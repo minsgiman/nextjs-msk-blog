@@ -1,6 +1,6 @@
 ---
 title: React.memo 사용하기
-date: '2020-11-11'
+date: '2019-09-14'
 tags: ['react']
 draft: false
 summary: 'React.memo와 렌더링 성능 | props 비교 커스터마이징 | React.memo는 언제 사용해야 하나'

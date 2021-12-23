@@ -1,6 +1,6 @@
 ---
 title: 크롬 개발자 도구를 사용한 웹 성능분석
-date: '2020-11-11'
+date: '2017-12-08'
 tags: ['frontend']
 draft: false
 summary: 'Performance탭에서 랜더링 과정 확인, Audits탭을 통한 웹 페이지 성능진단, Memory탭을 통한 Memory Leak 확인'

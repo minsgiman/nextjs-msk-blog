@@ -1,6 +1,6 @@
 ---
 title: functional extention 유틸
-date: '2020-11-11'
+date: '2021-06-30'
 tags: ['functional programming', 'typescript']
 draft: false
 summary: 'functional extention 유틸 및 unit test 구현'

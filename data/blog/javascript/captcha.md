@@ -1,6 +1,6 @@
 ---
 title: CAPTCHA 사용하기
-date: '2020-11-11'
+date: '2017-02-01'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: 'CAPTCHA(Completely Automated Public Turing test to tell Computers and Humans Apart)는 어떠한 사용자가 실제 사람인지 컴퓨터 프로그램인지를 구별하기 위해 사용되는 방법이다.'

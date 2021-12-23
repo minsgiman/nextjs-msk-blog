@@ -1,6 +1,6 @@
 ---
 title: OWASP Top 10 (2017)
-date: '2020-11-11'
+date: '2018-02-05'
 tags: ['security']
 draft: false
 summary: 'OWASP(국제 웹 보안 표준기구, The Open Web Application Security Project)에서는 3년에서 4년마다 웹 어플리케이션 취약점 중 가장 영향력있고 위협적인 취약점 10개를 선정하여 발표한다.'

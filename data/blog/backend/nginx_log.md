@@ -1,6 +1,6 @@
 ---
 title: nginx 로그 포맷 설정
-date: '2020-11-11'
+date: '2018-12-05'
 tags: ['nginx', 'backend', 'web server']
 draft: false
 summary: 'nginx.conf 에 로그포맷과 로그파일 경로를 다음과 같이 설정한다.'

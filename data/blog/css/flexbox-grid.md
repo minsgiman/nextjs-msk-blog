@@ -1,6 +1,6 @@
 ---
 title: flexbox를 이용한 grid 구현
-date: '2020-11-11'
+date: '2018-11-02'
 tags: ['css']
 draft: false
 summary: 'flex container로 grid item 요소들을 감싸면 이 flex container 속에 들어간 자식요소들은 가로 세로 유연하게 배치된다.'

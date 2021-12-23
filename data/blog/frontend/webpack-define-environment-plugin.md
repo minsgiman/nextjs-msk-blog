@@ -1,6 +1,6 @@
 ---
 title: Webpack을 통한 App Config 설정하기 (DefinePlugin, EnvironmentPlugin)
-date: '2020-11-11'
+date: '2021-01-12'
 tags: ['webpack', 'frontend']
 draft: false
 summary: 'Webpack을 통한 빌드시 App의 Config를 설정하는 방법에 대하여 정리하였다.'

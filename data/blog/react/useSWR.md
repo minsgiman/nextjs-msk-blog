@@ -1,6 +1,6 @@
 ---
 title: useSWR 사용
-date: '2020-11-11'
+date: '2021-02-19'
 tags: ['react']
 draft: false
 summary: 'SWR이란? | useSWR 사용 | 그 밖에...'

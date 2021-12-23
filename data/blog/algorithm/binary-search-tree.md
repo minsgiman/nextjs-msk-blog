@@ -1,6 +1,6 @@
 ---
 title: Javascript로 이진탐색트리 구현하기
-date: '2020-11-11'
+date: '2017-01-11'
 tags: ['algorithm']
 draft: false
 summary: '이진탐색트리(Binary Search Tree)는 다음과 같은 속성이 있는 이진트리 자료구조이다. 이진탐색트리를 구현하고 삽입, 삭제, 중위순회(Inorder traversal)를 테스트하였다.'

@@ -1,6 +1,6 @@
 ---
 title: Vuex 사용 및 Naming 컨벤션
-date: '2020-11-11'
+date: '2019-07-20'
 tags: ['vue', 'storybook']
 draft: false
 summary: 'Vuex는 단일 상태 트리를 사용하기 때문에 App의 모든 상태가 하나의 큰 객체 안에 포함된다. 그러나 규모가 커짐에 따라 저장소가 비대해질 수 있다. 이를 위해 Vuex는 저장소를 Module로 나눌 수 있다. 각 Module은 자체 state, getter, action, mutation 을 가진다.'

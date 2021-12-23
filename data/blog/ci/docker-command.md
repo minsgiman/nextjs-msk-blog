@@ -1,6 +1,6 @@
 ---
 title: Docker 커맨드
-date: '2020-11-11'
+date: '2019-02-03'
 tags: ['docker', 'ci']
 draft: false
 summary: 'Docker 설치 | 이미지 관리 | 컨테이너 관리 | 컨테이너 설정'

@@ -1,6 +1,6 @@
 ---
 title: 크로스 브라우징 관련 참고
-date: '2020-11-11'
+date: '2016-12-20'
 tags: ['css']
 draft: false
 summary: 'Can I Use 활용 | 버그 리포트 확인 | 브라우저 점유율 | CSS 초기화'

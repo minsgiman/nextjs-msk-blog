@@ -1,6 +1,6 @@
 ---
 title: 제네릭(Generic) 타입
-date: '2020-11-11'
+date: '2018-12-05'
 tags: ['typescript']
 draft: false
 summary: '제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입을 그 함수나 클래스를 사용할 때 결정하는 프로그래밍 기법을 말한다.'

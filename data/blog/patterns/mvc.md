@@ -1,6 +1,6 @@
 ---
 title: MVC Architecture
-date: '2020-11-11'
+date: '2020-12-21'
 tags: ['mvc']
 draft: false
 summary: 'MVC 아키텍처는 환경과 언어에 따라 각기 다른 형태로 발전하고 사용되어 왔기 때문에 개발자마다 이해하고 있는 MVC의 정의가 다를 수 있다.'

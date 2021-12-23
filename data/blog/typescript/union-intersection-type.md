@@ -1,6 +1,6 @@
 ---
 title: Typescript Union & Intersection 타입
-date: '2020-11-11'
+date: '2019-10-12'
 tags: ['typescript']
 draft: false
 summary: 'Intersection 타입은 여러 타입을 하나로 결합한다. 타입 간에 &를 사용하여 정의한다.'

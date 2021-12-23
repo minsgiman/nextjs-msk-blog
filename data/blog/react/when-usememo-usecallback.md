@@ -1,6 +1,6 @@
 ---
 title: 언제 useMemo와 useCallback을 사용해야 하나
-date: '2020-11-11'
+date: '2021-03-23'
 tags: ['react']
 draft: false
 summary: 'Performance optimizations 를 위한 useCallback, useMemo 사용은 공짜가 아니다.'

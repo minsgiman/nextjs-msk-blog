@@ -1,6 +1,6 @@
 ---
 title: 깊이 우선 탐색 (DFS, Depth-First Search)
-date: '2020-11-11'
+date: '2017-03-06'
 tags: ['algorithm']
 draft: false
 summary: '그래프는 정점과 간선으로 이루어져 있는데 간선을 통해서 모든 정점을 방문하는 것을 그래프를 탐색한다고 한다. 그래프 탐색 알고리즘 중 하나인 깊이 우선 탐색(DFS)에 대하여 알아본다.'

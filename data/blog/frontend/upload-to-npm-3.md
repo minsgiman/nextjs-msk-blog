@@ -1,6 +1,6 @@
 ---
 title: npm에 모듈 배포하기 3  (npm publish)
-date: '2020-11-11'
+date: '2018-02-06'
 tags: ['npm', 'frontend']
 draft: false
 summary: '.npmignore 작성과 local test방법 및 npm publish 커맨드에 관하여 정리하였다.'

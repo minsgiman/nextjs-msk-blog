@@ -1,6 +1,6 @@
 ---
 title: Javascript Garbage Collection
-date: '2020-11-11'
+date: '2015-01-09'
 tags: ['javascript']
 draft: false,
 summary: '브라우저는 가비지콜렉션을 수행하여 메모리 관리를 한다. 가비지콜렉션이 수행될 때는 브라우저가 스크립트 읽는 것을 잠시 중단하므로 가비지콜렉션이 빈번하게 발생하면 성능에 영향을 준다.'

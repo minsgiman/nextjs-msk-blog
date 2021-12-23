@@ -1,6 +1,6 @@
 ---
 title: React에서 MobX 사용하기
-date: '2020-11-11'
+date: '2020-04-05'
 tags: ['react']
 draft: false
 summary: 'MobX를 React와 사용하면 쉽게 State를 관리할 수 있고, setState도 사용하지 않아도 된다.'

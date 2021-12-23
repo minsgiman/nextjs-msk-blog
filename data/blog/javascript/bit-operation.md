@@ -1,6 +1,6 @@
 ---
 title: Javascript bit 연산
-date: '2020-11-11'
+date: '2016-10-11'
 tags: ['javascript']
 draft: false
 summary: 'Javascript bit 연산 Example'

@@ -1,6 +1,6 @@
 ---
 title: Docker 이미지 빌드하고 Push하기
-date: '2020-11-11'
+date: '2019-02-05'
 tags: ['docker', 'ci']
 draft: false
 summary: 'Docker 레지스트리 | 이미지 Layer | 이미지 빌드 해보기 | 이미지 푸시'

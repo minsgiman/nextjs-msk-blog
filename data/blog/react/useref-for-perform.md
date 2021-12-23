@@ -1,6 +1,6 @@
 ---
 title: useRef를 활용한 React App 성능 개선
-date: '2020-11-11'
+date: '2021-01-21'
 tags: ['react']
 draft: false
 summary: 'useRef는 일반적인 declarative한 React data flow에서 벗어나서 DOM 엘리먼트에 접근할 수 있는 방법을 제공하여 imperative하게 DOM을 제어할 수 있게 해준다.'

@@ -1,6 +1,6 @@
 ---
 title: MobX와 React hooks 함께 사용하기
-date: '2020-11-11'
+date: '2020-04-06'
 tags: ['react']
 draft: false
 summary: 'inject를 대체할 useStores hook'

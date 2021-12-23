@@ -1,6 +1,6 @@
 ---
 title: Git repository 복사하기 (history 까지 통째로)
-date: '2020-11-11'
+date: '2018-03-08'
 tags: ['git']
 draft: false
 summary: 'Create a bare clone of the repository. Mirror-push to the new repository. Remove the temporary local repository you created earlier.'

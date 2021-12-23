@@ -1,6 +1,6 @@
 ---
 title: HTML Popup 띄우는 방법
-date: '2020-11-11'
+date: '2015-09-12'
 tags: ['javascript']
 draft: false,
 summary: 'HTML Popup 창 띄우기, 옵션 List'

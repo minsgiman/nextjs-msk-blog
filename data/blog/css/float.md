@@ -1,6 +1,6 @@
 ---
 title: float 속성 이해
-date: '2020-11-11'
+date: '2017-01-02'
 tags: ['css']
 draft: false
 summary: 'float 속성 동작 (left, right, inherit, none)'
@@ -36,4 +36,4 @@ summary: 'float 속성 동작 (left, right, inherit, none)'
 
 ### 참조
 
-- [float속성의 모든 것](http://itux.tistory.com/entry/CSS-Float%EC%86%8D%EC%84%B1%EC%9D%98-%EB%AA%A8%EB%93%A0-%EA%B2%83)
+- [css float](https://developer.mozilla.org/ko/docs/Web/CSS/float)

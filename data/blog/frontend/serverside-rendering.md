@@ -1,6 +1,6 @@
 ---
 title: Client side 렌더링과 Server side 렌더링
-date: '2020-11-11'
+date: '2016-09-19'
 tags: ['frontend']
 draft: false
 summary: 'Client-side 렌더링까지 순서, Server-side 렌더링까지 순서, Client-side, Server-side 렌더링을 혼용하여서 사용'

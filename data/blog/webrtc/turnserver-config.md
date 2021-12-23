@@ -1,6 +1,6 @@
 ---
 title: TURN/STUN Server 설정
-date: '2020-11-11'
+date: '2018-07-18'
 tags: ['webrtc']
 draft: false
 summary: 'TURN/STUN Server란?'

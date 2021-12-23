@@ -1,6 +1,6 @@
 ---
 title: Polymorphic component (with typescript)
-date: '2020-11-11'
+date: '2021-03-05'
 tags: ['react']
 draft: false
 summary: 'React Polymorphic Components 구현'

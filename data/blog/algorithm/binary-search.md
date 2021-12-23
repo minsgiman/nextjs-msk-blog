@@ -1,6 +1,6 @@
 ---
 title: 이진 탐색 알고리즘
-date: '2020-11-11'
+date: '2017-01-18'
 tags: ['algorithm']
 draft: false
 summary: '이진탐색은 정렬된 리스트에만 적용가능하다. 시간복잡도는 O(logn) 이다.'

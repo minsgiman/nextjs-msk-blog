@@ -1,6 +1,6 @@
 ---
 title: cypress E2E 테스트
-date: '2020-11-11'
+date: '2020-09-15'
 tags: ['cypress', 'test', 'frontend']
 draft: false
 summary: 'Cypress는 E2E 테스트 framework으로 Chai assertion library를 내장하고 있고, stubbing 기능을 제공한다.'

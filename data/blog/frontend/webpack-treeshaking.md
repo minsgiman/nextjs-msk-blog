@@ -1,6 +1,6 @@
 ---
 title: Webpack Tree Shaking & Dynamic Import
-date: '2020-11-11'
+date: '2020-02-01'
 tags: ['webpack', 'frontend']
 draft: false
 summary: 'Tree Shaking | splitChunks | Dynamic Imports'

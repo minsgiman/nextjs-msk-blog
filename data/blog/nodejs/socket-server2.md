@@ -1,6 +1,6 @@
 ---
 title: Socket 서버 구현 2 (Socket Server 실행 및 Socket Router 구현)
-date: '2020-11-11'
+date: '2019-06-15'
 tags: ['nodejs', 'backend', 'websocket']
 draft: false
 summary: 'https서버 생성 | socket.io 서버 생성 | socketWildcard를 사용한 Socket Router 구현'

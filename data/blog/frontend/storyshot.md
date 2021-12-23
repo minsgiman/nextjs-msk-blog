@@ -1,6 +1,6 @@
 ---
 title: storybook addon storyshot 활용
-date: '2020-11-11'
+date: '2021-09-20'
 tags: ['storybook', 'test', 'frontend']
 draft: false
 summary: 'storyshot은 storybook 공식 애드온으로 작성된 story에 대한 html형태의 스냅샷을 생성하고, 이전 스냅샷과 비교한다.'

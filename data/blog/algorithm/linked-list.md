@@ -1,6 +1,6 @@
 ---
 title: Linked List in Javascript
-date: '2020-11-11'
+date: '2017-01-03'
 tags: ['algorithm']
 draft: false
 ---

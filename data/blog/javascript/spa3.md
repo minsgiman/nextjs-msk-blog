@@ -1,6 +1,6 @@
 ---
 title: MVW framework없이 Single Page App 만들기 3
-date: '2020-11-11'
+date: '2016-01-22'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: 'RequireJS를 사용한 AMD지원'

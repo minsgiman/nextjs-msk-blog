@@ -1,6 +1,6 @@
 ---
 title: 분산 메시징 시스템 Kafka
-date: '2020-11-11'
+date: '2018-07-08'
 tags: ['kafka', 'messaging system', 'backend']
 draft: false
 summary: 'kafka는 대용량의 실시간 로그처리에 특화되어 설계된 메시징 시스템으로써 기존 범용 메시징 시스템대비 TPS가 매우 우수하다.'

@@ -1,6 +1,6 @@
 ---
 title: Map & Set
-date: '2020-11-11'
+date: '2020-10-01'
 tags: ['javascript']
 draft: false,
 summary: 'Map | Map과 Object의 성능 | WeakMap | Set'

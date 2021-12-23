@@ -1,6 +1,6 @@
 ---
 title: 너비 우선 탐색 (BFS, Breadth-First Search)
-date: '2020-11-11'
+date: '2017-03-05'
 tags: ['algorithm']
 draft: false
 summary: '그래프 탐색 알고리즘 중 하나인 너비 우선 탐색(BFS)에 대하여 알아본다.'

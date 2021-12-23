@@ -1,6 +1,6 @@
 ---
 title: linux 프로세스 실행 옵션
-date: '2020-11-11'
+date: '2017-03-09'
 tags: ['linux']
 draft: false
 summary: 'nohup | & (백그라운드) | 표준출력, 표준에러 설정'

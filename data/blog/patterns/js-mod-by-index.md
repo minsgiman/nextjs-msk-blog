@@ -1,6 +1,6 @@
 ---
 title: JS array modify by index
-date: '2020-11-11'
+date: '2018-09-11'
 tags: ['javascript']
 draft: false
 summary: 'Array 특정 위치 삽입, Array 특정 위치 삭제, 문자열 특정위치 자르기'

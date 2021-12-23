@@ -1,6 +1,6 @@
 ---
 title: Gulp를 통한 model명 별로 빌드하기
-date: '2020-11-11'
+date: '2015-04-14'
 tags: ['gulp', 'frontend']
 draft: false
 summary: 'model명 별로 빌드 및 requireJS optimize'

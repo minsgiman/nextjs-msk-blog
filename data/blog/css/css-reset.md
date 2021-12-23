@@ -1,6 +1,6 @@
 ---
 title: CSS Reset
-date: '2020-11-11'
+date: '2017-04-12'
 tags: ['css']
 draft: false
 summary: 'images, videos, objects, iframes, embed와 같은 Media element들은 container의 width를 넘어가지 않도록 초기화한다.'

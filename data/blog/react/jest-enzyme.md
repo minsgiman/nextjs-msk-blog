@@ -1,6 +1,6 @@
 ---
 title: Jest, Enzyme 을 사용한 React 컴포넌트 테스트
-date: '2020-11-11'
+date: '2020-03-04'
 tags: ['react', 'test']
 draft: false
 summary: 'Jest, Enzyme 을 사용한 이유 | Setup | Enzyme을 통한 컴포넌트 렌더링 | 스냅샷 테스트'

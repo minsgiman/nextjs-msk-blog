@@ -1,6 +1,6 @@
 ---
 title: CSS Browser hack
-date: '2020-11-11'
+date: '2016-03-15'
 tags: ['css']
 draft: false
 summary: 'CSS Browser hack 사용'

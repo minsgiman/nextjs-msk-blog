@@ -1,6 +1,6 @@
 ---
 title: Socket 서버 구현 4 (Redis Client)
-date: '2020-11-11'
+date: '2019-06-17'
 tags: ['nodejs', 'backend', 'websocket', 'redis']
 draft: false
 summary: 'Redis 사용 | ioredis 모듈 | Master의 Redis subscribe 및 Worker로 전달'

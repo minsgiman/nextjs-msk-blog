@@ -1,6 +1,6 @@
 ---
 title: Redis 사용 이점
-date: '2020-11-11'
+date: '2018-12-20'
 tags: ['redis', 'backend', 'nosql db']
 draft: false
 summary: 'Redis는 "REmote DIctionary System"의 약자로 메모리 기반의 Key/Value Store 이다. 모든 데이타는 메모리에 저장되고, 이로 인하여 매우 빠른 write/read 속도를 보장한다.'

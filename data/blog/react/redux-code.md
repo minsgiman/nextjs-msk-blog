@@ -1,6 +1,6 @@
 ---
 title: Redux Code 구현
-date: '2020-11-11'
+date: '2016-12-11'
 tags: ['react', 'frontend']
 draft: false
 summary: 'Action, Reducer, Store'

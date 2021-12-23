@@ -1,6 +1,6 @@
 ---
 title: Socket 서버 구현 6 (http Request)
-date: '2020-11-11'
+date: '2019-06-19'
 tags: ['nodejs', 'backend', 'websocket']
 draft: false
 summary: 'request 모듈 | stream 연결 | SwiftStack Authentication'

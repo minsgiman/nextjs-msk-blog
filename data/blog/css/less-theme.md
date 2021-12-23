@@ -1,6 +1,6 @@
 ---
 title: 테마 변경 with LESS
-date: '2020-11-11'
+date: '2019-09-20'
 tags: ['css', 'less']
 draft: false
 summary: 'App의 테마 설정에 따라 동적으로 테마를 변경하는 방법 (with less)'

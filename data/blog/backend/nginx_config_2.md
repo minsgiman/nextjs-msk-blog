@@ -1,6 +1,6 @@
 ---
 title: nginx config 설정 (2)
-date: '2020-11-11'
+date: '2018-12-03'
 tags: ['nginx', 'backend', 'web server']
 draft: false
 summary: '1. upstream | 2. error page 처리'

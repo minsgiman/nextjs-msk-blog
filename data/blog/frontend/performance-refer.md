@@ -1,6 +1,6 @@
 ---
 title: Web App 성능 개선 참고
-date: '2020-11-11'
+date: '2021-07-10'
 tags: ['frontend', 'performance']
 draft: false
 summary: 'Tree shaking 개선, 자원 외부화로 번들 사이즈 감소, Dynamic Import와 모듈 chunk, Promise.all 조합'

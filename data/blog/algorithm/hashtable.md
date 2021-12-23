@@ -1,6 +1,6 @@
 ---
 title: Hash Table
-date: '2020-11-11'
+date: '2017-05-20'
 tags: ['algorithm']
 draft: false
 summary: '해쉬테이블은 효율적인 탐색을 위한 자료구조로서, key를 value에 대응시킨다.'

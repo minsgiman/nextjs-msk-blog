@@ -1,6 +1,6 @@
 ---
 title: Javascript Proxy 객체
-date: '2020-11-11'
+date: '2020-04-09'
 tags: ['javascript']
 draft: false,
 summary: 'The Proxy object enables you to wrap the target object and by doing that we can intercept and redefine fundamental operations for that object.'

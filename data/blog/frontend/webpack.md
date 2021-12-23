@@ -1,6 +1,6 @@
 ---
 title: webpack 사용
-date: '2020-11-11'
+date: '2017-03-09'
 tags: ['webpack', 'frontend']
 draft: false
 summary: 'webpack을 사용하는 이유, 왜 이런 기능이 필요?, webpack.config.js에 설정'

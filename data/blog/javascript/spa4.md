@@ -1,6 +1,6 @@
 ---
 title: MVW framework없이 Single Page App 만들기 4
-date: '2020-11-11'
+date: '2016-01-23'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: 'COMPONENT 구현'

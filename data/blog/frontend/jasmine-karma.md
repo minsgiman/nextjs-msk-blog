@@ -1,6 +1,6 @@
 ---
 title: Jasmine & Karma
-date: '2020-11-11'
+date: '2015-06-19'
 tags: ['jasmin', 'karma', 'test', 'frontend']
 draft: false
 summary: 'Jasmine은 자바스크립트를 위한 BDD(Behavior Driven Development) 프레임웍이다. Karma는 자바스크립트 테스트 러너다. '

@@ -1,6 +1,6 @@
 ---
 title: 반응형 웹에서 CSS 중앙정렬 기법
-date: '2020-11-11'
+date: '2016-02-10'
 tags: ['css']
 draft: false
 summary: '테이블 패턴을 이용한 수직 중앙정렬. text-align을 통한 가로 중앙정렬.'

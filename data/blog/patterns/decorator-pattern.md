@@ -1,6 +1,6 @@
 ---
 title: decorator pattern
-date: '2020-11-11'
+date: '2019-05-07'
 tags: ['pattern', 'javascript']
 draft: false
 summary: 'javascript로 구현한 decorator pattern'

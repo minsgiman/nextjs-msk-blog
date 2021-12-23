@@ -1,6 +1,6 @@
 ---
 title: React컴포넌트에 redux연결하기
-date: '2020-11-11'
+date: '2016-12-16'
 tags: ['react', 'frontend']
 draft: false
 summary: '전체 App의 최상위 container 컴포넌트에서 store의 변경 이벤트를 구독하고, 하위 컴포넌트에 데이터를 전달한다.'

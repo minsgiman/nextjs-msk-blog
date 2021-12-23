@@ -1,6 +1,6 @@
 ---
 title: Python으로 Model별 config.json 빌드
-date: '2020-11-11'
+date: '2015-02-10'
 tags: ['frontend']
 draft: false
 summary: '각 Model마다 관리하는 JSON 포맷이 달라지지 않도록 중앙에서 Control 하기 위하여 구현하였다.'

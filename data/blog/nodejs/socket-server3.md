@@ -1,6 +1,6 @@
 ---
 title: Socket 서버 구현 3 (Logging)
-date: '2020-11-11'
+date: '2019-06-16'
 tags: ['nodejs', 'backend', 'websocket']
 draft: false
 summary: 'Winston 모듈 | Master로 Log메시지 전송 및 Master의 Logging 관리'

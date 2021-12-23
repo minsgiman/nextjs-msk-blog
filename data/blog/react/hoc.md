@@ -1,6 +1,6 @@
 ---
 title: React Higher-Order Components (HOC)
-date: '2020-11-11'
+date: '2017-02-14'
 tags: ['react']
 draft: false
 summary: 'HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패턴이다.'

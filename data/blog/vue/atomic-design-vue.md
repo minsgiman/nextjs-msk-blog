@@ -1,6 +1,6 @@
 ---
 title: Vue Atomic Design
-date: '2020-11-11'
+date: '2020-01-22'
 tags: ['vue']
 draft: false
 summary: 'Vue Atomic 컴포넌트를 구현하였다.'

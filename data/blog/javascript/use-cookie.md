@@ -1,6 +1,6 @@
 ---
 title: Browser Cookie 사용
-date: '2020-11-11'
+date: '2016-02-10'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: '쿠키는 세션정보 유지에 많이 사용되며, 보안에 취약하기 때문에 브라우저 자체적으로 쿠키거부 설정을 할 수 있다.'

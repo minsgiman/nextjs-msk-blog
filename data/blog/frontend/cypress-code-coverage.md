@@ -1,6 +1,6 @@
 ---
 title: cypress code coverage 측정
-date: '2020-11-11'
+date: '2021-06-11'
 tags: ['cypress', 'test', 'frontend']
 draft: false
 summary: 'cypress code coverage 측정이 어떻게 이루어지고, 이를 위한 설정 과정을 정리하였다.'

@@ -1,6 +1,6 @@
 ---
 title: Socket 서버 구현 5 (Zookeeper Client, Kafka Producer)
-date: '2020-11-11'
+date: '2019-06-18'
 tags: ['nodejs', 'backend', 'websocket']
 draft: false
 summary: 'Zookeeper Client 구현 | Kafka Producer'

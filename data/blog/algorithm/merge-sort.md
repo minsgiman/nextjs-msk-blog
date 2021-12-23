@@ -1,6 +1,6 @@
 ---
 title: 합병 정렬 (merge sort)
-date: '2020-11-11'
+date: '2017-02-10'
 tags: ['algorithm']
 draft: false
 summary: '합병 정렬은 전체 원소를 하나의 단위로 분할한 후 분할한 원소를 다시 병합하는 정렬 방식이다.'

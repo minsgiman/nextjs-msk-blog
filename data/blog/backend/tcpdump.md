@@ -1,6 +1,6 @@
 ---
 title: tcpdump 사용
-date: '2020-11-11'
+date: '2018-02-10'
 tags: ['network', 'linux']
 draft: false
 summary: 'tcpdump는 주어진 조건 식을 만족하는 네트워크 인터페이스를 거치는 패킷들의 헤더들을 출력해주는 프로그램이다.'

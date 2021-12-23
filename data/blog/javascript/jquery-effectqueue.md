@@ -1,6 +1,6 @@
 ---
 title: Jquery의 Effect Queue
-date: '2020-11-11'
+date: '2016-10-02'
 tags: ['jquery', 'javascript']
 draft: false,
 summary: 'Jquery의 animate 함수는 내부적으로 effect queue를 사용한다.'

@@ -1,6 +1,6 @@
 ---
 title: npm에 모듈 배포하기 1  (package.json 작성하기)
-date: '2020-11-11'
+date: '2018-02-04'
 tags: ['npm', 'frontend']
 draft: false
 summary: '배포할 모듈에 대한 package.json 작성'

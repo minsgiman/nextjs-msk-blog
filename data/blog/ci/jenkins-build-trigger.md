@@ -1,6 +1,6 @@
 ---
 title: Jenkins Build Trigger (with GitHub)
-date: '2020-11-11'
+date: '2019-02-12'
 tags: ['jenkins', 'ci', 'git']
 draft: false
 summary: 'Jenkins와 GitHub 연결 | Jenkins Job 생성 | PR hook 설정'

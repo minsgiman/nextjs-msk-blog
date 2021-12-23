@@ -1,6 +1,6 @@
 ---
 title: Express 보안
-date: '2020-11-11'
+date: '2019-02-04'
 tags: ['security', 'nodejs']
 draft: false
 summary: '더 이상 사용되지 않거나 취약성이 있는 버전의 Express를 사용 중지 | TLS 사용 | Helmet 사용'

@@ -1,6 +1,6 @@
 ---
 title: 동적 프로그래밍 (dynamic programming)
-date: '2020-11-11'
+date: '2016-12-20'
 tags: ['algorithm']
 draft: false
 summary: '모든 작은 문제들은 한번만 푼다. 따라서 정답을 구한 작은 문제를 어딘가에 메모해둔다.'

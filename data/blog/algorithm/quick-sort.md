@@ -1,6 +1,6 @@
 ---
 title: 퀵 정렬 (quick sort)
-date: '2020-11-11'
+date: '2017-02-12'
 tags: ['algorithm']
 draft: false
 summary: '퀵 정렬은 기준값(pivot)을 사용하여 정렬을 한다. 어떤 값을 기준값으로 선정하는지에 따라서 퀵정렬 성능이 달라진다.'
@@ -21,7 +21,7 @@ summary: '퀵 정렬은 기준값(pivot)을 사용하여 정렬을 한다. 어�
 3. 결합(Combine): 정렬된 부분 배열들을 하나의 배열에 합병한다.
 4. 순환 호출이 한번 진행될 때마다 최소한 하나의 원소(피벗)는 최종적으로 위치가 정해지므로, 이 알고리즘은 반드시 끝난다는 것을 보장할 수 있다.
 
-![object](/images/develop/quick-sort.png 'object')
+![object](/static/images/quick-sort.png 'object')
 
 ```javascript
 function quickSort(array) {

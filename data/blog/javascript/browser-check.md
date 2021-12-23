@@ -1,6 +1,6 @@
 ---
 title: Browser 이름 및 버전 체크 snippet
-date: '2020-11-11'
+date: '2017-01-23'
 tags: ['javascript', 'frontend']
 draft: false
 ---

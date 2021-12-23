@@ -1,6 +1,6 @@
 ---
 title: MVW framework없이 Single Page App 만들기 1
-date: '2020-11-11'
+date: '2016-01-20'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: 'Single Page App 내에서 존재하는 UI화면 단위를 Page로 구분하고, Page의 이동은 hash값 변경을 통하여 구현하였다.'

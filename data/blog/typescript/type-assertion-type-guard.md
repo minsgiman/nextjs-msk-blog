@@ -1,6 +1,6 @@
 ---
 title: 타입단언(Type Assertion)과 타입가드(Type Guard)
-date: '2020-11-11'
+date: '2019-10-08'
 tags: ['typescript']
 draft: false
 summary: '타입 단언(Type Assertion)은 프로그래머가 수동적으로 컴파일러에게 특정변수에 대해 타입 힌트를 주는 것이다.'

@@ -1,6 +1,6 @@
 ---
 title: window.requestAnimationFrame()의 이해
-date: '2020-11-11'
+date: '2020-05-21'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: 'requestAnimationFrame은 브라우저가 frame을 그릴 준비가 되었을 때, Parameter로 전달한 애니매이션 프레임 콜백을 호출하는 함수다.'

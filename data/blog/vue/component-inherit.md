@@ -1,6 +1,6 @@
 ---
 title: Vue 컴포넌트 상속 (mixin과 extends)
-date: '2020-11-11'
+date: '2019-01-20'
 tags: ['vue']
 draft: false
 summary: 'Vue에서 컴포넌트를 상속하는 방법에는 mixin과 extends가 있다.'

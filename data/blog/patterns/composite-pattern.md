@@ -1,6 +1,6 @@
 ---
 title: composite pattern
-date: '2020-11-11'
+date: '2019-05-05'
 tags: ['pattern', 'javascript']
 draft: false
 summary: 'javascript로 구현한 composite pattern'

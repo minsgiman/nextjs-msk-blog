@@ -1,6 +1,6 @@
 ---
 title: d.ts 파일을 통한 타입선언
-date: '2020-11-11'
+date: '2018-11-02'
 tags: ['typescript']
 draft: false
 summary: 'd.ts 파일은 기존의 .js에서 구현한 모듈을 Typescript에서 사용하기 위해 기존 .js 모듈의 타입정보를 선언해주는 역할을 한다.'

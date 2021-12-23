@@ -1,6 +1,6 @@
 ---
 title: 크로스 도메인 해결방법
-date: '2020-11-11'
+date: '2016-01-09'
 tags: ['frontend']
 draft: false
 summary: 'Cross Domain Proxy | JSONP | CORS (Cross-Origin Resource Sharing)'

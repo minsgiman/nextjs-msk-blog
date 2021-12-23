@@ -1,6 +1,6 @@
 ---
 title: tsconfig의 lib 옵션
-date: '2020-11-11'
+date: '2020-11-03'
 tags: ['typescript']
 draft: false
 summary: 'lib 옵션은 컴파일에 포함될 라이브러리 목록이다. 필요한 라이브러리 목록을 다음과 같이 정의한다.'

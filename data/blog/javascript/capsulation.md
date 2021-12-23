@@ -1,6 +1,6 @@
 ---
 title: 캡슐화
-date: '2020-11-11'
+date: '2015-01-03'
 tags: ['javascript', 'oop']
 draft: false,
 summary: '캡슐화는 객체 지향 프로그래밍에서 다음 2가지 측면이 있다.'

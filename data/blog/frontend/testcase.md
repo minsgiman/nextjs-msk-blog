@@ -1,6 +1,6 @@
 ---
 title: 효율적인 테스트 케이스
-date: '2020-11-11'
+date: '2020-05-30'
 tags: ['test', 'frontend']
 draft: false
 summary: '내부 구현 & 인터페이스 테스트 | TC 개수 | 모듈의 변경과 의존성 테스트 | 현재, 미래를 위한 TC'

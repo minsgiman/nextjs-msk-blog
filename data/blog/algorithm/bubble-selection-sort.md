@@ -1,6 +1,6 @@
 ---
 title: 버블정렬과 선택정렬 (bubble sort, selection sort)
-date: '2020-11-11'
+date: '2017-01-24'
 tags: ['algorithm']
 draft: false
 summary: '버블정렬과 선택정렬은 구현이 간단하지만 비효율적이다. 둘 다 시간복잡도는 O(n^2)이다.'

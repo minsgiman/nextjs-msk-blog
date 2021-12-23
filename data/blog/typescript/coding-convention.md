@@ -1,6 +1,6 @@
 ---
 title: Typescript 코딩 컨벤션
-date: '2020-11-11'
+date: '2021-03-18'
 tags: ['typescript']
 draft: false
 summary: 'Typescript 코딩 컨벤션을 정리하였다.'

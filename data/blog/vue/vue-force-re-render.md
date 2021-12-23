@@ -1,6 +1,6 @@
 ---
 title: vue에서 컴포넌트 강제 re-rendering 하기
-date: '2020-11-11'
+date: '2018-04-03'
 tags: ['vue']
 draft: false
 summary: '컴포넌트의 key attribute 변경을 통한 re-rendering'

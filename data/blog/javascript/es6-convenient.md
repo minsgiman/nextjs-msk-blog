@@ -1,6 +1,6 @@
 ---
 title: ES6 편리한 기능
-date: '2020-11-11'
+date: '2016-03-01'
 tags: ['javascript']
 draft: false,
 summary: 'ES6에서 추가된 spec중 유용한 내용을 정리하였다.'

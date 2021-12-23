@@ -1,6 +1,6 @@
 ---
 title: WebRTC Peer 구현
-date: '2020-11-11'
+date: '2018-07-05'
 tags: ['webrtc']
 draft: false
 summary: 'WebRTC는 표준화된 프로토콜과 Javascript API를 통해서, 3rd party 플러그인을 사용하지 않고 브라우저를 통해 peer간의 audio, video, data를 통신할 수 있게 해준다.'

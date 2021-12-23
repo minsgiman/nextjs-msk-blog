@@ -1,6 +1,6 @@
 ---
 title: 구글맵 API 사용하기
-date: '2020-11-11'
+date: '2017-04-20'
 tags: ['javascript', 'google map', 'frontend']
 draft: false,
 summary: 'Google Maps Javascript API'

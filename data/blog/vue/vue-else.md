@@ -1,6 +1,6 @@
 ---
 title: vue와 다른 framework비교
-date: '2020-11-11'
+date: '2018-02-03'
 tags: ['vue']
 draft: false
 summary: 'vue와 다른 framework를 비교하였다.'

@@ -1,6 +1,6 @@
 ---
 title: Socket 서버 구현 1 (Master & Worker Cluster 관리)
-date: '2020-11-11'
+date: '2019-06-14'
 tags: ['nodejs', 'backend', 'websocket']
 draft: false
 summary: 'pm2 를 통한 Master & Worker Process 생성 | Master & Worker 간의 Communication | Mater 또는 Worker 가 죽는 경우 처리'

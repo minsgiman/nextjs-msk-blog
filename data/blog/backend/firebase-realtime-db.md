@@ -1,6 +1,6 @@
 ---
 title: Firebase Realtime Database 사용하기
-date: '2020-11-11'
+date: '2015-08-29'
 tags: ['firebase', 'backend']
 draft: false
 summary: 'Firebase Realtime DB를 사용하기 위해 Firebase에 만들어 놓은 Web프로젝트를 선택하고, 웹앱에 Firebase추가 버튼을 누른다.'

@@ -1,6 +1,6 @@
 ---
 title: express에서 graphql 사용하기
-date: '2020-11-11'
+date: '2020-03-13'
 tags: ['nodejs', 'graphql', 'backend']
 draft: false
 summary: 'express에서 graphql 사용하기 | RESTful과 차이점 | GraphQL 장단점'

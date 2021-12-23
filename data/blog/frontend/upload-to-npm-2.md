@@ -1,6 +1,6 @@
 ---
 title: npm에 모듈 배포하기 2  (진입점 main 파일 구현)
-date: '2020-11-11'
+date: '2018-02-05'
 tags: ['npm', 'frontend']
 draft: false
 summary: '진입점이 되는 main 파일을 UMD 포맷과 ES6 module 포맷으로 구현하여, 모든 환경에서 해당 모듈을 사용할 수 있도록 지원한다.'

@@ -1,6 +1,6 @@
 ---
 title: 크로스 브라우저 테스트를 위한 Browsersync
-date: '2020-11-11'
+date: '2016-03-11'
 tags: ['frontend']
 draft: false
 summary: 'Browser Sync는 브라우저를 동기화해주는 프로그램이다.'

@@ -1,6 +1,6 @@
 ---
 title: IE에서 axios, vuex 사용시 에러 수정하기
-date: '2020-11-11'
+date: '2018-03-06'
 tags: ['vue']
 draft: false
 summary: 'axios, vuex 사용시, 구형 IE 에러'

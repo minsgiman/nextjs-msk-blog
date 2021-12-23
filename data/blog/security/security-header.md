@@ -1,6 +1,6 @@
 ---
 title: HTTP Security Header
-date: '2020-11-11'
+date: '2020-05-02'
 tags: ['security']
 draft: false
 summary: 'Security Header는 웹사이트 보안의 가장 기본적인 부분이다. 이 헤더를 통해 여러 공격 유형인 XSS, injection, clickjacking 등으로부터 보호될 수 있다.'

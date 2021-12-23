@@ -1,6 +1,6 @@
 ---
 title: IP 및 URL의 유효성 검사
-date: '2020-11-11'
+date: '2015-12-09'
 tags: ['javascript']
 draft: false,
 summary: '정규표현식을 이용하여 입력받은 IP Address의 유효성을 체크하는 function이다.'

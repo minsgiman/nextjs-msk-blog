@@ -1,6 +1,6 @@
 ---
 title: Firebase Realtime Database 사용하기2
-date: '2020-11-11'
+date: '2015-08-30'
 tags: ['firebase', 'backend']
 draft: false
 summary: 'Child Data Add, Changed, Removed 이벤트 연결'

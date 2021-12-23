@@ -1,6 +1,6 @@
 ---
 title: Ice Factory Pattern
-date: '2020-11-11'
+date: '2020-03-02'
 tags: ['pattern', 'javascript']
 draft: false
 summary: 'javascript로 구현한 Ice Factory Pattern'

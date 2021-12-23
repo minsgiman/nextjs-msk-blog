@@ -1,6 +1,6 @@
 ---
 title: Jenkins Pipeline 설정 (with Jenkinsfile)
-date: '2020-11-11'
+date: '2019-02-15'
 tags: ['jenkins', 'ci']
 draft: false
 summary: 'JenkinsFile을 통해 Jenkins GUI 에서 jobs를 설정하는 대신 script로 pipeline job 을 설정할 수 있다.'

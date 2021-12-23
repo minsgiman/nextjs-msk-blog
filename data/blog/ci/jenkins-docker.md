@@ -1,6 +1,6 @@
 ---
 title: Docker Container에서 Jenkins 실행하기
-date: '2020-11-11'
+date: '2019-02-08'
 tags: ['docker', 'jenkins', 'ci']
 draft: false
 summary: 'https://hub.docker.com/ 에서 jenkins 를 검색하여 이미지를 찾고 설치하여 실행한다.'

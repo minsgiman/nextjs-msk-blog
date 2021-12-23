@@ -1,6 +1,6 @@
 ---
 title: http proxy 서버 구현하기
-date: '2020-11-11'
+date: '2019-05-04'
 tags: ['nodejs', 'backend']
 draft: false
 summary: 'express와 함께 http-proxy 라이브러리를 사용하여 구현하였다.'

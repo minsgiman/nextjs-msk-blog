@@ -1,6 +1,6 @@
 ---
 title: React.lazy 실패 시 retry하기
-date: '2020-11-11'
+date: '2021-04-29'
 tags: ['react']
 draft: false
 summary: 'React에서 Page 단위로 JS 번들을 분리할 때 다음과 같이 Page 컴포넌트 번들의 lazy loading을 구현한다.'

@@ -1,6 +1,6 @@
 ---
 title: MobX 사용 및 장단점
-date: '2020-11-11'
+date: '2020-04-01'
 tags: ['react']
 draft: false
 summary: 'MobX는 State관리 라이브러리이다. 장단점 및 사용방법에 대하여 정리하였다. '

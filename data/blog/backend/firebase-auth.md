@@ -1,6 +1,6 @@
 ---
 title: Firebase Authentication 사용하기
-date: '2020-11-11'
+date: '2015-08-24'
 tags: ['firebase', 'backend']
 draft: false
 summary: '먼저 firebase의 Authentication 탭의 로그인 방법 메뉴에서 이메일/비밀번호를 "사용 설정됨"으로 활성화 해준다.'

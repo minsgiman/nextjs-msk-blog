@@ -1,6 +1,6 @@
 ---
 title: LESS (The dynamic stylesheet language)
-date: '2020-11-11'
+date: '2016-12-20'
 tags: ['css', 'less']
 draft: false
 summary: 'LESS는 stylesheet를 작성하는 데 있어 Variable, Mixin, Nested Rule, Operation, Function과 같은 Script 기능을 제공한다.'

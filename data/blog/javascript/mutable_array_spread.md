@@ -1,6 +1,6 @@
 ---
 title: Mutable, Immutable Array 함수와 Spread 구문
-date: '2020-11-11'
+date: '2018-04-13'
 tags: ['javascript']
 draft: false,
 summary: 'Mutable Array 함수 | Immutable Array 함수 | 펼침 (Spread) 구문'

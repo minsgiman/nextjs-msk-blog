@@ -1,6 +1,6 @@
 ---
 title: WebRTC relay로만 동작하도록 변경하기
-date: '2020-11-11'
+date: '2018-09-03'
 tags: ['webrtc']
 draft: false
 summary: 'WebRTC relay로만 동작하도록 변경하는 이유 | ice Transport Policy 수정'

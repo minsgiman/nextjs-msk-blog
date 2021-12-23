@@ -1,6 +1,6 @@
 ---
 title: express에서 JWT사용하기
-date: '2020-11-11'
+date: '2019-12-29'
 tags: ['nodejs', 'jwt', 'backend']
 draft: false
 summary: 'JWT 는 JSON Web Token의 약자로 클라이언트와 서버, 서비스와 서비스 사이 통신 시 권한 인가(Authorization)를 위해 사용하는 토큰이다.'

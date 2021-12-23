@@ -1,6 +1,6 @@
 ---
 title: Redux
-date: '2020-11-11'
+date: '2016-11-21'
 tags: ['react']
 draft: false
 summary: 'Redux는? | MVC패턴의 단점 | Flux 패턴'

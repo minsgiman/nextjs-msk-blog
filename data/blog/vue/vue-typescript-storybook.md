@@ -1,6 +1,6 @@
 ---
 title: Vue + Typescript 환경에서 Storybook 사용하기
-date: '2020-11-11'
+date: '2019-06-05'
 tags: ['vue', 'storybook']
 draft: false
 summary: 'Storybook은 React, Vue, Angular 등 다양한 Library를 지원하고, 여기서는 그 중 Typescript로 작성한 Vue 컴포넌트를 테스트하는 방법에 대하여 정리하였다.'

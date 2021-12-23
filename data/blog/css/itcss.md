@@ -1,6 +1,6 @@
 ---
 title: ITCSS
-date: '2020-11-11'
+date: '2020-10-11'
 tags: ['css']
 draft: false
 summary: 'ITCSS는 확장성과 유지보수성을 높여서 CSS를 작성하는 하나의 방법론이다.'

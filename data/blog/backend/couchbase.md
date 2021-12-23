@@ -1,6 +1,6 @@
 ---
 title: NoSQL Couchbase DB
-date: '2020-11-11'
+date: '2018-05-11'
 tags: ['nosql db', 'backend']
 draft: false
 summary: 'Couchbase DB는 Document 기반의 Key-Value 스토어이다. 뷰, 맵&리듀스 함수, 클러스터링 등을 지원한다.'

@@ -1,6 +1,6 @@
 ---
 title: Responsive Web 구현
-date: '2020-11-11'
+date: '2017-02-20'
 tags: ['css']
 draft: false
 summary: '미디어 쿼리 (Media Queries) | Fluid Grid | Flexible Box'

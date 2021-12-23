@@ -1,6 +1,6 @@
 ---
 title: netcat을 사용한 udp 포트 연결 체크 (centos)
-date: '2020-11-11'
+date: '2018-01-10'
 tags: ['network', 'linux']
 draft: false
 summary: 'netcat은 TCP, UDP 프로토콜을 사용하는 네트워크 연결에서 데이터를 읽고 쓰는 간단한 유틸리티이다.'

@@ -1,6 +1,6 @@
 ---
 title: Javascript Hacks
-date: '2020-11-11'
+date: '2018-08-09'
 tags: ['javascript']
 draft: false,
 summary: 'Replace All | Extract Unique Values | Convert string to number | Converting NodeList to Arrays ...'

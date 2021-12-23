@@ -1,6 +1,6 @@
 ---
 title: AngularJS에서 Vue로 점진적으로 넘어가기 2 (다국어 적용 with vue-i18n)
-date: '2020-11-11'
+date: '2019-06-15'
 tags: ['vue']
 draft: false
 summary: 'AngularJS 안에서 vue component에 vue-i18n 적용하기'

@@ -1,6 +1,6 @@
 ---
 title: XSS와 sanitize-html
-date: '2020-11-11'
+date: '2019-09-04'
 tags: ['security']
 draft: false
 summary: 'Cross-Site Scripting (XSS) | 대응 (sanitize-html)'

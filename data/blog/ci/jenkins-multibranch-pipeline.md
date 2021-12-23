@@ -1,6 +1,6 @@
 ---
 title: Jenkins Multibranch Pipeline 만들기 (with GitHub)
-date: '2020-11-11'
+date: '2019-02-09'
 tags: ['jenkins', 'git', 'ci']
 draft: false
 summary: 'Jenkins create job에서 Multibranch Pipeline Job 을 생성한다.'

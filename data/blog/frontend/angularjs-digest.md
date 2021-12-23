@@ -1,6 +1,6 @@
 ---
 title: AngularJS의 $watch, $apply, $digest 동작
-date: '2020-11-11'
+date: '2015-02-17'
 tags: ['angularjs', 'frontend']
 draft: false
 summary: '$watch list, $digest loop, $apply를 통하여 angular context로 들어가기'

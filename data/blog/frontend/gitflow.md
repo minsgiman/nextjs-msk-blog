@@ -1,6 +1,6 @@
 ---
 title: Git Flow 브랜치
-date: '2020-11-11'
+date: '2017-01-03'
 tags: ['git']
 draft: false
 summary: 'master와 develop 브랜치 (주요 브랜치), feature 브랜치 (보조 브랜치), release 브랜치 (보조 브랜치) '

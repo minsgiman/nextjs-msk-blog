@@ -1,6 +1,6 @@
 ---
 title: Vue.js의 Dynamic component 사용하기
-date: '2020-11-11'
+date: '2019-05-20'
 tags: ['vue']
 draft: false
 summary: 'Vue에서 화면의 변경이 있을 때 Vue Router를 사용하는 방법뿐 아니라, Dynamic component를 활용하여 렌더링하는 컴포넌트를 변경할 수 있다.'

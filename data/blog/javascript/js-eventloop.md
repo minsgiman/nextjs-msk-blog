@@ -1,6 +1,6 @@
 ---
 title: Javascript의 Event Loop
-date: '2020-11-11'
+date: '2017-05-25'
 tags: ['javascript']
 draft: false,
 summary: 'Javascript Engine의 call stack, Event Loop와 Event Table 그리고 Event Queue가 하는 일'

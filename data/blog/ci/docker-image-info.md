@@ -1,6 +1,6 @@
 ---
 title: Docker 이미지 정보 확인
-date: '2020-11-11'
+date: '2019-02-06'
 tags: ['docker', 'ci']
 draft: false
 summary: 'Docker 이미지 정보, 변경 히스토리, 저장소 위치, 레이어 저장소 확인'

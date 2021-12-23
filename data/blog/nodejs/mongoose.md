@@ -1,6 +1,6 @@
 ---
 title: express에서 mongoose 사용하기
-date: '2020-11-11'
+date: '2019-10-11'
 tags: ['nodejs', 'mongoose', 'mongodb', 'backend']
 draft: false
 summary: 'mongoose는 MongoDB ODM(Object Document Mapping)중 하나로써, MongoDB Document를 자바스크립트 Object에 매칭시켜주는 역할을 한다.'

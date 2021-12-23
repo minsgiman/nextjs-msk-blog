@@ -1,6 +1,6 @@
 ---
 title: MVW framework없이 Single Page App 만들기 6
-date: '2020-11-11'
+date: '2016-01-25'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: '다국어 지원'

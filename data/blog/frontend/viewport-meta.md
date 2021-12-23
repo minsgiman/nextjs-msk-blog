@@ -1,6 +1,6 @@
 ---
 title: viewport meta tag를 이용한 모바일 브라우저 레이아웃 설정
-date: '2020-11-11'
+date: '2018-05-09'
 tags: ['frontend']
 draft: false
 summary: '기본 viewport meta tag 설정 옵션 | width, height 옵션 | 모든 viewport 옵션을 꼭 설정하지 않아도 된다.'

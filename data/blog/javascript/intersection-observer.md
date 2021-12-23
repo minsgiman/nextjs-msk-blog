@@ -1,6 +1,6 @@
 ---
 title: Intersection Observer 를 사용한 Infinite Scroll
-date: '2020-11-11'
+date: '2021-09-02'
 tags: ['javascript', 'frontend']
 draft: false,
 summary: 'Intersection Observer API는 Target Element가 Viewport내에 노출되었는지 여부를 구독할 수 있는 API이다.'

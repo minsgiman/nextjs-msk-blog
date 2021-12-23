@@ -1,6 +1,6 @@
 ---
 title: React Query의 mutations 사용하기
-date: '2020-11-11'
+date: '2021-05-09'
 tags: ['react']
 draft: false
 summary: 'React Query 에서 지원하는 mutations 사용방법에 대한 정리'

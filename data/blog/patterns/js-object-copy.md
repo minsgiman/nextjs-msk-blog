@@ -1,6 +1,6 @@
 ---
 title: How to copy object in javascript
-date: '2020-11-11'
+date: '2019-10-11'
 tags: ['javascript']
 draft: false
 summary: 'Shallow Copy, Deep Copy'

@@ -1,6 +1,6 @@
 ---
 title: Redis Cluster 서버 이전 프로세스
-date: '2020-11-11'
+date: '2019-01-10'
 tags: ['redis', 'backend', 'nosql db']
 draft: false
 summary: '1. 새로운 Redis서버 실행 및 Cluster에 추가 | 2. 새로 추가된 Redis로 슬롯 및 연동서버 이동 | 3. 기존 Redis노드 제거'

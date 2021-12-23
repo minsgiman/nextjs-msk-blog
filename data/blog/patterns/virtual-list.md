@@ -1,6 +1,6 @@
 ---
 title: Virtual List
-date: '2020-11-11'
+date: '2019-04-20'
 tags: ['virtual list', 'javascript']
 draft: false
 summary: 'javascript로 구현한 Virtual List'

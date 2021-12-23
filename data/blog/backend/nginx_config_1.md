@@ -1,6 +1,6 @@
 ---
 title: nginx config 설정 (1)
-date: '2020-11-11'
+date: '2018-12-01'
 tags: ['nginx', 'backend', 'web server']
 draft: false
 summary: '1. nginx 설정 파일 | 2. Core 모듈 & 블록 | 3. rewrite (재작성)'

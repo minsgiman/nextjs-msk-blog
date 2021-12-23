@@ -1,6 +1,6 @@
 ---
 title: React Query의 infinite query 사용하기
-date: '2020-11-11'
+date: '2021-05-04'
 tags: ['react']
 draft: false
 summary: 'react query 에서 지원하는 infinite query 사용방법에 대한 정리'

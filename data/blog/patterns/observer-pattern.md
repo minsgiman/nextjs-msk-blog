@@ -1,6 +1,6 @@
 ---
 title: observer pattern
-date: '2020-11-11'
+date: '2019-05-23'
 tags: ['pattern', 'javascript']
 draft: false
 summary: 'javascript로 구현한 observer pattern'

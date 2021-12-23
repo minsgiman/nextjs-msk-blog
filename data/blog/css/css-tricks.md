@@ -1,6 +1,6 @@
 ---
 title: CSS Tricks
-date: '2020-11-11'
+date: '2018-06-12'
 tags: ['css']
 draft: false
 summary: 'Text Select Color | Drop Caps | Image Overlay | Parallax Images ...'

@@ -1,6 +1,6 @@
 ---
 title: Vue에 Typescript 적용하기
-date: '2020-11-11'
+date: '2019-04-20'
 tags: ['typescript', 'vue']
 draft: false
 summary: 'Vue에 Typescript를 적용하는 방법 두가지 그리고 Typescript 적용시 겪는 이슈들에 대하여 정리하였다.'

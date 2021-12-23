@@ -1,6 +1,6 @@
 ---
 title: Docker 간단한 설명
-date: '2020-11-11'
+date: '2019-02-02'
 tags: ['docker', 'ci']
 draft: false
 summary: 'Docker는 Linux 컨테이너를 만들고 사용할 수 있도록 하는 컨테이너화 기술'
