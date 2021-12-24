@@ -6,16 +6,13 @@ draft: false
 summary: 'storyshot은 storybook 공식 애드온으로 작성된 story에 대한 html형태의 스냅샷을 생성하고, 이전 스냅샷과 비교한다.'
 ---
 
-프로젝트의 atomic 컴포넌트부터 page(혹은 template)단위의 컴포넌트까지 모든 화면의 UI component story를 작성하였다.
-
-그런데 코드 수정을 할때마다 기존에 작성한 UI component story에 의도하지 않은 변화가 발생하지는 않았을지 걱정된다.
-
+프로젝트의 atomic 컴포넌트부터 page(혹은 template)단위의 컴포넌트까지 모든 화면의 UI component story를 작성하였다. <br />
+그런데 코드 수정을 할때마다 기존에 작성한 UI component story에 의도하지 않은 변화가 발생하지는 않았을지 걱정된다. <br />
 눈으로 모든 Story를 일일히 확인하는 것은 너무 오랜 시간이 걸린다.
 
 **바로 의도하지 않은 UI 변경이 발생하지 않았는지 Visual Test를 수행하는 것이 storyshot 의 역할이다.**
 
-storyshot은 storybook 공식 애드온으로 작성된 story에 대한 html형태의 스냅샷을 생성하고, 이전 스냅샷과 비교한다.
-
+storyshot은 storybook 공식 애드온으로 작성된 story에 대한 html형태의 스냅샷을 생성하고, 이전 스냅샷과 비교한다. <br />
 다음은 storyshot을 수행하면 생성되는 story에 대한 스냅샷이다.
 
 ```
@@ -78,8 +75,7 @@ initStoryshots({
 
 #### Storyshot disable
 
-어떤 story들은 snapshot이 불가능하거나 어렵다. (랜덤한 값이 생성되거나 store로부터 그려야 할 데이터를 가져오는 경우)
-
+어떤 story들은 snapshot이 불가능하거나 어렵다. (랜덤한 값이 생성되거나 store로부터 그려야 할 데이터를 가져오는 경우) <br />
 이러한 경우 다음과 같이 각 story 별로 parameters에 disable을 설정해주면 snapshot이 생성되지 않는다.
 
 ```js
