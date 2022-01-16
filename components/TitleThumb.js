@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react'
 
+import Image from './Image'
+
 const TitleThumb = ({ id, onClick, imgUrl, title, description, startDate }) => {
   const handleClick = useCallback(() => {
     onClick(id)
@@ -8,7 +10,7 @@ const TitleThumb = ({ id, onClick, imgUrl, title, description, startDate }) => {
   return (
     <div className="title_thumb" onClick={handleClick}>
       <div className="img_box">
-        <img src={imgUrl}></img>
+        <Image src={imgUrl} alt={title} layout="fill" />
         <div className="inner_info">
           <span className="date_info">{startDate}</span>
           <span className="tit_info">{title}</span>

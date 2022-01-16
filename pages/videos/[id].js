@@ -29,7 +29,7 @@ export default function Video({ video }) {
     if (!isLoadFinish) {
       setIsLoadFinish(true)
     }
-  }, [])
+  }, [isLoadFinish])
 
   return (
     <>
@@ -46,10 +46,10 @@ export default function Video({ video }) {
         </div>
         <div className="container py-12">
           <div className={classnames('videos_wrap', { hide: !isLoadFinish })}>
-            <iframe src={video.videoUrl} onLoad={onIframeLoad}></iframe>
+            <iframe title="video-viewer" src={video.videoUrl} onLoad={onIframeLoad}></iframe>
           </div>
           {!isLoadFinish && (
-            <img className="loading" src="/static/images/progress_rolling_blue.svg" />
+            <img className="loading" alt="loading" src="/static/images/progress_rolling_blue.svg" />
           )}
         </div>
       </div>
