@@ -1,5 +1,7 @@
 import '@/css/tailwind.css'
 import '@/css/prism.css'
+import '@/css/custom.scss'
+import 'react-image-gallery/styles/scss/image-gallery.scss'
 
 import { ThemeProvider } from 'next-themes'
 import Head from 'next/head'
