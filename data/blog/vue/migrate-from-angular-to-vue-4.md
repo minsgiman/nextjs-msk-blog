@@ -1,6 +1,6 @@
 ---
 title: AngularJS에서 Vue로 점진적으로 넘어가기 4 (Vue Component 상속)
-date: '2019-06-17'
+date: '2019-04-17'
 tags: ['vue']
 draft: false
 summary: 'vue에서 template상속은 slot element를 통해서 할 수 있다. slot element는 상속받은 컴포넌트에서 구현한 내용으로 대체된다.'

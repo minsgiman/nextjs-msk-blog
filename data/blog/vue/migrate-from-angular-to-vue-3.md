@@ -1,6 +1,6 @@
 ---
 title: AngularJS에서 Vue로 점진적으로 넘어가기 3 (상태관리 With Vuex)
-date: '2019-06-16'
+date: '2019-04-16'
 tags: ['vue']
 draft: false
 summary: 'AngularJS 안에서 vuex Store module 정의하고 사용하기'

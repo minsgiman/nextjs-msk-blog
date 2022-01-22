@@ -1,6 +1,6 @@
 ---
 title: AngularJS에서 Vue로 점진적으로 넘어가기 1 (Vue component 생성 및 마운트)
-date: '2019-06-14'
+date: '2019-04-14'
 tags: ['vue']
 draft: false
 summary: 'AngularJS를 통해 load 되는 모든 template들은 Angular 구문으로 해석되고, 바인딩하는 과정을 거친다. 따라서, Angular의 template과 Vue의 template은 혼용해서 사용할 수 없다.'
