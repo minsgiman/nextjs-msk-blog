@@ -3,7 +3,7 @@ title: React Server Component(RSC) 소개
 date: '2022-01-29'
 tags: ['react']
 draft: false
-summary: 'React 서버 컴포넌트는 Client 사이드 번들에 포함되지 않는다. 서버 컴포넌트에서만 사용되는 라이브러리 모듈은 서버 사이드에서만 사용하면 된다.'
+summary: 'RSC는 무엇이고 기존의 SSR과는 어떻게 다른지 살펴본다.'
 ---
 
 NextJS 12에서도 React Server Component(RSC) 를 지원한다고 한다. <br />
