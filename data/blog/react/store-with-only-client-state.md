@@ -39,6 +39,8 @@ React Query 주요 내용들.. 자세한 내용은 공식 문서 참고.
 - create, update, delete API 호출을 위한 [useMutation](https://react-query.tanstack.com/guides/mutations) hook 제공
 - [Optimistic Updates](https://react-query.tanstack.com/guides/optimistic-updates#_top) 기능 제공 (mutate시에 UI를 미리 업데이트 시켜두고 서버응답 결과에 따라 업데이트 유지 or 롤백하는 기능)
 - Infinite scroll을 위한 [useInfinityQuery](https://react-query.tanstack.com/reference/useInfiniteQuery) hook 제공
+- 서버 데이터 normalize를 위한 옵션 제공 : [select](https://react-query.tanstack.com/guides/migrating-to-react-query-3#query-data-selectors)사용 또는 queryFn 내부에서 return시 normalize
+  (참고 : [React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations))
 
 ### 도입 시 좋은점과 고민할 부분
 
