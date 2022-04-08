@@ -9,11 +9,11 @@ summary: 'GTM container에 어떤 Tag를 추가했는지에 따라 페이지 로
 [Google Tag Manager(GTM)](https://support.google.com/tagmanager/answer/6103696?hl=ko) 설치만으로 Web Page 로드속도가 느려지는 것은 아니다.
 
 하지만 GTM container에 어떤 [Tag](https://developers.google.com/tag-platform/devguides#tags)를 추가했는지에 따라 페이지 로드속도에 영향을 줄 수 있다. <br />
-Web Page에서 dataLayer에 push하는 이벤트에 따라 설정해놓은 Tag의 코드 snippet이 동기적으로 실행되기 때문이다. <br />
+Web Page에서 dataLayer에 push하는 이벤트에 따라 GTM에서 설정해놓은 Tag의 코드 snippet이 동기적으로 실행되기 때문이다. <br />
 
 페이지 성능에 영향을 줄 수 있는 GTM Tag 설정시 어떤 과정을 거쳐야 하고 개선점에 대해 알아본다.
 
-### GTM 태그 추가시에는
+### GTM 태그 추가
 
 마케팅 및 사용자분석을 위하여 GTM Tag를 추가한다. <br />
 이러한 Tag는 포함하고 있는 script 내용에 따라 페이지 로드 성능저하를 일으킬 수 있다. <br />
