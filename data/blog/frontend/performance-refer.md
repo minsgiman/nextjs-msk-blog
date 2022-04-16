@@ -33,6 +33,7 @@ summary: 'Tree shaking 개선, 자원 외부화로 번들 사이즈 감소, Dyna
 
   - JS 번들 로드 성능 분석, 측정
   - \_\_webpack_require\_\_ 가 차지하는 비용
+  - 번역 : https://devjin-blog.com/notion-performance-enhancement/
 
 - Preload and Prefetch
 
