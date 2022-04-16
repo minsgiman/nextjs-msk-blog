@@ -3,7 +3,7 @@ title: Store에서 비동기 통신 분리하기 (with React Query)
 date: '2022-02-26'
 tags: ['react']
 draft: false
-summary: ''
+summary: '우리가 사용하는 Store가 상당 부분 API 통신을 위한 코드들로 비대해진다. API 통신과 Server Side 상태 관리를 위한 더 나은 방법은 없을까?'
 ---
 
 ### 참고
