@@ -41,6 +41,10 @@ summary: 'Tree shaking 개선, 자원 외부화로 번들 사이즈 감소, Dyna
   - [개츠비 프리로딩과 프리패치](https://jeonghwan-kim.github.io/dev/2020/08/21/gatsby-prefetch.html)
   - [Best-ish Practices for Dynamically Prefetching & Prerendering Pages with JavaScript](https://www.macarthur.me/posts/best-ish-practices-for-dynamically-prefetching-and-prerendering-with-javascript)
 
+- [The cost of JavaScript in 2019](https://v8.dev/blog/cost-of-javascript-2019)
+
+- [Optimising Core Web Vitals on SPAs](https://simonhearne.com/2022/core-web-vitals-on-spas)
+
 - [구글 I/O 페이지 로드 후 성능](https://events.google.com/io/session/61a0f83e-1d64-4bdc-b5d9-04360db925ec?lng=ko)
 
 - [Javascript 초기로드 최적화](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/javascript-startup-optimization?hl=ko)

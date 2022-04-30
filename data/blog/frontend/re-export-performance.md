@@ -6,8 +6,7 @@ draft: false
 summary: 'barrel 파일을 통해 외부에 공개할 기능을 관리하고 외부에서 깔끔하게 import 할 수 있다. 하지만 re-export가 때로는 성능 문제를 야기할 수 있다.'
 ---
 
-barrel 파일은 여러 모듈을 묶어서 re-export 한다. <br />
-다음과 같이 사용한다.
+barrel 파일은 여러 모듈을 묶어서 re-export 하고 다음과 같이 사용한다.
 
 ```js
 export * from './Foo'
@@ -93,11 +92,8 @@ __webpack_require__("xN6P"); | | // ... | }, |
 
 \_\_webpack_require\_\_는 webpack의 internal함수로써 module을 require 하는데 사용된다. <br />
 webpack은 import를 모두 \_\_webpack_require\_\_() 로 변환한다. <br />
-Bundle initialization이 많은 시간이 걸리는 이유는 변환된 \_\_webpack_require\_\_(모듈함수ID) 가 모두 실행되기 때문이다. <br />
+Bundle initialization이 많은 시간이 걸리는 이유는 \_\_webpack_require\_\_(모듈함수ID) 가 모두 실행되기 때문이다. <br />
 import하는 모듈이 많아질수록 그 비용은 올라간다.
-
-아래에서 index파일을 통해 묶여있는 많은 모듈들로 initialization 시간이 오래 걸리는 것을 볼 수 있다.
-<img src="/static/images/index-webpack-require.png" />
 
 #### v8 엔진 lazy parsing
 
@@ -108,10 +104,14 @@ pre-parsing은 syntax error 정도만 먼저 체크하고, 추상 구문 트리(
 
 그래서 barrel 파일을 통한 re-export는 수많은 불필요한 \_\_webpack_require\_\_ 수행과 JS엔진의 full-parsing 대상을 늘릴 수 있다. <br />
 
+아래에서 utils/index 파일을 통해 묶여있는 많은 모듈들로 initialization 시간이 오래 걸리는 것을 볼 수 있다. <br />
+실제로 프로젝트에서 utils/index 를 제거하고 모두 direct import 하도록 변경하였더니 초기로딩에서 300ms 정도 개선이 있었다.
+<img src="/static/images/index-webpack-require.png" />
+
 ### 결론
 
 모든 디렉토리마다 barrel 파일을 만들어서 re-export 하는 것은 의도치 않은 성능 문제를 일으킬 수 있기 때문에 지양해야 한다. <br />
-모듈 개수가 너무 많으면서 각 모듈들이 실행되는 시점이 다르다면 묶어서 re-export 하는 것 보다는 각 모듈을 direct import 하는 것이 좋을 것으로 보인다.
+barrel 파일로 묶는 모듈 개수가 너무 많으면서 각 모듈들이 실행되는 시점이 다르고 tree-shaking의 대상도 아니라면 re-export 하는 것 보다는 각 모듈을 direct import 하는 것이 성능상 이점이 있을 것으로 보인다.
 
 ---
 
