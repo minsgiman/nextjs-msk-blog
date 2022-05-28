@@ -3,7 +3,7 @@ title: React Testing Library 로 React 컴포넌트 테스트하기
 date: '2022-05-27'
 tags: ['react', 'test']
 draft: false
-summary: 'Prefetch는 브라우저가 idle time에 미래에 사용될 리소스들을 미리 다운로드 받아서 캐시하여, 미래에 방문할 페이지의 로딩 속도를 빠르게 해주는 기능이다.'
+summary: 'React Testing Library는 React 컴포넌트를 테스트하기 위해 설계된 라이브러리다.'
 ---
 
 [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)는 React 컴포넌트를 테스트하기 위해 설계된 라이브러리다. <br />
