@@ -6,6 +6,10 @@ draft: false
 summary: 'Tree shaking 개선, 자원 외부화로 번들 사이즈 감소, Dynamic Import와 모듈 chunk, Promise.all 조합'
 ---
 
+- [빠른 로드 시간](https://web.dev/fast/#prioritize-resources)
+
+  - 사이트 성능을 높이기 위한 기술에 대해 종합적으로 정리
+
 - [Detached window memory leaks](https://web.dev/detached-window-memory-leaks/?utm_source=google-io21&utm_medium=referral&utm_campaign=io21-resources)
 
   - window.open 또는 iframe 사용시 close 하더라도 window or iframe 객체참조 없애지 않으면 큰 메모리낭비
