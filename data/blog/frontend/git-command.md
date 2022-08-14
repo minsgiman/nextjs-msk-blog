@@ -76,6 +76,33 @@ summary: 'remote | branch flow | commit | stash | squash | tag | useful command'
 
 - **git branch -m 변경전\_branch_name 새로운\_branch_name** : Git 브랜치 이름 변경
 
+### github PR(pull request) 을 merge 하지 않고 local 로 받기
+
+- project내 .git/config 파일 open
+
+```
+[remote "upstream"]
+  url = git@github.com:username/project-name.git
+  fetch = +refs/heads/*:refs/remotes/upstream/*
+  fetch = +refs/pull/*/head:refs/remotes/upstream/pr/*
+
+마지막 fetch 행 추가
+```
+
+- upstream 저장소에서 PR 을 가져온다.
+
+```
+git fetch upstream
+```
+
+- upstream에 있는 PR 번호로 체크아웃 받는다.
+
+```
+git checkout upstream/pr/1490
+```
+
+- origin에 있는 PR을 가져온다면 위에서 upstream 만 origin으로 바꿔주면 된다.
+
 ---
 
 ### 참조
@@ -85,3 +112,5 @@ summary: 'remote | branch flow | commit | stash | squash | tag | useful command'
 - [13 Advanced (but useful) Git Techniques and Shortcuts](https://www.youtube.com/watch?v=ecK3EnyGD8o)
 
 - [GitHub 프로젝트 패키지 릴리즈](https://devgwang.tistory.com/50)
+
+- [github PR(pull request) 을 merge 하지 않고 local 로 받기](https://www.lesstif.com/gitbook/github-pr-pull-request-merge-local-30704954.html)
