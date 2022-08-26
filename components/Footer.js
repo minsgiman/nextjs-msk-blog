@@ -3,5 +3,5 @@ export default function Footer() {
     <footer>
       <div className="flex flex-col items-center mt-16"></div>
     </footer>
-  )
+  );
 }

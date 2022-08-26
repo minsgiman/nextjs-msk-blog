@@ -13,38 +13,38 @@ A shallow copy refers to the fact that only one level is copied, and that will w
 #### 1) spread operator (...)
 
 ```javascript
-const array = [3, 4, 5]
+const array = [3, 4, 5];
 
-const copyWithEquals = array
-console.log(copyWithEquals === array) // true
+const copyWithEquals = array;
+console.log(copyWithEquals === array); // true
 
-const copyWithSpread = [...array]
-console.log(copyWithSpread === array) // false
-console.log(...copyWithSpread) // 3, 4, 5
+const copyWithSpread = [...array];
+console.log(copyWithSpread === array); // false
+console.log(...copyWithSpread); // 3, 4, 5
 ```
 
 #### 2) array.slice()
 
 ```javascript
-const array = [3, 4, 5]
+const array = [3, 4, 5];
 
-const copyWithEquals = array
-console.log(copyWithEquals === array) // true
+const copyWithEquals = array;
+console.log(copyWithEquals === array); // true
 
-const copyWithSlice = array.slice()
-console.log(copyWithSlice === array) // false
-console.log(...copyWithSlice) // 3, 4, 5
+const copyWithSlice = array.slice();
+console.log(copyWithSlice === array); // false
+console.log(...copyWithSlice); // 3, 4, 5
 ```
 
 #### 3) Object.assign()
 
 ```javascript
-const array = [3, 4, 5]
+const array = [3, 4, 5];
 
-const copyWithEquals = array
-const copyWithAssign = []
-Object.assign(copyWithAssign, array)
-console.log(...copyWithAssign) // 3, 4, 5
+const copyWithEquals = array;
+const copyWithAssign = [];
+Object.assign(copyWithAssign, array);
+console.log(...copyWithAssign); // 3, 4, 5
 ```
 
 ## Deep Copy
@@ -57,27 +57,27 @@ for objects and arrays containing other objects or arrays, copying these objects
 
 ```javascript
 const deepCopyFunction = (inObject) => {
-  let outObject, value, key
+  let outObject, value, key;
 
   if (typeof inObject !== 'object' || inObject === null) {
-    return inObject // Return the value if inObject is not an object
+    return inObject; // Return the value if inObject is not an object
   }
 
-  outObject = Array.isArray(inObject) ? [] : {}
+  outObject = Array.isArray(inObject) ? [] : {};
 
   for (key in inObject) {
-    value = inObject[key]
-    outObject[key] = deepCopyFunction(value)
+    value = inObject[key];
+    outObject[key] = deepCopyFunction(value);
   }
 
-  return outObject
-}
+  return outObject;
+};
 
-let originalArray = [37, 3700, { hello: 'world' }]
-console.log('Original array:', ...originalArray) // 37 3700 Object { hello: "world" }
+let originalArray = [37, 3700, { hello: 'world' }];
+console.log('Original array:', ...originalArray); // 37 3700 Object { hello: "world" }
 
-let deepCopiedArray = deepCopyFunction(originalArray)
-console.log('Deep copy:', ...deepCopiedArray) // 37 3700 Object { hello: "world" }
+let deepCopiedArray = deepCopyFunction(originalArray);
+console.log('Deep copy:', ...deepCopiedArray); // 37 3700 Object { hello: "world" }
 ```
 
 #### 3) JSON.parse/stringify

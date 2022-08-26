@@ -152,8 +152,8 @@ module.exports = (env) => {
       },
     },
     //...
-  }
-}
+  };
+};
 ```
 
 - Typescript에서 .vue 파일을 import 할때 발생하는 에러 수정을 위해 vue-shims.d.ts 파일을 작성한다.<br />
@@ -162,8 +162,8 @@ module.exports = (env) => {
 ```ts
 // src/vue-shims.d.ts
 declare module '*.vue' {
-  import Vue from 'vue'
-  export default Vue
+  import Vue from 'vue';
+  export default Vue;
 }
 ```
 
@@ -185,7 +185,7 @@ declare module '*.vue' {
 
 ```js
 // webpack.config.js
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 //...
 
 module.exports = (env) => {
@@ -193,8 +193,8 @@ module.exports = (env) => {
     //...
     plugins: [new VueLoaderPlugin()],
     //...
-  }
-}
+  };
+};
 ```
 
 - Webstorm에서 .vue 파일의 TSLint 지원은 2019.1 build 버전부터 제대로 동작한다.

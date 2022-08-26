@@ -25,7 +25,7 @@ tab을 사용하지 않고, space 2개를 사용한다.
 변수, 함수 이름 : camelCase
 
 ```js
-const transferType = type
+const transferType = type;
 
 function convertTransfer() {
   // ...
@@ -43,19 +43,19 @@ class RequestInfoMsgRoute {
 상수, enum 이름 : UPPER_CASE_SNAKE_CASE
 
 ```js
-const NEW_TYPE = 'newtype'
+const NEW_TYPE = 'newtype';
 ```
 
 boolean 변수 : `is-` 또는 `has-` prefix를 붙인다.
 
 ```js
 // is prefix to describe a characteristic
-const isLoggedIn = true
-const isActiveUser = true
+const isLoggedIn = true;
+const isActiveUser = true;
 
 // has prefix if it possesses a certain value
-const hasFollowers = true
-const hasAllergies = false
+const hasFollowers = true;
+const hasAllergies = false;
 ```
 
 function Naming은 동사로 시작한다. 주로 사용하는 동사 : get, set, reset, fetch, remove, delete, handle
@@ -63,12 +63,12 @@ function Naming은 동사로 시작한다. 주로 사용하는 동사 : get, set
 ```js
 // reset a value
 function resetCount() {
-  this.count = this.initialCount
+  this.count = this.initialCount;
 }
 
 // remove an element
 function removeItemFromCart(itemId) {
-  return this.items.filter((item) => item.id !== itemId)
+  return this.items.filter((item) => item.id !== itemId);
 }
 
 // erase permanently
@@ -86,11 +86,11 @@ const와 let은 사용하는 블럭의 가장 위에 선언해준다.
 
 ```js
 function sample() {
-  const result = []
-  let pageToken = null
+  const result = [];
+  let pageToken = null;
 
   for (let i = 0; i < cnt; i++) {
-    let id = null
+    let id = null;
 
     // ...
   }
@@ -111,15 +111,15 @@ function sample() {
 ```js
 // bad
 items.map(function (item) {
-  return item + 1
-})
+  return item + 1;
+});
 ```
 
 ```js
 // good
 items.map((item) => {
-  return item + 1
-})
+  return item + 1;
+});
 ```
 
 #### 2. object 파라미터
@@ -132,19 +132,19 @@ object 파라미터를 그대로 넘기거나 하는 경우와 같이 destructur
 ```js
 // bad
 const getTransferResult = (receiver) => {
-  console.log(receiver.receiverType, receiver.receiverName)
+  console.log(receiver.receiverType, receiver.receiverName);
 
-  return `${receiver.receiverType} ${receiver.receiverName}`
-}
+  return `${receiver.receiverType} ${receiver.receiverName}`;
+};
 ```
 
 ```js
 // good
 const getTransferResult = ({ receiverType, receiverName }) => {
-  console.log(receiverType, receiverName)
+  console.log(receiverType, receiverName);
 
-  return `${receiverType} ${receiverName}`
-}
+  return `${receiverType} ${receiverName}`;
+};
 ```
 
 #### 3. const vs function 선언
@@ -158,19 +158,19 @@ function 선언은 모듈내의 메인 기능을 표현할 때 사용한다. (�
 // good
 export function Counter() {
   const onIncrease = () => {
-    dispatch({ type: 'INCREMENT' })
-  }
+    dispatch({ type: 'INCREMENT' });
+  };
 
   const onDecrease = () => {
-    dispatch({ type: 'DECREMENT' })
-  }
+    dispatch({ type: 'DECREMENT' });
+  };
 
   return (
     <div>
       <button onClick={onIncrease}>+1</button>
       <button onClick={onDecrease}>-1</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -185,7 +185,7 @@ export function convertStringToArrayBuffer(str) {
 // bad
 export const isObject = () => {
   // ...
-}
+};
 ```
 
 #### 4. boolean flag 파라미터
@@ -197,30 +197,30 @@ boolean flag 파라미터를 전달하는 것을 지양하고, 함수 분리가 
 ```js
 // bad
 function getItemCost(itemCost, isMember) {
-  const MEMBER_DISCOUNT = 0.3
-  const NORMAL_DISCOUNT = 0.1
-  let cost
+  const MEMBER_DISCOUNT = 0.3;
+  const NORMAL_DISCOUNT = 0.1;
+  let cost;
 
   if (isMember) {
-    cost = itemCost * (1 - MEMBER_DISCOUNT)
+    cost = itemCost * (1 - MEMBER_DISCOUNT);
   } else {
-    cost = itemCost * (1 - NORMAL_DISCOUNT)
+    cost = itemCost * (1 - NORMAL_DISCOUNT);
   }
-  return cost
+  return cost;
 }
 ```
 
 ```js
 // good
 function getItemCost(itemCost) {
-  const NORMAL_DISCOUNT = 0.1
-  const cost = itemCost * (1 - MEMBER_DISCOUNT)
-  return cost
+  const NORMAL_DISCOUNT = 0.1;
+  const cost = itemCost * (1 - MEMBER_DISCOUNT);
+  return cost;
 }
 function getItemCostForMember(itemCost) {
-  const MEMBER_DISCOUNT = 0.3
-  const cost = itemCost * (1 - MEMBER_DISCOUNT)
-  return cost
+  const MEMBER_DISCOUNT = 0.3;
+  const cost = itemCost * (1 - MEMBER_DISCOUNT);
+  return cost;
 }
 ```
 
@@ -233,7 +233,7 @@ function getItemCostForMember(itemCost) {
 ```js
 // bad
 if (termData?.term?.downloadable)
-  return { type: FOOTER_TYPE.DOWNLOAD, onDownloadClick: handleDownloadClick }
+  return { type: FOOTER_TYPE.DOWNLOAD, onDownloadClick: handleDownloadClick };
 ```
 
 ```js
@@ -242,7 +242,7 @@ if (termData?.term?.downloadable) {
   return {
     type: FOOTER_TYPE.DOWNLOAD,
     onDownloadClick: handleDownloadClick,
-  }
+  };
 }
 ```
 
@@ -262,7 +262,7 @@ if (typeof message === 'string') {
 
 ```js
 // good
-import { TypeUtility } from '@utils'
+import { TypeUtility } from '@utils';
 // TypeUtility.isBoolean
 // TypeUtility.isString
 // TypeUtility.isObject
@@ -317,7 +317,7 @@ if (status === 'loading' && isEmpty(productList)) {
 ```js
 // good
 function shouldDisplayLoader(status, productList) {
-  return status === 'loading' && isEmpty(productList)
+  return status === 'loading' && isEmpty(productList);
 }
 if (shouldDisplayLoader(requestStatus, productList)) {
   // ... rest of the code
@@ -335,14 +335,14 @@ const AmountInputBox = ({ receiver, onInputClick, onSelectAccountChange, childre
   // ...
 
   const handleInputClick = (e) => {
-    e.preventDefault()
-    onInputClick()
-  }
+    e.preventDefault();
+    onInputClick();
+  };
 
   const handleSelectAccountChange = (value) => {
-    onClose()
-    onSelectAccountChange(value)
-  }
+    onClose();
+    onSelectAccountChange(value);
+  };
 
   return (
     <>
@@ -352,24 +352,24 @@ const AmountInputBox = ({ receiver, onInputClick, onSelectAccountChange, childre
 
       <TransferAccountLayer onChange={handleSelectAccountChange} />
     </>
-  )
-}
+  );
+};
 
 AmountInputBox.defaultProps = {
   receiver: {},
   onInputClick: () => {},
   onSelectAccountChange: () => {},
   children: null,
-}
+};
 
 AmountInputBox.propTypes = {
   receiver: PropTypes.object,
   onInputClick: PropTypes.func,
   onSelectAccountChange: PropTypes.func,
   children: PropTypes.node,
-}
+};
 
-export default AmountInputBox
+export default AmountInputBox;
 ```
 
 ## File Naming
@@ -392,14 +392,14 @@ RouteStrategy.js (RouteStrategy 클래스)
 
 ```js
 // bad
-console.log('[SendMessage target]', message)
+console.log('[SendMessage target]', message);
 ```
 
 ```js
 // good
-import { logger } from '@utils'
+import { logger } from '@utils';
 
-logger.trace('[SendMessage target]', message)
+logger.trace('[SendMessage target]', message);
 ```
 
 ```cmd
@@ -418,16 +418,16 @@ logger 유틸내에서 error 로그는 [Sentry](https://sentry.io/welcome/)와 �
 
 ```js
 try {
-  const eventData = JSON.parse(data)
+  const eventData = JSON.parse(data);
 
   if (origin === registedOrigin) {
-    logger.debug('Received Message', eventData)
-    this.callbackList.forEach((v) => v(eventData))
+    logger.debug('Received Message', eventData);
+    this.callbackList.forEach((v) => v(eventData));
   } else {
-    throw 'Invalid origin'
+    throw 'Invalid origin';
   }
 } catch (error) {
-  logger.error(error, `[Message from Frame]: ${data}`)
+  logger.error(error, `[Message from Frame]: ${data}`);
 }
 ```
 
@@ -441,14 +441,14 @@ try {
 
 ```js
 // bad
-import i18n from './../utils/i18n'
+import i18n from './../utils/i18n';
 ```
 
 ```js
 // good
-import { i18n } from '@utils'
-import { rootStoryCategory, subStoryCategory, pageStoryCategory } from './utils/constants'
-import { StoryLayout } from './decorators'
+import { i18n } from '@utils';
+import { rootStoryCategory, subStoryCategory, pageStoryCategory } from './utils/constants';
+import { StoryLayout } from './decorators';
 ```
 
 #### 2. named default export
@@ -459,13 +459,13 @@ import { StoryLayout } from './decorators'
 
 ```js
 // bad
-export { Foo, Bar }
-export default { User }
+export { Foo, Bar };
+export default { User };
 ```
 
 ```js
 // good
-export { Foo, Bar, User }
+export { Foo, Bar, User };
 ```
 
 #### 3. 패키지화되어 있는 모듈 import
@@ -476,7 +476,7 @@ export { Foo, Bar, User }
 
 ```js
 // bad
-import { getTransactionList } from '@utils/account/transaction'
+import { getTransactionList } from '@utils/account/transaction';
 ```
 
 ```js
@@ -499,15 +499,15 @@ src/utils/locale/i18n.ts -> src/utils/index.ts -> src/utils/locale/index.ts -> s
 ```js
 // bad
 // utils/locale/i18n.ts
-import { logger, DevUtility, fx } from '@utils'
+import { logger, DevUtility, fx } from '@utils';
 ```
 
 ```js
 // good
 // utils/locale/i18n.ts
-import { logger } from '@utils/logger'
-import { fx } from '@utils/fx'
-import * as DevUtility from '@utils/dev'
+import { logger } from '@utils/logger';
+import { fx } from '@utils/fx';
+import * as DevUtility from '@utils/dev';
 ```
 
 #### 4. 외부 내부 모듈 구분
@@ -518,13 +518,13 @@ import * as DevUtility from '@utils/dev'
 
 ```js
 // bad
-import React from 'react'
-import { i18n } from '@utils'
+import React from 'react';
+import { i18n } from '@utils';
 ```
 
 ```js
 // good
-import React from 'react'
+import React from 'react';
 
-import { i18n } from '@utils'
+import { i18n } from '@utils';
 ```

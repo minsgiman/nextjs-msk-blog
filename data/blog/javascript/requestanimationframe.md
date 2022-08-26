@@ -47,31 +47,31 @@ requestAnimationFrame을 지원하지 않는 브라우저인 경우에는 setTim
       }
     </style>
     <script type="text/javascript">
-      var requestId = 0
-      var startime = 0
-      var lpos = 0
-      var elm
+      var requestId = 0;
+      var startime = 0;
+      var lpos = 0;
+      var elm;
 
       function init() {
-        elm = document.getElementById('animated')
+        elm = document.getElementById('animated');
       }
 
       function render() {
-        elm.style.left = ((lpos += 3) % 600) + 'px'
-        requestId = window.requestAFrame(render)
+        elm.style.left = ((lpos += 3) % 600) + 'px';
+        requestId = window.requestAFrame(render);
       }
 
       function start() {
         if (window.performance.now) {
-          startime = window.performance.now()
+          startime = window.performance.now();
         } else {
-          startime = Date.now()
+          startime = Date.now();
         }
-        requestId = window.requestAFrame(render)
+        requestId = window.requestAFrame(render);
       }
 
       function stop() {
-        if (requestId) window.cancelAFrame(requestId)
+        if (requestId) window.cancelAFrame(requestId);
       }
 
       // handle multiple browsers for requestAnimationFrame()
@@ -83,10 +83,10 @@ requestAnimationFrame을 지원하지 않는 브라우저인 경우에는 setTim
           window.oRequestAnimationFrame ||
           // if all else fails, use setTimeout
           function (callback) {
-            return window.setTimeout(callback, 1000 / 60) // shoot for 60 fps
+            return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
           }
-        )
-      })()
+        );
+      })();
 
       // handle multiple browsers for cancelAnimationFrame()
       window.cancelAFrame = (function () {
@@ -96,10 +96,10 @@ requestAnimationFrame을 지원하지 않는 브라우저인 경우에는 setTim
           window.mozCancelAnimationFrame ||
           window.oCancelAnimationFrame ||
           function (id) {
-            window.clearTimeout(id)
+            window.clearTimeout(id);
           }
-        )
-      })()
+        );
+      })();
     </script>
   </head>
   <body onload="init();">

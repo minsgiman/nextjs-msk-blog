@@ -34,48 +34,48 @@ isInfinite Param을 통해 Viewport 노출을 한번만 감지할지, 계속 감
 
 ```ts
 /* useIntersectionObserver.tsx */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 type IUseIntersectionObserverParams = {
-  ref: React.RefObject<HTMLElement> | null
-  isInfinite?: boolean
-  onIntersect?: () => void
-}
+  ref: React.RefObject<HTMLElement> | null;
+  isInfinite?: boolean;
+  onIntersect?: () => void;
+};
 
 export function useIntersectionObserver({
   ref,
   isInfinite,
   onIntersect,
 }: IUseIntersectionObserverParams) {
-  const [isIntersecting, setIsIntersecting] = useState(false)
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
-    let observer: IntersectionObserver
+    let observer: IntersectionObserver;
 
     if (ref) {
       observer = new IntersectionObserver(([entry], observer) => {
         if (entry.isIntersecting) {
           if (!isInfinite) {
-            observer.unobserve(entry.target)
+            observer.unobserve(entry.target);
           }
 
           if (!isIntersecting) {
-            setIsIntersecting(true)
+            setIsIntersecting(true);
           }
-          onIntersect?.()
-          console.log('[useIntersectionObserver] intersect target')
+          onIntersect?.();
+          console.log('[useIntersectionObserver] intersect target');
         }
-      })
+      });
 
-      ref.current && observer.observe(ref.current)
+      ref.current && observer.observe(ref.current);
     }
 
     return () => {
-      observer?.disconnect()
-    }
-  }, [ref])
+      observer?.disconnect();
+    };
+  }, [ref]);
 
-  return isIntersecting
+  return isIntersecting;
 }
 ```
 
@@ -86,25 +86,25 @@ InfiniteScrollBox 컴포넌트를 구현하였다. <br />
 
 ```ts
 /* InfiniteScrollBox.tsx */
-import React, { createRef } from 'react'
+import React, { createRef } from 'react';
 
-import { useIntersectionObserver } from '@hooks'
-import { LoadingContent } from '@components-common/atoms/loading'
+import { useIntersectionObserver } from '@hooks';
+import { LoadingContent } from '@components-common/atoms/loading';
 
 export interface IInfiniteScrollBoxProps {
-  isLoading?: boolean
-  onIntersect?: () => void
-  children?: React.ReactNode
+  isLoading?: boolean;
+  onIntersect?: () => void;
+  children?: React.ReactNode;
 }
 
 export function InfiniteScrollBox({ isLoading, onIntersect, children }: IInfiniteScrollBoxProps) {
-  const bottomRef = createRef<HTMLDivElement>()
+  const bottomRef = createRef<HTMLDivElement>();
 
   useIntersectionObserver({
     ref: bottomRef,
     isInfinite: true,
     onIntersect,
-  })
+  });
 
   return (
     <>
@@ -112,7 +112,7 @@ export function InfiniteScrollBox({ isLoading, onIntersect, children }: IInfinit
       {isLoading && <LoadingContent />}
       <div ref={bottomRef}></div>
     </>
-  )
+  );
 }
 ```
 
@@ -123,29 +123,29 @@ InfiniteScrollBox 컴포넌트를 사용하여 List에 무한스크롤을 적용
 ```javascript
 /* MainList.js */
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = 10;
 
 const MainList = ({ fetchApi, apiActionTypes }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { items, pageToken } = useSelector(getMainList)
-  const loading = useSelector(getLoading(apiActionTypes))
+  const { items, pageToken } = useSelector(getMainList);
+  const loading = useSelector(getLoading(apiActionTypes));
 
-  const isEmptyList = useMemo(() => ObjectUtility.isEmpty(items), [items])
+  const isEmptyList = useMemo(() => ObjectUtility.isEmpty(items), [items]);
 
   const handleIntersect = useCallback(() => {
     if (!ObjectUtility.isEmpty(pageToken) && !loading && items.length >= PAGE_SIZE) {
-      handleFetchBoard()
+      handleFetchBoard();
     }
-  }, [pageToken, loading, items])
+  }, [pageToken, loading, items]);
 
   const handleFetchBoard = useCallback(() => {
     dispatch(
       fetchApi({
         payload: pageToken,
       })
-    )
-  }, [pageToken])
+    );
+  }, [pageToken]);
 
   return (
     <InfiniteScrollBox isLoading={loading} onIntersect={handleIntersect}>
@@ -155,8 +155,8 @@ const MainList = ({ fetchApi, apiActionTypes }) => {
         ))}
       </ul>
     </InfiniteScrollBox>
-  )
-}
+  );
+};
 ```
 
 ---

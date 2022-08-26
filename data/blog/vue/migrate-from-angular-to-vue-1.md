@@ -27,31 +27,31 @@ app.factory('vContentPlayDlg', [
   'vCompManager',
   'vModalDlg',
   function (vCompManager, vModalDlg) {
-    var _templateUrl = '/vue_templates/content_play_dlg.html'
+    var _templateUrl = '/vue_templates/content_play_dlg.html';
     var _vConstructor = {
       props: ['dlgStyle', 'webmUrl', 'mp4Url'],
       created: function () {},
       beforeDestroy: function () {
-        $(this.$el).detach()
+        $(this.$el).detach();
       },
       destroyed: function () {},
       methods: {
         onCloseDialog: function () {
-          var uid = this.$el.getAttribute('data-uid')
-          vCompManager.destroyComponent(uid)
+          var uid = this.$el.getAttribute('data-uid');
+          vCompManager.destroyComponent(uid);
         },
       },
       components: {
         modal_dlg: {},
       },
-    }
+    };
 
     return {
       createComponent: function (targetId, props) {
         var getCompPromises = [],
-          subComponents = []
-        getCompPromises.push(vModalDlg.getConstructor())
-        subComponents.push(_vConstructor.components.modal_dlg)
+          subComponents = [];
+        getCompPromises.push(vModalDlg.getConstructor());
+        subComponents.push(_vConstructor.components.modal_dlg);
 
         return vCompManager.createComponent(
           targetId,
@@ -61,39 +61,39 @@ app.factory('vContentPlayDlg', [
           _templateUrl,
           getCompPromises,
           subComponents
-        )
+        );
       },
       destroyComponent: function (uid) {
-        vCompManager.destroyComponent(uid)
+        vCompManager.destroyComponent(uid);
       },
       getConstructor: function () {
-        return vCompManager.getConstructor(_vConstructor, _templateUrl)
+        return vCompManager.getConstructor(_vConstructor, _templateUrl);
       },
-    }
+    };
   },
-])
+]);
 
 /**** Vue Component Manager ****/
 app.factory('vCompManager', [
   '$q',
   '$templateRequest',
   function ($q, $templateRequest) {
-    var _compMap = {}
+    var _compMap = {};
 
     function _makeComponent(targetId, props, vConstructor, vI18n) {
-      var vExtendConstructor = Vue.extend(vConstructor)
+      var vExtendConstructor = Vue.extend(vConstructor);
       var vComponent = new vExtendConstructor({
         i18n: vI18n,
         propsData: props,
-      }).$mount('#' + targetId)
+      }).$mount('#' + targetId);
 
-      var uid = vComponent._uid
-      _compMap[uid] = vComponent
+      var uid = vComponent._uid;
+      _compMap[uid] = vComponent;
 
       if (vComponent.$el) {
-        vComponent.$el.setAttribute('data-uid', uid)
+        vComponent.$el.setAttribute('data-uid', uid);
       }
-      return uid
+      return uid;
     }
 
     return {
@@ -108,62 +108,62 @@ app.factory('vCompManager', [
       ) {
         var promises = [],
           uid,
-          deferred = $q.defer()
+          deferred = $q.defer();
 
         if (vConstructor.template) {
-          uid = _makeComponent(targetId, props, vConstructor, vI18n)
-          deferred.resolve(uid)
+          uid = _makeComponent(targetId, props, vConstructor, vI18n);
+          deferred.resolve(uid);
         } else {
           //Load Template & sub Components
-          promises.push($templateRequest(templateUrl))
+          promises.push($templateRequest(templateUrl));
           if (getCompPromises && getCompPromises.length) {
             getCompPromises.forEach(function (promise) {
-              promises.push(promise)
-            })
+              promises.push(promise);
+            });
           }
           $q.all(promises).then(function (res) {
-            vConstructor.template = res[0]
+            vConstructor.template = res[0];
             if (subComponents && subComponents.length) {
               subComponents.forEach(function (component, index) {
-                $.extend(component, res[index + 1])
-              })
+                $.extend(component, res[index + 1]);
+              });
             }
-            uid = _makeComponent(targetId, props, vConstructor, vI18n)
-            deferred.resolve(uid)
-          })
+            uid = _makeComponent(targetId, props, vConstructor, vI18n);
+            deferred.resolve(uid);
+          });
         }
 
-        return deferred.promise
+        return deferred.promise;
       },
       destroyComponent: function (uid) {
         if (_compMap[uid]) {
-          _compMap[uid].$destroy()
-          _compMap[uid] = null
+          _compMap[uid].$destroy();
+          _compMap[uid] = null;
         }
       },
       getConstructor: function (vConstructor, templateUrl) {
-        var deferred = $q.defer()
+        var deferred = $q.defer();
 
         if (vConstructor.template) {
-          deferred.resolve(vConstructor)
+          deferred.resolve(vConstructor);
         } else {
           $templateRequest(templateUrl).then(function (template) {
-            vConstructor.template = template
-            deferred.resolve(vConstructor)
-          })
+            vConstructor.template = template;
+            deferred.resolve(vConstructor);
+          });
         }
 
-        return deferred.promise
+        return deferred.promise;
       },
       getMixin: function (data, methods) {
         return {
           data: data,
           methods: methods,
-        }
+        };
       },
-    }
+    };
   },
-])
+]);
 ```
 
 3. Angular Controller 에서 각 vue component Angular Service에서 제공하는 createComponent, destroyComponent 를 호출하여 vue component를 생성하고, 마운트한다.
@@ -183,8 +183,8 @@ vContentPlayDlg
     mp4Url: 'https://xxx/CF/video/biz_app_final.mp4',
   })
   .then(function (uid) {
-    vContentPlayDlgCompId = uid
-  })
+    vContentPlayDlgCompId = uid;
+  });
 
 //...
 //...
@@ -192,8 +192,8 @@ vContentPlayDlg
 $scope.$on('$destroy', function () {
   //...
   //...
-  vContentPlayDlg.destroyComponent(vContentPlayDlgCompId)
-})
+  vContentPlayDlg.destroyComponent(vContentPlayDlgCompId);
+});
 ```
 
 ---

@@ -27,7 +27,7 @@ summary: 'Redis 사용 | ioredis 모듈 | Master의 Redis subscribe 및 Worker�
 - redis커맨드 사용방법은 다음 redis공식 홈페이지에서 확인한다. https://redis.io/commands
 
 ```js
-var redis = require('ioredis')
+var redis = require('ioredis');
 
 /** Redis Cluster Client 생성 코드 **/
 var pClient = new redis.Cluster([
@@ -43,27 +43,27 @@ var pClient = new redis.Cluster([
     port: constants.REDIS_MASTER3_PORT,
     host: constants.REDIS_MASTER3_IP,
   },
-])
+]);
 
 /** Redis Subscribe 코드 **/
-pClient.psubscribe('ch:*', function (err, count) {})
-pClient.on('pmessage', subscribeListener)
+pClient.psubscribe('ch:*', function (err, count) {});
+pClient.on('pmessage', subscribeListener);
 
 function subscribeListener(pattern, channel, message) {
   // ...
 }
 
 /** Redis Publish코드 **/
-pClient.publish('ch:message', messageJSON)
+pClient.publish('ch:message', messageJSON);
 
 /** Redis get,set,hget,expire 등의 Redis 커맨드 사용코드 **/
 pClient.hget('config', value, function (err, reply) {
   // ...
-})
+});
 
 pClient.get('key', function (err, reply) {
   // ...
-})
+});
 ```
 
 ### 3. Master의 Redis subscribe 및 Worker로 전달

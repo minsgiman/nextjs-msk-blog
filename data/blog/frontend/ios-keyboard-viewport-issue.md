@@ -21,19 +21,19 @@ https://openradar.appspot.com/radar?id=5018321736957952
 
 ```js
 const handler = () => {
-  const { height: oldHeight } = viewportSize
-  const { height: newHeight } = getViewPortSize()
-  const isVisible = oldHeight !== newHeight
+  const { height: oldHeight } = viewportSize;
+  const { height: newHeight } = getViewPortSize();
+  const isVisible = oldHeight !== newHeight;
 
   handleSendMessage({
     type: RESPONSE_KEYBOARD_VISIBLE_STATE,
     data: {
       isVisible,
     },
-  })
-}
+  });
+};
 
-window.addEventListener('resize', handler)
+window.addEventListener('resize', handler);
 ```
 
 AOS 웹뷰에서는 위의 코드가 잘 동작한다. 그런데 IOS 웹뷰에서는 resize이벤트가 발생하지 않는다! <br />

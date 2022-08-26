@@ -30,11 +30,11 @@ var _messages = {
   ko: {
     hello: '안녕, 안녕',
   },
-}
+};
 var _i18n = new VueI18n({
   locale: 'ko',
   messages: _messages,
-})
+});
 ```
 
 3. vue component 생성시 vue-18n 객체를 전달하고, template에서 사용한다.

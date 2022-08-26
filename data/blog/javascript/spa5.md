@@ -22,8 +22,8 @@ $.li18n.translations = {
     strId_login: '로그인',
     strId_logout: '로그아웃',
   },
-}
-$.li18n.currentLocale = 'eng'
+};
+$.li18n.currentLocale = 'eng';
 
 /* _t('strId_login') or $.li18n.translate('strId_login')로 사용 */
 ```

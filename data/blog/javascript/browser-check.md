@@ -15,36 +15,36 @@ function browser() {
         /(opera|chrome|crios|safari|ucbrowser|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
       ) || [],
     result = {},
-    tem
+    tem;
 
   if (/trident/i.test(match[1])) {
-    tem = /\brv[ :]+(\d+)/g.exec(userAgent) || []
-    result.name = 'Internet Explorer'
+    tem = /\brv[ :]+(\d+)/g.exec(userAgent) || [];
+    result.name = 'Internet Explorer';
   } else if (match[1] === 'Chrome') {
-    tem = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+    tem = userAgent.match(/\b(OPR|Edge)\/(\d+)/);
 
     if (tem && tem[1]) {
-      result.name = tem[0].indexOf('Edge') === 0 ? 'Edge' : 'Opera'
+      result.name = tem[0].indexOf('Edge') === 0 ? 'Edge' : 'Opera';
     }
   }
   if (!result.name) {
-    tem = userAgent.match(/version\/(\d+)/i) // iOS support
-    result.name = match[0].replace(/\/.*/, '')
+    tem = userAgent.match(/version\/(\d+)/i); // iOS support
+    result.name = match[0].replace(/\/.*/, '');
 
     if (result.name.indexOf('MSIE') === 0) {
-      result.name = 'Internet Explorer'
+      result.name = 'Internet Explorer';
     }
     if (userAgent.match('CriOS')) {
-      result.name = 'Chrome'
+      result.name = 'Chrome';
     }
   }
   if (tem && tem.length) {
-    match[match.length - 1] = tem[tem.length - 1]
+    match[match.length - 1] = tem[tem.length - 1];
   }
 
-  result.version = Number(match[match.length - 1])
+  result.version = Number(match[match.length - 1]);
 
-  return result
+  return result;
 }
 
 /*  Result

@@ -39,8 +39,8 @@ npm install --save helmet
 #### 사용
 
 ```js
-var helmet = require('helmet')
-app.use(helmet())
+var helmet = require('helmet');
+app.use(helmet());
 ```
 
 #### 적어도 X-Powered-By 헤더는 사용하지 않도록 설정
@@ -50,7 +50,7 @@ Helmet을 사용하지 않는다면 적어도 X-Powered-By 헤더는 사용하�
 다음과 같이 app.disable() 메소드를 이용해 이 헤더를 끈다.
 
 ```js
-app.disable('x-powered-by')
+app.disable('x-powered-by');
 ```
 
 <br />
@@ -74,14 +74,14 @@ cookie-session은 세션 키가 아니라 세션 데이터 전체를 쿠키에 �
 이러한 문제점을 피하려면 일반적인 쿠키 이름을 사용한다. express-session 미들웨어를 이용해 다음과 같이 설정한다.
 
 ```js
-var session = require('express-session')
-app.set('trust proxy', 1) // trust first proxy
+var session = require('express-session');
+app.set('trust proxy', 1); // trust first proxy
 app.use(
   session({
     secret: 's3Cur3',
     name: 'sessionId',
   })
-)
+);
 ```
 
 #### 쿠키 보안 옵션 설정
@@ -97,11 +97,11 @@ app.use(
 #### cookie-session 미들웨어를 사용한 예
 
 ```js
-var session = require('cookie-session')
-var express = require('express')
-var app = express()
+var session = require('cookie-session');
+var express = require('express');
+var app = express();
 
-var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 app.use(
   session({
     name: 'session',
@@ -114,7 +114,7 @@ app.use(
       expires: expiryDate,
     },
   })
-)
+);
 ```
 
 <br />

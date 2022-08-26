@@ -22,18 +22,18 @@ function createShoppingCart({ db }) {
     empty,
     getProducts,
     removeProduct,
-  })
+  });
 
   function addProduct(product) {
-    db.push(product)
+    db.push(product);
   }
 
   function empty() {
-    db = []
+    db = [];
   }
 
   function getProducts() {
-    return Object.freeze([...db])
+    return Object.freeze([...db]);
   }
 
   function removeProduct(id) {
@@ -41,12 +41,12 @@ function createShoppingCart({ db }) {
   }
 }
 
-const db = []
-const cart = createShoppingCart({ db })
+const db = [];
+const cart = createShoppingCart({ db });
 cart.addProduct({
   name: 'foo',
   price: 9.99,
-})
+});
 ```
 
 Class 사용과 비교하여 Ice Factory Pattern에서 바뀐 부분은 다음과 같다.
@@ -61,11 +61,11 @@ Class 사용과 비교하여 Ice Factory Pattern에서 바뀐 부분은 다음�
 
 ```js
 function makeThing(spec) {
-  const secret = 'shhh!'
+  const secret = 'shhh!';
 
   return Object.freeze({
     doStuff,
-  })
+  });
 
   function doStuff() {
     // We can use both spec
@@ -109,11 +109,11 @@ function createShoppingCart(productList) {
 ShoppingCart 인스턴스 cart에서 ProductList의 addProduct method를 items property를 통해 호출한다.
 
 ```js
-const productDb = []
-const productList = createProductList({ productDb })
-const cart = createShoppingCart(productList)
+const productDb = [];
+const productList = createProductList({ productDb });
+const cart = createShoppingCart(productList);
 
-cart.items.addProduct()
+cart.items.addProduct();
 ```
 
 물론 Ice Factory를 사용하는데에는 trade-off가 있다.

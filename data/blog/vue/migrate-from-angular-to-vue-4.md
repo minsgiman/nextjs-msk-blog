@@ -52,9 +52,9 @@ var mixin = {
     return {
       message: 'hello',
       foo: 'abc',
-    }
+    };
   },
-}
+};
 
 new Vue({
   mixins: [mixin],
@@ -62,41 +62,41 @@ new Vue({
     return {
       message: 'goodbye',
       bar: 'def',
-    }
+    };
   },
   created: function () {
-    console.log(this.$data)
+    console.log(this.$data);
     // => { message: "goodbye", foo: "abc", bar: "def" }
   },
-})
+});
 
 /************** Method inherit ****************/
 var mixin = {
   methods: {
     foo: function () {
-      console.log('foo')
+      console.log('foo');
     },
     conflicting: function () {
-      console.log('from mixin')
+      console.log('from mixin');
     },
   },
-}
+};
 
 var vm = new Vue({
   mixins: [mixin],
   methods: {
     bar: function () {
-      console.log('bar')
+      console.log('bar');
     },
     conflicting: function () {
-      console.log('from self')
+      console.log('from self');
     },
   },
-})
+});
 
-vm.foo() // => "foo"
-vm.bar() // => "bar"
-vm.conflicting() // => "from self"
+vm.foo(); // => "foo"
+vm.bar(); // => "bar"
+vm.conflicting(); // => "from self"
 ```
 
 ---

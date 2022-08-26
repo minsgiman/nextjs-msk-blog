@@ -23,16 +23,16 @@ summary: 'Single Page App 내에서 존재하는 UI화면 단위를 Page로 구�
 2. hash가 변경되면, hashchange 이벤트가 발생한다.
 
 ```js
-$(window).on('hashchange', routePage)
+$(window).on('hashchange', routePage);
 ```
 
 3. hashchange 이벤트 콜백에서 framework에서 관리하고 있는 Page를 변경한다.
 
 ```js
 function routePage() {
-  var pageName = window.location.hash
+  var pageName = window.location.hash;
   // ...
   // ...
-  pageManager.changeCenterPage(pageName, data, loadCb)
+  pageManager.changeCenterPage(pageName, data, loadCb);
 }
 ```

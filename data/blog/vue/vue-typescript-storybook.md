@@ -27,24 +27,24 @@ Storybook은 React, Vue, Angular 등 다양한 Library를 지원하고, 여기�
 - /.storybook/config.js 를 작성한다.
 
 ```js
-import { configure } from '@storybook/vue'
+import { configure } from '@storybook/vue';
 
 // automatically import all files ending in *.stories.ts
-const req = require.context('../src/stories', true, /.stories.ts$/)
+const req = require.context('../src/stories', true, /.stories.ts$/);
 function loadStories() {
-  req.keys().forEach((filename) => req(filename))
+  req.keys().forEach((filename) => req(filename));
 }
 
-configure(loadStories, module)
+configure(loadStories, module);
 ```
 
 - /.storybook/webpack.config.js 를 작성한다.
 
 ```js
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = async ({ config, mode }) => {
-  config.resolve.extensions.push('.ts', '.tsx', '.vue', '.css', '.less', '.scss', '.sass', '.html')
+  config.resolve.extensions.push('.ts', '.tsx', '.vue', '.css', '.less', '.scss', '.sass', '.html');
   config.module.rules.push({
     test: /\.ts$/,
     exclude: /node_modules/,
@@ -57,17 +57,17 @@ module.exports = async ({ config, mode }) => {
         },
       },
     ],
-  })
+  });
 
   config.module.rules.push({
     test: /\.less$/,
     loaders: ['style-loader', 'css-loader', 'less-loader'],
-  })
+  });
 
-  config.plugins.push(new ForkTsCheckerWebpackPlugin())
+  config.plugins.push(new ForkTsCheckerWebpackPlugin());
 
-  return config
-}
+  return config;
+};
 ```
 
 ### 3. Vue 컴포넌트 테스트를 위한 stories 코드를 작성한다.
@@ -77,14 +77,14 @@ module.exports = async ({ config, mode }) => {
 - /src/stories/index.stories.ts 를 작성한다.
 
 ```js
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import HelloWorld from '../components/HelloWorld.vue'
+import HelloWorld from '../components/HelloWorld.vue';
 
 storiesOf('HelloWorld', module).add('simple', () => ({
   components: { HelloWorld },
   template: `<HelloWorld msg="Welcome to Your Vue.js + TypeScript + Storybook App"/>`,
-}))
+}));
 ```
 
 ### 4. package.json에 command를 작성한다.

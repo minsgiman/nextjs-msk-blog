@@ -35,72 +35,72 @@ summary: '그래프 탐색 알고리즘 중 하나인 너비 우선 탐색(BFS)�
 ```javascript
 class Queue {
   constructor() {
-    this._arr = []
+    this._arr = [];
   }
   enqueue(item) {
-    this._arr.push(item)
+    this._arr.push(item);
   }
   dequeue() {
-    return this._arr.shift()
+    return this._arr.shift();
   }
   isEmpty() {
-    return !this._arr.length
+    return !this._arr.length;
   }
 }
 
 class Graph {
   constructor() {
-    this.edges = {}
-    this.nodes = []
+    this.edges = {};
+    this.nodes = [];
   }
 
   addNode(node) {
-    this.nodes.push(node)
-    this.edges[node] = []
+    this.nodes.push(node);
+    this.edges[node] = [];
   }
 
   addEdge(node1, node2, weight = 1) {
-    this.edges[node1].push({ node: node2, weight: weight })
-    this.edges[node2].push({ node: node1, weight: weight })
+    this.edges[node1].push({ node: node2, weight: weight });
+    this.edges[node2].push({ node: node1, weight: weight });
   }
 
   BFS(node) {
-    const queue = new Queue()
-    const visitedMap = {}
-    queue.enqueue(node)
-    visitedMap[node] = true
+    const queue = new Queue();
+    const visitedMap = {};
+    queue.enqueue(node);
+    visitedMap[node] = true;
 
     while (!queue.isEmpty()) {
-      let headNode = queue.dequeue()
-      console.log(headNode)
+      let headNode = queue.dequeue();
+      console.log(headNode);
 
       this.edges[headNode]
         .filter((edge) => !visitedMap[edge.node])
         .forEach((edge) => {
-          queue.enqueue(edge.node)
-          visitedMap[edge.node] = true
-        })
+          queue.enqueue(edge.node);
+          visitedMap[edge.node] = true;
+        });
     }
   }
 }
 
-let g = new Graph()
-g.addNode('A')
-g.addNode('B')
-g.addNode('C')
-g.addNode('D')
-g.addNode('E')
-g.addNode('F')
-g.addNode('G')
+let g = new Graph();
+g.addNode('A');
+g.addNode('B');
+g.addNode('C');
+g.addNode('D');
+g.addNode('E');
+g.addNode('F');
+g.addNode('G');
 
-g.addEdge('A', 'C')
-g.addEdge('A', 'B')
-g.addEdge('A', 'D')
-g.addEdge('D', 'E')
-g.addEdge('E', 'F')
-g.addEdge('B', 'G')
+g.addEdge('A', 'C');
+g.addEdge('A', 'B');
+g.addEdge('A', 'D');
+g.addEdge('D', 'E');
+g.addEdge('E', 'F');
+g.addEdge('B', 'G');
 
-g.BFS('A')
+g.BFS('A');
 ```
 
 결과 : A C B D G E F

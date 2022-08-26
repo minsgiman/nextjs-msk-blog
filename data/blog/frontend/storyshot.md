@@ -52,13 +52,13 @@ yarn run test:storybook -u
 
 ```js
 /* storyshot.test.js */
-import path from 'path'
+import path from 'path';
 import initStoryshots, {
   multiSnapshotWithOptions,
   Stories2SnapsConverter,
-} from '@storybook/addon-storyshots'
+} from '@storybook/addon-storyshots';
 
-const resolve = (...dir) => path.resolve(process.cwd(), ...dir)
+const resolve = (...dir) => path.resolve(process.cwd(), ...dir);
 
 initStoryshots({
   configPath: resolve('.storybook'),
@@ -70,7 +70,7 @@ initStoryshots({
     snapshotExtension: '.snap.js',
     storiesExtensions: ['.js', '.tsx'],
   }),
-})
+});
 ```
 
 #### Storyshot disable
@@ -81,5 +81,5 @@ initStoryshots({
 ```js
 Exception.parameters = {
   storyshots: { disable: true },
-}
+};
 ```

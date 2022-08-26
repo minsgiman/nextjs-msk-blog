@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
-import ImageGallery from 'react-image-gallery'
-import photosData from '@/data/photosData'
-import Link from '@/components/Link'
+import { useMemo } from 'react';
+import ImageGallery from 'react-image-gallery';
+import photosData from '@/data/photosData';
+import Link from '@/components/Link';
 
 export function getStaticPaths() {
   return {
@@ -11,32 +11,32 @@ export function getStaticPaths() {
       },
     })),
     fallback: false,
-  }
+  };
 }
 
 export async function getStaticProps({ params }) {
   const photo = photosData.find((photoObj) => {
-    return photoObj.id === params.id
-  })
-  return { props: { photo: photo } }
+    return photoObj.id === params.id;
+  });
+  return { props: { photo: photo } };
 }
 
 export default function Photo({ photo }) {
   const imageItems = useMemo(() => {
-    const images = photo?.images
+    const images = photo?.images;
 
     if (!images) {
-      return []
+      return [];
     }
 
     images.forEach((image) => {
       if (!image.thumbnail) {
-        image.thumbnail = image.original
+        image.thumbnail = image.original;
       }
-    })
+    });
 
-    return images
-  }, [photo])
+    return images;
+  }, [photo]);
 
   return (
     <>
@@ -58,5 +58,5 @@ export default function Photo({ photo }) {
         </div>
       </div>
     </>
-  )
+  );
 }

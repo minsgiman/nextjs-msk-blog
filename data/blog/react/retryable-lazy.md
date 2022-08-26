@@ -72,18 +72,18 @@ export default function retryableLazy(lazyImport: IDynamicImportType, setCompone
 처음의 lazy load 코드는 retryableLazy를 사용하여 다음과 같이 변경된다.
 
 ```js
-import React from 'react'
+import React from 'react';
 
-import { retryableLazy } from '@components-common/lazyLoad'
+import { retryableLazy } from '@components-common/lazyLoad';
 
-let MenuMain
+let MenuMain;
 
 retryableLazy(
   () => import(/* webpackChunkName: "MenuMain" */ '@pages/MenuMain'),
   (component) => {
-    MenuMain = component
+    MenuMain = component;
   }
-)
+);
 // ...
 
 export default function Menu() {
@@ -91,7 +91,7 @@ export default function Menu() {
     <Switch>
       <Route path={ROUTES.MENU} component={MenuMain} />
     </Switch>
-  )
+  );
 }
 ```
 

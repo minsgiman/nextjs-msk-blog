@@ -13,45 +13,45 @@ summary: 'file system 모듈 | file read & write stream | form을 통한 파일 
 - NodeJS에서 기본적인 파일 읽기, 쓰기 코드를 확인해본다.
 
 ```js
-var fs = require('fs')
+var fs = require('fs');
 
 //동기적 방식 파일 읽기
 try {
-  var data = fs.readFileSync('./credential.txt', 'utf8')
-  console.log(data)
+  var data = fs.readFileSync('./credential.txt', 'utf8');
+  console.log(data);
 } catch (err) {
-  console.log(err)
+  console.log(err);
 }
 
 //동기적 방식 파일 쓰기
 try {
-  fs.writeFileSync('./credential.txt', 'Hello world', 'utf8')
-  console.log('success')
+  fs.writeFileSync('./credential.txt', 'Hello world', 'utf8');
+  console.log('success');
 } catch (err) {
-  console.log(err)
+  console.log(err);
 }
 
 //비동기적 방식 파일 읽기
 fs.readFile('./credentail.txt', 'utf8', function (err, data) {
   if (err) {
     //파일 읽기 실패
-    console.log(err)
+    console.log(err);
   } else {
     //파일 읽기 성공
-    console.log(data)
+    console.log(data);
   }
-})
+});
 
 //비동기적 방식 파일 쓰기
 fs.writeFile('./credential.txt', 'Hello world', 'utf8', function (err, data) {
   if (err) {
     //파일 쓰기 실패
-    console.log(err)
+    console.log(err);
   } else {
     //파일 쓰기 성공
-    console.log('success')
+    console.log('success');
   }
-})
+});
 ```
 
 ### 2. file read & write stream
@@ -114,30 +114,30 @@ fs.createReadStream(file)
 - end 이벤트 : 전체 request를 전송받고, 모든 포함된 파일이 disk에 flushing이 완료되었을 때 호출된다. 여기서 response를 보내준다.
 
 ```js
-var formidable = require('formidable')
+var formidable = require('formidable');
 
 app.route('/upload').post(function (req, res) {
-  var form = new formidable.IncomingForm()
+  var form = new formidable.IncomingForm();
 
-  form.parse(req)
+  form.parse(req);
 
   form.on('fileBegin', function (name, file) {
     //여기서 지정한 경로에 파일이 업로드된다.
-    file.path = __dirname + '/string.xlsx'
-  })
+    file.path = __dirname + '/string.xlsx';
+  });
 
   form.on('progress', function (byteRead, byteExpected) {
-    console.log(' Reading total ' + byteRead + '/' + byteExpected)
-  })
+    console.log(' Reading total ' + byteRead + '/' + byteExpected);
+  });
 
   form.on('file', function (name, file) {
-    console.log('Uploaded ' + file.name)
-  })
+    console.log('Uploaded ' + file.name);
+  });
 
   form.on('end', function () {
-    res.status(200).send('Upload complete')
-  })
-})
+    res.status(200).send('Upload complete');
+  });
+});
 ```
 
 ### 4. .xlsx 파일 읽기
@@ -145,13 +145,13 @@ app.route('/upload').post(function (req, res) {
 - xlsx 모듈을 통해 .xlsx(엑셀) 파일을 읽을 수 있다.
 
 ```js
-var xlsx = require('xlsx')
+var xlsx = require('xlsx');
 
-var excel = xlsx.readFile('string.xlsx')
-var sheet_name_list = excel.SheetNames
+var excel = xlsx.readFile('string.xlsx');
+var sheet_name_list = excel.SheetNames;
 //array 형태로 data를 반환한다.
-var xlDataArray = xlsx.utils.sheet_to_json(excel.Sheets[sheet_name_list[0]])
-console.log(xlDataArray)
+var xlDataArray = xlsx.utils.sheet_to_json(excel.Sheets[sheet_name_list[0]]);
+console.log(xlDataArray);
 ```
 
 ---

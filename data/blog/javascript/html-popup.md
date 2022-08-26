@@ -9,7 +9,7 @@ summary: 'HTML Popup 창 띄우기, 옵션 List'
 ### 1. HTML Popup 창 띄우기
 
 ```js
-window.open('파일명', '팝업이름', '옵션설정')
+window.open('파일명', '팝업이름', '옵션설정');
 ```
 
 ### 2. 옵션 List

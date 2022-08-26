@@ -92,17 +92,17 @@ summary: 'Redux는? | MVC패턴의 단점 | Flux 패턴'
 
 ```js
 /* actionTypes.js */
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
-export const SET_COLOR = 'SET_COLOR'
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const SET_COLOR = 'SET_COLOR';
 
 /* actions.js */
-import * as types from './actionTypes'
+import * as types from './actionTypes';
 
 export function increment() {
   return {
     type: types.INCREMENT,
-  }
+  };
 }
 
 //...
@@ -110,7 +110,7 @@ export function setColor(color) {
   return {
     type: types.SET_COLOR,
     color,
-  }
+  };
 }
 ```
 
@@ -124,11 +124,11 @@ export function setColor(color) {
 
 ```js
 /* reducers.js */
-import * as types from '../actions/actionTypes'
+import * as types from '../actions/actionTypes';
 
 const initialState = {
   number: 0,
-}
+};
 
 export default function counter(state = initialState, action) {
   switch (action.type) {
@@ -136,14 +136,14 @@ export default function counter(state = initialState, action) {
       return {
         ...state,
         number: state.number + 1,
-      }
+      };
     case types.DECREMENT:
       return {
         ...state,
         number: state.number - 1,
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
 ```
@@ -160,23 +160,23 @@ export default function counter(state = initialState, action) {
 
 ```js
 /* store.js */
-import { createStore } from 'redux'
-import reducers from './reducers'
-import * as types from './actions'
+import { createStore } from 'redux';
+import reducers from './reducers';
+import * as types from './actions';
 
-const store = createStore(reducers)
+const store = createStore(reducers);
 
 /* state 변경시 실행될 콜백 등록 */
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
 /* reducer로 action을 보내고, reducer에서 리턴한 state로 변경된다. */
-store.dispatch(action.increment())
-store.dispatch(action.increment())
-store.dispatch(action.decrement())
-store.dispatch(action.setColor([200, 200, 200]))
+store.dispatch(action.increment());
+store.dispatch(action.increment());
+store.dispatch(action.decrement());
+store.dispatch(action.setColor([200, 200, 200]));
 
 /* 위에서 등록한 state변경 콜백을 끊는다 */
-unsubscribe()
+unsubscribe();
 ```
 
 <br />

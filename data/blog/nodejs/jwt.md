@@ -36,7 +36,7 @@ Payload에는 토큰에 담을 클레임(claim)정보를 포함한다. 클라이
 ```js
 signature = base64UrlEncode(
   Sign('ES256', '${PRIVATE_KEY}', base64UrlEncode(header) + '.' + base64UrlEncode(payload))
-)
+);
 ```
 
 ## JWT의 장점과 단점
@@ -71,11 +71,11 @@ signature = base64UrlEncode(
 module.exports = {
   authenticate: async (req, res, next) => {
     if (!req.body || !req.body.id || !req.body.password) {
-      return res.send({ code: 'nok', error: 'wrong parameter' })
+      return res.send({ code: 'nok', error: 'wrong parameter' });
     }
 
     try {
-      const user = await userModel.findOne({ id: req.body.id }).exec()
+      const user = await userModel.findOne({ id: req.body.id }).exec();
       if (user && bcrypt.compareSync(req.body.password, user.password)) {
         const token = jwt.sign(
           {
@@ -84,15 +84,15 @@ module.exports = {
           },
           process.env.ACCESS_TOKEN_SECRET,
           { expiresIn: '7d' }
-        )
-        return res.send({ code: 'ok', user: { id: user.id, admin: user.admin }, token: token })
+        );
+        return res.send({ code: 'ok', user: { id: user.id, admin: user.admin }, token: token });
       }
-      return res.send({ code: 'nok', message: 'Invalid id or password' })
+      return res.send({ code: 'nok', message: 'Invalid id or password' });
     } catch (err) {
-      return next(err)
+      return next(err);
     }
   },
-}
+};
 ```
 
 #### 2. 토큰 인증 구현
@@ -108,24 +108,24 @@ module.exports = {
 2. 서버는 인증이 필요한 경로에 접근할 때 JWT Signature를 체크하고 Payload로부터 사용자 정보를 확인한다.
 
 ```js
-app.use('/translates', validateUser, translates)
+app.use('/translates', validateUser, translates);
 
 function validateUser(req, res, next) {
   if (req.method === 'OPTIONS') {
-    return res.send({ code: 'ok' })
+    return res.send({ code: 'ok' });
   }
 
-  const authHeader = req.headers['authorization']
-  const token = authHeader ? authHeader.split(' ')[1] : null
+  const authHeader = req.headers['authorization'];
+  const token = authHeader ? authHeader.split(' ')[1] : null;
   if (!token) {
-    return res.status(401).json({ code: 'nok', message: 'Unauthorized' })
+    return res.status(401).json({ code: 'nok', message: 'Unauthorized' });
   }
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, user) {
     if (err) {
-      return res.status(403).json({ code: 'nok', message: 'Forbidden' })
+      return res.status(403).json({ code: 'nok', message: 'Forbidden' });
     }
-    req.user = user
-    next()
-  })
+    req.user = user;
+    next();
+  });
 }
 ```

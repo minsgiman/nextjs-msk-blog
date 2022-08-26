@@ -53,12 +53,12 @@ id가 없는 경우에는 uuid를 생성하여 key로 사용하는 것을 권장
 ```ts
 // bad
 {
-  todos.map((todo, index) => <Todo {...todo} key={index} />)
+  todos.map((todo, index) => <Todo {...todo} key={index} />);
 }
 
 // good
 {
-  todos.map((todo) => <Todo {...todo} key={todo.id} />)
+  todos.map((todo) => <Todo {...todo} key={todo.id} />);
 }
 ```
 
@@ -74,17 +74,17 @@ return (
   <MyComponent variant="long body" foo="bar">
     <MyChild />
   </MyComponent>
-)
+);
 
 // good
 return (
   <MyComponent variant="long body" foo="bar">
     <MyChild />
   </MyComponent>
-)
+);
 
 // good, when single line
-return <MyComponent>{body}</MyComponent>
+return <MyComponent>{body}</MyComponent>;
 ```
 
 ## Tag Self Closing
@@ -139,11 +139,11 @@ style prop에 대한 타입은 React에서 제공해주는 타입을 사용한�
 
 ```ts
 type ContainerProps = {
-  styles: React.CSSProperties
-}
+  styles: React.CSSProperties;
+};
 
 export function Container({ styles }: ContainerProps) {
-  return <div style={styles}>Text here</div>
+  return <div style={styles}>Text here</div>;
 }
 ```
 
@@ -155,9 +155,9 @@ props가 multiple 타입인 경우 Generic으로 처리가능하다면 Generic�
 
 ```ts
 type ListProps<T> = {
-  items: T[]
-  onClick: (value: T) => void
-}
+  items: T[];
+  onClick: (value: T) => void;
+};
 
 export function List<T extends { id: number }>({ items, onClick }: ListProps<T>) {
   return (
@@ -167,10 +167,10 @@ export function List<T extends { id: number }>({ items, onClick }: ListProps<T>)
           <div key={item.id} onClick={() => onClick(item)}>
             {item}
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 ```
 
@@ -189,7 +189,7 @@ return (
     ]}
     onClick={(item) => console.log(item)}
   />
-)
+);
 ```
 
 ## useRef non-null assertion

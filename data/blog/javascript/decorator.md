@@ -44,39 +44,39 @@ const readOnly = (target, key, descriptor) => {
   return {
     ...descriptor,
     writable: false,
-  }
-}
+  };
+};
 
 const logger = (msg) => (target, key, descriptor) => {
-  const originMethod = descriptor.value
+  const originMethod = descriptor.value;
 
   descriptor.value = function (...args) {
-    console.log('[LOG]', msg)
-    return originMethod.apply(this, args)
-  }
+    console.log('[LOG]', msg);
+    return originMethod.apply(this, args);
+  };
 
-  return descriptor
-}
+  return descriptor;
+};
 
 class Rectangle {
   @readOnly
-  size = 100
+  size = 100;
 
   constructor(color) {
-    this.color = color
+    this.color = color;
   }
 
   @logger('get rectangle info')
   getRectangleInfo() {
-    return `${this.color} ${this.size}`
+    return `${this.color} ${this.size}`;
   }
 }
 
-const rectangle = new Rectangle('red')
-console.log(rectangle.getRectangleInfo())
+const rectangle = new Rectangle('red');
+console.log(rectangle.getRectangleInfo());
 // [LOG] get rectangle info
 // red 100
-rectangle.size = 200
+rectangle.size = 200;
 // TypeError: Cannot assign to read only property 'size' of object '#<Rectangle>'
 ```
 
@@ -85,33 +85,33 @@ rectangle.size = 200
 ```js
 function apiRequest(target, key, descriptor) {
   const apiAction = async function (...args) {
-    const original = descriptor.value || descriptor.initializer.call(this)
+    const original = descriptor.value || descriptor.initializer.call(this);
 
-    this.setNetworkStatus('loading')
+    this.setNetworkStatus('loading');
 
     try {
-      const result = await original(...args)
-      return result
+      const result = await original(...args);
+      return result;
     } catch (e) {
-      this.setApiError(e)
+      this.setApiError(e);
     } finally {
-      this.setNetworkStatus('idle')
+      this.setNetworkStatus('idle');
     }
-  }
+  };
 
   return {
     ...descriptor,
     value: apiAction,
     initializer: undefined,
-  }
+  };
 }
 
 class WidgetStore {
   @apiRequest
   async getWidget(id) {
-    const { widget } = await api.getWidget(id)
-    this.addWidget(widget)
-    return widget
+    const { widget } = await api.getWidget(id);
+    this.addWidget(widget);
+    return widget;
   }
 
   setNetworkStatus(status) {
@@ -132,27 +132,27 @@ class WidgetStore {
 function withDob(target) {
   return class extends target {
     constructor(...args) {
-      super(...args)
-      this.dob = new Date().toString()
+      super(...args);
+      this.dob = new Date().toString();
     }
 
     setDob(dob) {
-      this.dob = dob
+      this.dob = dob;
     }
-  }
+  };
 }
 
 @withDob
 class Person {
   constructor(firstName, lastName) {
-    this.firstName = firstName
-    this.lastName = lastName
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 }
 
-const p = new Person('last', 'first')
-p.setDob(new Date('1990-02-05').toString())
-console.log(p.dob)
+const p = new Person('last', 'first');
+p.setDob(new Date('1990-02-05').toString());
+console.log(p.dob);
 // Mon Feb 05 1990 09:00:00 GMT+0900
 ```
 

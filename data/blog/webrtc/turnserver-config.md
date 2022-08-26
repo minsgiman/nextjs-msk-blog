@@ -35,7 +35,7 @@ summary: 'TURN/STUN Server란?'
         { url: 'stun:stun.l.google.com:19302' },
         { url: 'turn:xxx.xxx.com:10088?transport=udp', username: 'test', credential: 'test' },
         { url: 'turn:xxx.xxx.com:10088?transport=tcp', username: 'test', credential: 'test' },
-      ]
+      ];
     }
     ```
 
@@ -47,7 +47,7 @@ summary: 'TURN/STUN Server란?'
         { url: 'stun:stun.l.google.com:19302' },
         { url: 'turns:xxx.xxx.com:10088?transport=udp', username: 'test', credential: 'test' },
         { url: 'turns:xxx.xxx.com:10088?transport=tcp', username: 'test', credential: 'test' },
-      ]
+      ];
     }
     ```
 

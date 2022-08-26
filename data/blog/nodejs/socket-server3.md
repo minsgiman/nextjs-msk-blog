@@ -13,7 +13,7 @@ summary: 'Winston 모듈 | Master로 Log메시지 전송 및 Master의 Logging �
 - 로그파일은 'control_2018-02-12.log' 와 같이 생성된다.
 
 ```js
-var winston = require('winston')
+var winston = require('winston');
 
 logger = new winston.Logger({
   transports: [
@@ -27,16 +27,16 @@ logger = new winston.Logger({
       maxFiles: 10,
       maxsize: 1 * 1024 * 1024 * 1024,
       timestamp: function () {
-        var date = new Date()
-        var tz = date.getTime() + date.getTimezoneOffset() * 60000 + 9 * 3600000
-        date.setTime(tz)
+        var date = new Date();
+        var tz = date.getTime() + date.getTimezoneOffset() * 60000 + 9 * 3600000;
+        date.setTime(tz);
 
-        var curr_hour = pad(date.getHours())
-        var curr_min = pad(date.getMinutes())
-        var curr_sec = pad(date.getSeconds())
-        var curr_msec = pad2(date.getMilliseconds())
+        var curr_hour = pad(date.getHours());
+        var curr_min = pad(date.getMinutes());
+        var curr_sec = pad(date.getSeconds());
+        var curr_msec = pad2(date.getMilliseconds());
 
-        return curr_hour + ':' + curr_min + ':' + curr_sec + '.' + curr_msec
+        return curr_hour + ':' + curr_min + ':' + curr_sec + '.' + curr_msec;
       },
       formatter: function (options) {
         return (
@@ -49,7 +49,7 @@ logger = new winston.Logger({
           (options.meta && Object.keys(options.meta).length
             ? '\n\t' + JSON.stringify(options.meta)
             : '')
-        )
+        );
       },
     }),
     new winston.transports.Console({
@@ -58,16 +58,16 @@ logger = new winston.Logger({
       json: false,
       colorize: true,
       timestamp: function () {
-        var date = new Date()
-        var tz = date.getTime() + date.getTimezoneOffset() * 60000 + 9 * 3600000
-        date.setTime(tz)
+        var date = new Date();
+        var tz = date.getTime() + date.getTimezoneOffset() * 60000 + 9 * 3600000;
+        date.setTime(tz);
 
-        var curr_hour = pad(date.getHours())
-        var curr_min = pad(date.getMinutes())
-        var curr_sec = pad(date.getSeconds())
-        var curr_msec = pad2(date.getMilliseconds())
+        var curr_hour = pad(date.getHours());
+        var curr_min = pad(date.getMinutes());
+        var curr_sec = pad(date.getSeconds());
+        var curr_msec = pad2(date.getMilliseconds());
 
-        return curr_hour + ':' + curr_min + ':' + curr_sec + '.' + curr_msec
+        return curr_hour + ':' + curr_min + ':' + curr_sec + '.' + curr_msec;
       },
       formatter: function (options) {
         return (
@@ -80,12 +80,12 @@ logger = new winston.Logger({
           (options.meta && Object.keys(options.meta).length
             ? '\n\t' + JSON.stringify(options.meta)
             : '')
-        )
+        );
       },
     }),
   ],
   exitOnError: false,
-})
+});
 ```
 
 ### 2. Master로 Log메시지 전송 및 Master의 Logging 관리
@@ -101,40 +101,40 @@ var processLoggingMsg = function (message) {
   if (message && message.data) {
     switch (message.data.type) {
       case 'debug':
-        logging.debugLog(message.data.log)
-        break
+        logging.debugLog(message.data.log);
+        break;
       case 'info':
-        logging.infoLog(message.data.log)
-        break
+        logging.infoLog(message.data.log);
+        break;
       case 'warning':
-        logging.warningLog(message.data.log)
-        break
+        logging.warningLog(message.data.log);
+        break;
       case 'error':
-        logging.errorLog(message.data.log)
-        break
+        logging.errorLog(message.data.log);
+        break;
       default:
-        break
+        break;
     }
   }
-}
+};
 
 var masterMessageListener = function (message) {
   if (message && message.data) {
     switch (message.data.type) {
       case 'kafka':
-        processKafkaMsg(message.data)
-        break
+        processKafkaMsg(message.data);
+        break;
       case 'logging':
-        processLoggingMsg(message.data)
-        break
+        processLoggingMsg(message.data);
+        break;
       // ...
       // ...
       // ...
       default:
-        break
+        break;
     }
   }
-}
+};
 
-process.on('message', masterMessageListener)
+process.on('message', masterMessageListener);
 ```

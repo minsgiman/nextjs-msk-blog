@@ -14,19 +14,19 @@ summary: 'Tree Shaking | splitChunks | Dynamic Imports'
 ```js
 //abc.js
 function a() {
-  console.log('a')
+  console.log('a');
 }
 function b() {
-  console.log('b')
+  console.log('b');
 }
 function c() {
-  console.log('c')
+  console.log('c');
 }
-export { a, b, c }
+export { a, b, c };
 
 //main.js
-import * as abc from './abc'
-abc.a()
+import * as abc from './abc';
+abc.a();
 ```
 
 - 외부 라이브러리를 사용할 때 라이브러리에 Tree Shaking이 적용되기 위해서는 **외부 패키지의 package.json에 있는 sideEffects(Webpack 4.0부터 지원) 설정이 false로 되어있어야 한다.**
@@ -39,12 +39,12 @@ abc.a()
 
 ```js
 //main.js
-import { snakeCase, toUpper } from 'lodash-es'
+import { snakeCase, toUpper } from 'lodash-es';
 
-const snakeCaseStr = snakeCase('sddMMM')
-console.log(snakeCaseStr)
-const toUpperStr = toUpper(snakeCaseStr)
-console.log(toUpperStr)
+const snakeCaseStr = snakeCase('sddMMM');
+console.log(snakeCaseStr);
+const toUpperStr = toUpper(snakeCaseStr);
+console.log(toUpperStr);
 ```
 
 ### splitChunks
@@ -96,7 +96,7 @@ module.exports = {
       },
     },
   },
-}
+};
 ```
 
 ### Dynamic Imports
@@ -122,16 +122,16 @@ module.exports = {
 
 ```js
 //main.js
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   routes: [
     { path: '*', component: () => import(/* webpackChunkName: "login" */ './pages/login') },
     { path: '/guide', component: () => import(/* webpackChunkName: "guide" */ './pages/guide') },
   ],
-})
+});
 ```
 
 ```js

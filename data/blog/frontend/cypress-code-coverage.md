@@ -37,9 +37,9 @@ Instrumentation은 테스트시 코드의 **어떤 부분이 실행되는지 추
 ```js
 // add.js
 function add(a, b) {
-  return a + b
+  return a + b;
 }
-module.exports = { add }
+module.exports = { add };
 ```
 
 Instrumentation 과정에서는 위의 코드를 파싱하여 functions, statements, branches 를 찾는다. <br />
@@ -49,17 +49,17 @@ Instrumentation 과정에서는 위의 코드를 파싱하여 functions, stateme
 const c = (window.__coverage__ = {
   f: [0] /* 각 function 호출 횟수 카운팅 */,
   s: [0, 0, 0] /* 각 statement 호출 횟수 카운팅 */,
-})
+});
 
-c.s[0]++
+c.s[0]++;
 function add(a, b) {
-  c.f[0]++
-  c.s[1]++
+  c.f[0]++;
+  c.s[1]++;
 
-  return a + b
+  return a + b;
 }
-c.s[2]++
-module.exports = { add }
+c.s[2]++;
+module.exports = { add };
 ```
 
 #### Instrument code Library 적용 (with babel)
@@ -115,16 +115,16 @@ npm i -D @cypress/code-coverage nyc istanbul-lib-coverage
 
 ```js
 //cypress/support/index.js
-import '@cypress/code-coverage/support'
+import '@cypress/code-coverage/support';
 ```
 
 ```js
 //cypress/plugins/index.js
 module.exports = (on, config) => {
-  require('@cypress/code-coverage/task')(on, config)
-  on('file:preprocessor', cypressTypeScriptPreprocessor)
-  return config
-}
+  require('@cypress/code-coverage/task')(on, config);
+  on('file:preprocessor', cypressTypeScriptPreprocessor);
+  return config;
+};
 ```
 
 이제 cypress 테스트를 실행하면 다음 Task가 추가로 실행되는 것을 확인할 수 있다.

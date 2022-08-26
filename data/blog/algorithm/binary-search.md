@@ -19,19 +19,19 @@ summary: '이진탐색은 정렬된 리스트에만 적용가능하다. 시간�
 ```javascript
 function binarySearch(arr, target) {
   function search(lo, hi) {
-    const mid = parseInt((lo + hi) / 2)
+    const mid = parseInt((lo + hi) / 2);
     if (lo === hi) {
-      return arr[lo] === target ? lo : -1
+      return arr[lo] === target ? lo : -1;
     } else if (target > arr[mid]) {
-      return search(mid + 1, hi)
+      return search(mid + 1, hi);
     } else {
-      return search(lo, mid)
+      return search(lo, mid);
     }
   }
 
-  return search(0, arr.length - 1)
+  return search(0, arr.length - 1);
 }
 
-const arr = [1, 2, 3, 4, 5]
-console.log(binarySearch(arr, 2)) // 1
+const arr = [1, 2, 3, 4, 5];
+console.log(binarySearch(arr, 2)); // 1
 ```

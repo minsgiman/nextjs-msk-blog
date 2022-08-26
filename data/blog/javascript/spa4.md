@@ -24,7 +24,7 @@ objTable = new cmpBasic.table({
     ['HTTP', '80'],
     ['FTP', '21'],
   ],
-})
+});
 ```
 
 2.  컴포넌트 API를 통해 EventHandler연결, Data Get, Set등을 제공한다.
@@ -34,23 +34,23 @@ objTable = new cmpBasic.table({
 //event 처리할 대상(버튼 등)이 동적으로 바뀌지 않을 경우
 //해당 버튼 등에 eventHandler를 직접 연결해주는 component API
 objForm.setSubmitHandler(function (event) {
-  srvService.deleteAllPortForwardingRules()
-  event.preventDefault()
-})
+  srvService.deleteAllPortForwardingRules();
+  event.preventDefault();
+});
 
 //event 처리할 대상(버튼 등)이 동적으로 바뀔 경우
 //부모에게 이벤트를 위임해서 처리하도록 하는 component API
-objList.setBtnEventDelegator(fnRuleRemoveBtnHandler)
+objList.setBtnEventDelegator(fnRuleRemoveBtnHandler);
 
 /* 컴포넌트 Data Set */
-objForm.setValueWithId('input', SETUP_TAG_ID, data.destination)
+objForm.setValueWithId('input', SETUP_TAG_ID, data.destination);
 ```
 
 3.  컴포넌트의 DOM Tree연결은 생성한 컴포넌트의 최상위 요소인 $element를 통해서 연결하도록 구현.
 
 ```js
 if (objForm) {
-  $collumnLeftBox.append(objForm.$element)
+  $collumnLeftBox.append(objForm.$element);
 }
 ```
 
@@ -60,10 +60,10 @@ if (objForm) {
 objInfoList = new cmpBasic.list({
   class: 'list',
   // ...
-})
+});
 
 objForm = new cmpForm({
   name: 'seguranca-controle-dos-pais-registro-local',
   data: [{ type: 'element', element: objInfoList.$element }],
-})
+});
 ```

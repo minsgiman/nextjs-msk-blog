@@ -65,9 +65,9 @@ Could not find a declaration file for module ‘moduleA’. ...
 ```ts
 // moduleA.d.ts
 declare module 'moduleA' {
-  function createElement(type: string): HTMLElement
+  function createElement(type: string): HTMLElement;
 
-  export default createElement
+  export default createElement;
 }
 ```
 

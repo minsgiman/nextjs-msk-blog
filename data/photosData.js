@@ -429,6 +429,6 @@ const photosData = [
       },
     ],
   },
-]
+];
 
-module.exports = photosData.reverse()
+module.exports = photosData.reverse();

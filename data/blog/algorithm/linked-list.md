@@ -8,192 +8,192 @@ draft: false
 ```js
 class LinkedListNode {
   constructor(value, next) {
-    this.value = value
-    this.next = next || null
+    this.value = value;
+    this.next = next || null;
   }
 }
 
 class LinkedList {
   constructor(value) {
-    this.size = 0
-    this.head = null
-    this.tail = null
+    this.size = 0;
+    this.head = null;
+    this.tail = null;
 
     if (value) {
-      if (Array.isArray(value)) return this.fromArray(value)
-      return new TypeError(value + ' is not iterable')
+      if (Array.isArray(value)) return this.fromArray(value);
+      return new TypeError(value + ' is not iterable');
     }
 
-    return this
+    return this;
   }
 
   prepend(value) {
-    this.size += 1
+    this.size += 1;
 
-    const newNode = new LinkedListNode(value, this.head)
+    const newNode = new LinkedListNode(value, this.head);
 
-    this.head = newNode
-    if (!this.tail) this.tail = newNode
-    return this
+    this.head = newNode;
+    if (!this.tail) this.tail = newNode;
+    return this;
   }
 
   append(value) {
-    this.size += 1
+    this.size += 1;
 
-    const newNode = new LinkedListNode(value)
+    const newNode = new LinkedListNode(value);
 
     if (!this.head) {
-      this.head = newNode
-      this.tail = newNode
-      return this
+      this.head = newNode;
+      this.tail = newNode;
+      return this;
     }
 
-    this.tail.next = newNode
-    this.tail = newNode
-    return this
+    this.tail.next = newNode;
+    this.tail = newNode;
+    return this;
   }
 
   fromArray(values) {
-    values.forEach((value) => this.append(value))
-    return this
+    values.forEach((value) => this.append(value));
+    return this;
   }
 
   toArray(useNodes = false) {
-    const nodes = []
-    let currentNode = this.head
+    const nodes = [];
+    let currentNode = this.head;
     while (currentNode) {
-      nodes.push(useNodes ? currentNode : currentNode.value)
-      currentNode = currentNode.next
+      nodes.push(useNodes ? currentNode : currentNode.value);
+      currentNode = currentNode.next;
     }
-    return nodes
+    return nodes;
   }
 
   includes(value) {
-    if (!this.head) return false
+    if (!this.head) return false;
 
-    let isNode = value.constructor.name === 'LinkedListNode'
-    if (isNode) value = value.value
+    let isNode = value.constructor.name === 'LinkedListNode';
+    if (isNode) value = value.value;
 
-    let currentNode = this.head
+    let currentNode = this.head;
 
     while (currentNode) {
       if (value !== undefined && value === currentNode.value) {
-        return true
+        return true;
       }
-      currentNode = currentNode.next
+      currentNode = currentNode.next;
     }
 
-    return false
+    return false;
   }
 
   find(callback) {
     if (Object.prototype.toString.call(callback) !== '[object Function]') {
-      return new TypeError(callback + ' is not a function')
+      return new TypeError(callback + ' is not a function');
     }
 
-    if (!this.head) return undefined
+    if (!this.head) return undefined;
 
-    let currentNode = this.head
+    let currentNode = this.head;
 
     while (currentNode) {
       if (callback && callback(currentNode.value)) {
-        return currentNode
+        return currentNode;
       }
-      currentNode = currentNode.next
+      currentNode = currentNode.next;
     }
 
-    return undefined
+    return undefined;
   }
 
   delete(value, deleteOne = false) {
-    if (!this.head) return false
+    if (!this.head) return false;
 
-    let deletedNode = null
+    let deletedNode = null;
 
     // If the head needs to be deleted
     while (this.head && this.head.value === value) {
-      this.size -= 1
-      deletedNode = this.head
-      this.head = this.head.next
-      if (deleteOne) return true
+      this.size -= 1;
+      deletedNode = this.head;
+      this.head = this.head.next;
+      if (deleteOne) return true;
     }
 
-    let currentNode = this.head
+    let currentNode = this.head;
 
     // If any node except the head or tail needs to be deleted
     if (currentNode !== null) {
       while (currentNode.next) {
         if (currentNode.next.value === value) {
-          this.size -= 1
-          deletedNode = currentNode.next
-          currentNode.next = currentNode.next.next
-          if (deleteOne) return true
+          this.size -= 1;
+          deletedNode = currentNode.next;
+          currentNode.next = currentNode.next.next;
+          if (deleteOne) return true;
         } else {
-          currentNode = currentNode.next
+          currentNode = currentNode.next;
         }
       }
     }
 
     // If the tail needs to be deleted
     if (this.tail.value === value) {
-      this.tail = currentNode
+      this.tail = currentNode;
     }
 
     if (deletedNode === null) {
-      return false
+      return false;
     } else {
-      return true
+      return true;
     }
   }
 
   deleteHead() {
-    if (!this.head) return null
+    if (!this.head) return null;
 
-    this.size -= 1
+    this.size -= 1;
 
-    const deletedHead = this.head
+    const deletedHead = this.head;
 
     if (this.head.next) {
-      this.head = this.head.next
+      this.head = this.head.next;
     } else {
-      this.head = null
-      this.tail = null
+      this.head = null;
+      this.tail = null;
     }
 
-    return deletedHead
+    return deletedHead;
   }
 
   deleteTail() {
-    if (this.size === 0) return false
+    if (this.size === 0) return false;
 
     if (this.size === 1) {
       if (this.head === null) {
-        return false
+        return false;
       } else {
-        this.head = null
-        this.tail = null
-        this.size -= 1
-        return true
+        this.head = null;
+        this.tail = null;
+        this.size -= 1;
+        return true;
       }
     }
 
-    const deletedTail = this.tail
+    const deletedTail = this.tail;
 
-    let currentNode = this.head
+    let currentNode = this.head;
     while (currentNode.next) {
       if (!currentNode.next.next) {
-        this.size -= 1
-        currentNode.next = null
+        this.size -= 1;
+        currentNode.next = null;
       } else {
-        currentNode = currentNode.next
+        currentNode = currentNode.next;
       }
     }
 
-    this.tail = currentNode
+    this.tail = currentNode;
 
-    return deletedTail
+    return deletedTail;
   }
 }
 
-module.exports = LinkedList
+module.exports = LinkedList;
 ```

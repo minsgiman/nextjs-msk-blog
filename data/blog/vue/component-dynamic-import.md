@@ -21,8 +21,8 @@ Vue에서 화면의 변경이 있을 때 Vue Router를 사용하는 방법뿐 �
 </template>
 
 <script>
-  import Cat from './Cat'
-  import Cupcake from './Cupcake'
+  import Cat from './Cat';
+  import Cupcake from './Cupcake';
 
   export default {
     components: {
@@ -32,9 +32,9 @@ Vue에서 화면의 변경이 있을 때 Vue Router를 사용하는 방법뿐 �
     data: function () {
       return {
         currentTabComponent: 'Cat',
-      }
+      };
     },
-  }
+  };
 </script>
 ```
 
@@ -59,9 +59,9 @@ Vue에서 화면의 변경이 있을 때 Vue Router를 사용하는 방법뿐 �
     data: function () {
       return {
         currentTabComponent: 'Cat',
-      }
+      };
     },
-  }
+  };
 </script>
 ```
 

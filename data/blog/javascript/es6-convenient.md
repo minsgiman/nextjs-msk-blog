@@ -11,23 +11,23 @@ summary: 'ES6에서 추가된 spec중 유용한 내용을 정리하였다.'
 - 기존에는 Object literal 선언에 Variable key's value를 사용할 수 없었다.
 
 ```js
-let myKey = 'key3'
+let myKey = 'key3';
 let obj = {
   key1: 'One',
   key2: 'Two',
-}
-obj[myKey] = 'Three'
+};
+obj[myKey] = 'Three';
 ```
 
 - ES6는 Object literal 선언에 Variable key's value를 사용할 수 있도록 해준다.
 
 ```js
-let myKey = 'variableKey'
+let myKey = 'variableKey';
 let obj = {
   key1: 'One',
   key2: 'Two',
   [myKey]: 'Three',
-}
+};
 ```
 
 ### Arrow Functions
@@ -36,12 +36,12 @@ let obj = {
 
 ```js
 // Adds a 10% tax to total
-let calculateTotal = (total) => total * 1.1
-calculateTotal(10) // 11
+let calculateTotal = (total) => total * 1.1;
+calculateTotal(10); // 11
 
 // Cancel an event -- another tiny task
-let brickEvent = (e) => e.preventDefault()
-document.querySelector('div').addEventListener('click', brickEvent)
+let brickEvent = (e) => e.preventDefault();
+document.querySelector('div').addEventListener('click', brickEvent);
 ```
 
 ### find/findIndex
@@ -49,10 +49,10 @@ document.querySelector('div').addEventListener('click', brickEvent)
 - Array에 find/findIndex function을 제공하여, 원하는 조건으로 매칭되는 첫번째 아이템을 찾을 수 있도록 해준다.
 
 ```js
-let ages = [12, 19, 6, 4]
+let ages = [12, 19, 6, 4];
 
-let firstAdult = ages.find((age) => age >= 18) // 19
-let firstAdultIndex = ages.findIndex((age) => age >= 18) // 1
+let firstAdult = ages.find((age) => age >= 18); // 19
+let firstAdultIndex = ages.findIndex((age) => age >= 18); // 1
 ```
 
 ### The Spread Operator: ...
@@ -60,14 +60,14 @@ let firstAdultIndex = ages.findIndex((age) => age >= 18) // 1
 - Array 혹은 iterable object가 각각의 item으로 분리되어 전달할 수 있다.
 
 ```js
-let numbers = [9, 4, 7, 1]
-Math.min(...numbers) // 1
+let numbers = [9, 4, 7, 1];
+Math.min(...numbers); // 1
 
 // Convert NodeList to Array
-let divsArray = [...document.querySelectorAll('div')]
+let divsArray = [...document.querySelectorAll('div')];
 
 // Convert Arguments to Array
-let argsArray = [...arguments]
+let argsArray = [...arguments];
 ```
 
 ### Default Argument Values
@@ -77,9 +77,9 @@ let argsArray = [...arguments]
 ```js
 // Basic usage
 function greet(name = 'Anon') {
-  console.log(`Hello ${name}!`)
+  console.log(`Hello ${name}!`);
 }
-greet() // Hello Anon!
+greet(); // Hello Anon!
 ```
 
 ### Modules
@@ -120,20 +120,20 @@ console.log(Math.square(11)); //121
 ```js
 function timeout(duration = 0) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => (Math.random() > 0.5 ? resolve() : reject()), duration)
-  })
+    setTimeout(() => (Math.random() > 0.5 ? resolve() : reject()), duration);
+  });
 }
 
 function log() {
-  console.log('done')
+  console.log('done');
 }
 
 function error() {
-  console.log('error')
+  console.log('error');
 }
 
 //resolve면 done, reject면 error를 표시
-timeout(100).then(log).catch(error)
+timeout(100).then(log).catch(error);
 ```
 
 ### let/const
@@ -142,11 +142,11 @@ timeout(100).then(log).catch(error)
 
 ```js
 {
-  var a = 10
-  let b = 20
-  const tmp = a
-  a = b
-  b = tmp
+  var a = 10;
+  let b = 20;
+  const tmp = a;
+  a = b;
+  b = tmp;
 }
 // a는 블록 바깥에서 참조 가능
 // b, tmp는 바깥에서 참조 불가능

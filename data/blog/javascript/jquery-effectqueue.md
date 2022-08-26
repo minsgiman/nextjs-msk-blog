@@ -13,7 +13,7 @@ summary: 'Jquery의 animate 함수는 내부적으로 effect queue를 사용한�
 - 왜냐하면, Animate 내부적으로 effect queue를 사용하기 때문에 앞에서 일어난 animation이 끝나고 다음것이 수행된다.
 
 ```js
-$('#box').animate({ width: '500px', opacity: 0.4 }, 1000).animate({ height: '300px' }, 1000)
+$('#box').animate({ width: '500px', opacity: 0.4 }, 1000).animate({ height: '300px' }, 1000);
 ```
 
 ## queue옵션을 false로 설정
@@ -23,7 +23,7 @@ $('#box').animate({ width: '500px', opacity: 0.4 }, 1000).animate({ height: '300
 ```js
 $('#box')
   .animate({ width: '500px', opacity: 0.4 }, 1000)
-  .animate({ height: '300px' }, { duration: 1000, queue: false })
+  .animate({ height: '300px' }, { duration: 1000, queue: false });
 ```
 
 ## queue함수의 활용
@@ -37,7 +37,7 @@ $('#one')
     $('#two')
       .fadeOut()
       .queue(function () {
-        $('#three').fadeOut()
-      })
-  })
+        $('#three').fadeOut();
+      });
+  });
 ```

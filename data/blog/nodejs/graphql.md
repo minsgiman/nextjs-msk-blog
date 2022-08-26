@@ -54,8 +54,8 @@ Facebook에서는 다음과 같은 이유로 GraphQL을 만들었다고 한다.
 ## express에서 GraphQL API 구현
 
 ```js
-const express = require('express')
-const { graphqlHTTP } = require('express-graphql')
+const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
 const {
   GraphQLSchema,
   GraphQLObjectType,
@@ -63,14 +63,14 @@ const {
   GraphQLList,
   GraphQLInt,
   GraphQLNonNull,
-} = require('graphql')
-const app = express()
+} = require('graphql');
+const app = express();
 
 const authors = [
   { id: 1, name: 'Row' },
   { id: 2, name: 'Tolk' },
   { id: 3, name: 'Brent' },
-]
+];
 
 const books = [
   { id: 1, name: 'Harry1', authorId: 1 },
@@ -81,7 +81,7 @@ const books = [
   { id: 6, name: 'Harry6', authorId: 2 },
   { id: 7, name: 'Harry7', authorId: 3 },
   { id: 8, name: 'Harry8', authorId: 3 },
-]
+];
 
 const AuthorType = new GraphQLObjectType({
   name: 'Author',
@@ -92,11 +92,11 @@ const AuthorType = new GraphQLObjectType({
     books: {
       type: GraphQLList(BookType),
       resolve: (author) => {
-        return books.filter((book) => book.authorId === author.id)
+        return books.filter((book) => book.authorId === author.id);
       },
     },
   }),
-})
+});
 
 const BookType = new GraphQLObjectType({
   name: 'Book',
@@ -108,11 +108,11 @@ const BookType = new GraphQLObjectType({
     author: {
       type: AuthorType,
       resolve: (book) => {
-        return authors.find((author) => author.id === book.authorId)
+        return authors.find((author) => author.id === book.authorId);
       },
     },
   }),
-})
+});
 
 const RootQueryType = new GraphQLObjectType({
   name: 'Query',
@@ -145,7 +145,7 @@ const RootQueryType = new GraphQLObjectType({
       resolve: (parent, args) => authors.find((author) => author.id === args.id),
     },
   }),
-})
+});
 
 const RootMutationType = new GraphQLObjectType({
   name: 'Mutation',
@@ -159,9 +159,9 @@ const RootMutationType = new GraphQLObjectType({
         authorId: { type: GraphQLNonNull(GraphQLInt) },
       },
       resolve: (parent, args) => {
-        const book = { id: books.length + 1, name: args.name, authorId: args.authorId }
-        books.push(book)
-        return book
+        const book = { id: books.length + 1, name: args.name, authorId: args.authorId };
+        books.push(book);
+        return book;
       },
     },
     addAuthor: {
@@ -171,18 +171,18 @@ const RootMutationType = new GraphQLObjectType({
         name: { type: GraphQLNonNull(GraphQLString) },
       },
       resolve: (parent, args) => {
-        const author = { id: authors.length + 1, name: args.name }
-        authors.push(author)
-        return author
+        const author = { id: authors.length + 1, name: args.name };
+        authors.push(author);
+        return author;
       },
     },
   }),
-})
+});
 
 const schema = new GraphQLSchema({
   query: RootQueryType,
   mutation: RootMutationType,
-})
+});
 
 app.use(
   '/graphql',
@@ -190,9 +190,9 @@ app.use(
     schema,
     graphiql: true,
   })
-)
+);
 
-app.listen(5000, () => console.log('Server Running'))
+app.listen(5000, () => console.log('Server Running'));
 ```
 
 ---

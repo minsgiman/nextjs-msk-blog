@@ -13,24 +13,24 @@ summary: 'Map | Map과 Object의 성능 | WeakMap | Set'
 Map에서는 기존 Object의 단점을 해결하였다. 객체를 키로 사용할 수 있으며, 의도치 않은 연결은 발생하지 않는다.
 
 ```js
-const symbol = Symbol()
-const string2 = 'string2'
+const symbol = Symbol();
+const string2 = 'string2';
 const regularObject = {
   string1: 'value1',
   [string2]: 'value2',
   [symbol]: 'value3',
-}
+};
 
-const func = () => null
-const object = {}
-const array = []
-const bool = false
-const map = new Map()
-map.set(func, 'value1')
-map.set(object, 'value2')
-map.set(array, 'value3')
-map.set(bool, 'value4')
-map.set(NaN, 'value5')
+const func = () => null;
+const object = {};
+const array = [];
+const bool = false;
+const map = new Map();
+map.set(func, 'value1');
+map.set(object, 'value2');
+map.set(array, 'value3');
+map.set(bool, 'value4');
+map.set(NaN, 'value5');
 ```
 
 Object는 직접적으로 iterate 할 수 없어서 다음 method들을 사용해서 key - value를 iterate 할 수 있다.
@@ -45,13 +45,13 @@ key - value 의 개수는 map.size 를 통해서 조회할 수 있다. (Object�
 
 ```js
 for (let [key, value] of map) {
-  console.log(key)
-  console.log(value)
+  console.log(key);
+  console.log(value);
 }
 map.forEach((key, value) => {
-  console.log(key)
-  console.log(value)
-})
+  console.log(key);
+  console.log(value);
+});
 ```
 
 ### Map과 Object의 성능
@@ -91,25 +91,25 @@ WeakMap은 그렇지 않다. 따라서 이터러블이 될 수 없다. (가비�
 
 ```js
 const SecretHolder = (function () {
-  const secrets = new WeakMap()
+  const secrets = new WeakMap();
   return class {
     setSecret(secret) {
-      secrets.set(this, secret)
+      secrets.set(this, secret);
     }
     getSecret() {
-      return secrets.get(this)
+      return secrets.get(this);
     }
-  }
-})()
+  };
+})();
 
-const a = new SecretHolder()
-const b = new SecretHolder()
+const a = new SecretHolder();
+const b = new SecretHolder();
 
-a.setSecret('secret A')
-b.setSecret('secret B')
+a.setSecret('secret A');
+b.setSecret('secret B');
 
-console.log(a.getSecret())
-console.log(b.getSecret())
+console.log(a.getSecret());
+console.log(b.getSecret());
 ```
 
 ### Set
@@ -118,31 +118,31 @@ Set은 중복을 허용하지 않는 데이터 집합이다.
 동일한 값에 대해서 단 한번만 기록되어야 하는 경우에 사용된다.
 
 ```js
-const roles = new Set()
+const roles = new Set();
 
-roles.add('1')
-roles.add('xxx')
+roles.add('1');
+roles.add('xxx');
 
-roles.size // 2
+roles.size; // 2
 
-roles.add('1')
-roles.size // 2. 중복이라면 아무일도 일어나지 않는다.
+roles.add('1');
+roles.size; // 2. 중복이라면 아무일도 일어나지 않는다.
 
-roles.delete('xxx')
-roles // Set ["1"]
-roles.size // 1
-roles.delete('xxx') // False
+roles.delete('xxx');
+roles; // Set ["1"]
+roles.size; // 1
+roles.delete('xxx'); // False
 ```
 
 Set 또한 for...of나 forEach를 사용해서 iterate 할 수 있다.
 
 ```js
-let set = new Set(['oranges', 'apples', 'bananas'])
-for (let value of set) alert(value)
+let set = new Set(['oranges', 'apples', 'bananas']);
+for (let value of set) alert(value);
 
 set.forEach((value, valueAgain, set) => {
-  alert(value)
-})
+  alert(value);
+});
 ```
 
 forEach에서 첫번째 Parameter와 동일한 value를 두번째에서도(valueAgain) 전달받는다.

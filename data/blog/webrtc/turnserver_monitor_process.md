@@ -33,8 +33,8 @@ function addUserByTurnAdmin(userId, password, callback) {
       password,
     function (error, stdout, stderr) {
       if (error !== null) {
-        logger.errorLog('exec turnadmin add/update user error: ' + error)
-        callback(-1)
+        logger.errorLog('exec turnadmin add/update user error: ' + error);
+        callback(-1);
       } else {
         logger.debugLog(
           'turnadmin add/update id : ' +
@@ -45,11 +45,11 @@ function addUserByTurnAdmin(userId, password, callback) {
             password +
             ', db_path : ' +
             constants.TURN_DB_PATH
-        )
-        callback(0)
+        );
+        callback(0);
       }
     }
-  )
+  );
 }
 
 function removeUserByTurnAdmin(userId, callback) {
@@ -57,28 +57,28 @@ function removeUserByTurnAdmin(userId, callback) {
     'sudo turnadmin -d -u ' + userId + ' -r ' + constants.TURN_REALM,
     function (error, stdout, stderr) {
       if (error !== null) {
-        logger.errorLog('exec turnadmin add/update user error: ' + error)
-        callback(-1)
+        logger.errorLog('exec turnadmin add/update user error: ' + error);
+        callback(-1);
       } else {
-        logger.debugLog('turnadmin delete id : ' + userId + ', realm : ' + constants.TURN_REALM)
-        callback(0)
+        logger.debugLog('turnadmin delete id : ' + userId + ', realm : ' + constants.TURN_REALM);
+        callback(0);
       }
     }
-  )
+  );
 }
 
 expressApp.route('/turncredential').get(function (req, res, next) {
   var userid = '',
     password = '',
     expired_time = 0,
-    credentialJSON = turncredential.getActiveCredential()
+    credentialJSON = turncredential.getActiveCredential();
 
   if (credentialJSON) {
-    userid = credentialJSON.userid
-    password = credentialJSON.password
-    expired_time = credentialJSON.expired_time
+    userid = credentialJSON.userid;
+    password = credentialJSON.password;
+    expired_time = credentialJSON.expired_time;
   }
-  res.writeHead(200, { 'content-type': 'text/plain' })
+  res.writeHead(200, { 'content-type': 'text/plain' });
   res.write(
     '{ "type" : "result", "code" : "ok", "userid" : ' +
       '"' +
@@ -91,9 +91,9 @@ expressApp.route('/turncredential').get(function (req, res, next) {
       ', "expired_time" : ' +
       expired_time +
       ' }'
-  )
-  res.end()
-})
+  );
+  res.end();
+});
 ```
 
 ### 3. Zookeeper에 TURN서버 정보와 서버트래픽 정보 업데이트 구현
@@ -104,24 +104,24 @@ expressApp.route('/turncredential').get(function (req, res, next) {
 /* 트래픽 계산 */
 var checkTraffic = function (callback) {
   exec('cat /sys/class/net/bond0/statistics/rx_bytes', function (error, stdout, stderr) {
-    var rxbyte = stdout
+    var rxbyte = stdout;
     if (error !== null) {
-      console.log('exec error: ' + error)
+      console.log('exec error: ' + error);
     }
-    logger.debugLog('Get rxbyte : ' + rxbyte)
-    callback(rxbyte)
-  })
-}
+    logger.debugLog('Get rxbyte : ' + rxbyte);
+    callback(rxbyte);
+  });
+};
 
 checkTraffic(function (rxbyte) {
-  var freeTraffic
+  var freeTraffic;
   if (!prevRxByte) {
-    rxBytePer10Sec = 0
+    rxBytePer10Sec = 0;
   } else {
-    rxBytePer10Sec = rxbyte - prevRxByte
+    rxBytePer10Sec = rxbyte - prevRxByte;
   }
-  prevRxByte = rxbyte
-  freeTraffic = ((constants.MAX_TRAFFIC_BPS - (rxBytePer10Sec * 8) / 10) / 1000000).toFixed(1) //calc freetraffic by Mbps
+  prevRxByte = rxbyte;
+  freeTraffic = ((constants.MAX_TRAFFIC_BPS - (rxBytePer10Sec * 8) / 10) / 1000000).toFixed(1); //calc freetraffic by Mbps
   sData =
     '{"freeTraffic":' +
     freeTraffic +
@@ -131,17 +131,17 @@ checkTraffic(function (rxbyte) {
     ':' +
     constants.TURN_MONITOR_SERVER_PORT +
     '"' +
-    '}'
+    '}';
 
   /* ZooKeeper에 업데이트 */
   if (stat) {
     zclient.setData(sPath, new Buffer(sData), function (error, stat) {
       if (error) {
-        logger.errorLog(' ZooKeeper sendSummary - ' + error.stack)
-        return
+        logger.errorLog(' ZooKeeper sendSummary - ' + error.stack);
+        return;
       }
-      logger.debugLog(' ZooKeeper SendSumary - node (' + sPath + '), data (' + sData + ') set')
-    })
+      logger.debugLog(' ZooKeeper SendSumary - node (' + sPath + '), data (' + sData + ') set');
+    });
   } else {
     zclient.create(
       sPath,
@@ -151,8 +151,8 @@ checkTraffic(function (rxbyte) {
         if (error) {
           logger.debugLog(
             ' ZooKeeper SendSummary - failed to create node (' + path + '), due to (' + error + ')'
-          )
-          return
+          );
+          return;
         } else {
           logger.debugLog(
             ' ZooKeeper SendSummary - node(' +
@@ -160,12 +160,12 @@ checkTraffic(function (rxbyte) {
               ') is successfully created. Data is set (' +
               sData +
               ')'
-          )
+          );
         }
       }
-    )
+    );
   }
-})
+});
 ```
 
 ### 4. TURN서버를 child process로 실행, TURN서버가 죽는 경우 재실행 구현
@@ -176,30 +176,30 @@ checkTraffic(function (rxbyte) {
 
 ```js
 function start() {
-  global.turnProcess = child_process.spawn('turnserver')
+  global.turnProcess = child_process.spawn('turnserver');
 
   global.turnProcess.stdout.on('data', function (data) {
     //logging.debugLog(data.toString());
-  })
+  });
 
   global.turnProcess.stderr.on('data', function (data) {
     //logging.debugLog(data.toString());
-  })
+  });
 
   global.turnProcess.on('exit', function (code) {
-    logging.debugLog('child process exited with code ' + code)
-    setTimeout(start, 3000)
-  })
+    logging.debugLog('child process exited with code ' + code);
+    setTimeout(start, 3000);
+  });
 }
 
-process.on('SIGINT', gracefulShutdown)
-process.on('SIGTERM', gracefulShutdown)
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
 
 var gracefulShutdown = function () {
-  logging.debugLog('gracefulShutdown !!')
+  logging.debugLog('gracefulShutdown !!');
   zookeeper.removeNode(function (code) {
-    var credentialJSON = turncredential.getActiveCredential()
-    var currentTime = new Date().getTime()
+    var credentialJSON = turncredential.getActiveCredential();
+    var currentTime = new Date().getTime();
     if (
       credentialJSON &&
       credentialJSON.userid &&
@@ -217,19 +217,19 @@ var gracefulShutdown = function () {
         '"' +
         ', "expired_time" : ' +
         credentialJSON.expired_time +
-        '}'
+        '}';
       fs.writeFile('./credential', writeData, function (error) {
         if (global.turnProcess) {
-          global.turnProcess.kill()
+          global.turnProcess.kill();
         }
-        process.exit()
-      })
+        process.exit();
+      });
     } else {
       if (global.turnProcess) {
-        global.turnProcess.kill()
+        global.turnProcess.kill();
       }
-      process.exit()
+      process.exit();
     }
-  })
-}
+  });
+};
 ```

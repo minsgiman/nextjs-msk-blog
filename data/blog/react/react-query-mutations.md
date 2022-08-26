@@ -36,18 +36,18 @@ mutation에는 useMutation의 첫 번째 파라미터 함수를 호출하는 mut
 **useSuperHeroesData.js**
 
 ```js
-import { useQuery, useMutation, useQueryClient } from 'react-query'
-import axios from 'axios'
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import axios from 'axios';
 
-const SUPER_HERO_DATA_KEY = 'super-heroes'
+const SUPER_HERO_DATA_KEY = 'super-heroes';
 
 const fetchSuperHeroes = () => {
-  return axios.get('http://localhost:4000/superheroes')
-}
+  return axios.get('http://localhost:4000/superheroes');
+};
 
 const addSuperHero = (hero) => {
-  return axios.post('http://localhost:4000/superheroes', hero)
-}
+  return axios.post('http://localhost:4000/superheroes', hero);
+};
 
 export const useSuperHeroesData = (onSuccess, onError) => {
   return useQuery(SUPER_HERO_DATA_KEY, fetchSuperHeroes, {
@@ -57,11 +57,11 @@ export const useSuperHeroesData = (onSuccess, onError) => {
     //   const superHeroNames = data.data.map(hero => hero.name)
     //   return superHeroNames
     // }
-  })
-}
+  });
+};
 
 export const useAddSuperHeroData = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   return useMutation(addSuperHero, {
     onSuccess: (data) => {
@@ -74,32 +74,32 @@ export const useAddSuperHeroData = () => {
         return {
           ...oldQueryData,
           data: [...oldQueryData.data, data.data],
-        }
-      })
+        };
+      });
       /** Handling Mutation Response End */
     },
     /**Optimistic Update Start */
     onMutate: async (newHero) => {
-      await queryClient.cancelQueries(SUPER_HERO_DATA_KEY)
-      const previousHeroData = queryClient.getQueryData(SUPER_HERO_DATA_KEY)
+      await queryClient.cancelQueries(SUPER_HERO_DATA_KEY);
+      const previousHeroData = queryClient.getQueryData(SUPER_HERO_DATA_KEY);
       queryClient.setQueryData(SUPER_HERO_DATA_KEY, (oldQueryData) => {
         //API 응답전에 미리 업데이트
         return {
           ...oldQueryData,
           data: [...oldQueryData.data, { id: oldQueryData?.data?.length + 1, ...newHero }],
-        }
-      })
-      return { previousHeroData } //에러 발생시 onError에서 이전 data로 다시 복원하기 위함.
+        };
+      });
+      return { previousHeroData }; //에러 발생시 onError에서 이전 data로 다시 복원하기 위함.
     },
     onError: (_err, _newTodo, context) => {
-      queryClient.setQueryData(SUPER_HERO_DATA_KEY, context.previousHeroData)
+      queryClient.setQueryData(SUPER_HERO_DATA_KEY, context.previousHeroData);
     },
     onSettled: () => {
-      queryClient.invalidateQueries(SUPER_HERO_DATA_KEY) // query invalidation. 서버로부터 다시 갱신
+      queryClient.invalidateQueries(SUPER_HERO_DATA_KEY); // query invalidation. 서버로부터 다시 갱신
     },
     /**Optimistic Update End */
-  })
-}
+  });
+};
 ```
 
 **SuperHeroesPage.js**

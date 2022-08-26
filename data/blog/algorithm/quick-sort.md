@@ -25,35 +25,35 @@ summary: '퀵 정렬은 기준값(pivot)을 사용하여 정렬을 한다. 어�
 
 ```javascript
 function quickSort(array) {
-  if (array.length < 2) return array
+  if (array.length < 2) return array;
 
-  const pivot = array[0]
-  let leftCursor = 1
-  let rightCursor = array.length - 1
+  const pivot = array[0];
+  let leftCursor = 1;
+  let rightCursor = array.length - 1;
 
   while (leftCursor <= rightCursor) {
     if (array[leftCursor] > pivot && array[rightCursor] < pivot) {
-      ;[array[leftCursor], array[rightCursor]] = [array[rightCursor], array[leftCursor]]
-      leftCursor++
-      rightCursor--
+      [array[leftCursor], array[rightCursor]] = [array[rightCursor], array[leftCursor]];
+      leftCursor++;
+      rightCursor--;
     }
 
     if (array[leftCursor] <= pivot) {
-      leftCursor++
+      leftCursor++;
     }
 
     if (array[rightCursor] >= pivot) {
-      rightCursor--
+      rightCursor--;
     }
   }
 
-  ;[array[0], array[leftCursor - 1]] = [array[leftCursor - 1], array[0]]
-  const left = array.splice(0, leftCursor - 1)
-  const mid = array.splice(0, 1)
-  const right = array
+  [array[0], array[leftCursor - 1]] = [array[leftCursor - 1], array[0]];
+  const left = array.splice(0, leftCursor - 1);
+  const mid = array.splice(0, 1);
+  const right = array;
 
-  return [...quickSort(left), ...mid, ...quickSort(right)]
+  return [...quickSort(left), ...mid, ...quickSort(right)];
 }
 
-const result = quickSort([5, 3, 8, 4, 9, 1, 6, 2, 7]) // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+const result = quickSort([5, 3, 8, 4, 9, 1, 6, 2, 7]); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 ```

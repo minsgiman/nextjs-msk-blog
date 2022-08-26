@@ -25,20 +25,20 @@ summary: 'Hooks가 만들어진 이유 | State, Effect, Custom Hook'
 - useState는 파라미터로 초기값을 받고, 현재 상태와 현재상태를 업데이트 할 수 있는 함수를 반환해준다.
 
 ```js
-const [count, setCount] = useState(0)
+const [count, setCount] = useState(0);
 ```
 
 - 기존 Class 컴포넌트 코드
 
 ```js
-import React from 'react'
+import React from 'react';
 
 class Example extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       count: 0,
-    }
+    };
   }
 
   render() {
@@ -47,7 +47,7 @@ class Example extends React.Component {
         <p>You clicked {this.state.count} times</p>
         <button onClick={() => this.setState({ count: this.state.count + 1 })}>Click me</button>
       </div>
-    )
+    );
   }
 }
 ```
@@ -55,18 +55,18 @@ class Example extends React.Component {
 - useState 코드
 
 ```js
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 function Example() {
   // "count"라는 새로운 상태 값을 정의합니다.
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div>
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -82,7 +82,7 @@ function useEffect(effect: EffectCallback, inputs?: InputIdentityList)
 - 두번째 파라미터인 inputs로 특정 state가 변경될 때마다 effect가 실행되게 할 수있다.
 
 ```js
-useEffect(() => func(), [count]) // count state가 변경될 때마다 func 실행
+useEffect(() => func(), [count]); // count state가 변경될 때마다 func 실행
 ```
 
 - 기존 Class 컴포넌트 코드

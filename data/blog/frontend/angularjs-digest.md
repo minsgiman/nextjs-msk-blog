@@ -15,8 +15,8 @@ summary: '$watch list, $digest loop, $apply를 통하여 angular context로 들�
 3. user와 pass에 대한 model 변경을 감시하기 위하여 두개의 \$watch가 만들어져서 \$watch list에 첨부된다
 
 ```js
-User: <input type="text" ng-model="user" />
-Password: <input type="password" ng-model="pass" />
+User: <input type="text" ng-model="user" />;
+Password: <input type="password" ng-model="pass" />;
 ```
 
 4. \$scope에 모델을 두개 만들고, html에서 한개의 model만 사용할 경우는 \$watch가 한개만 만들어져서 \$watch list에 첨부된다
@@ -61,10 +61,10 @@ Hello, {{world}}
 
 ```js
 element.bind('click', function () {
-  scope.foo++
-  scope.bar++
-  scope.$apply()
-})
+  scope.foo++;
+  scope.bar++;
+  scope.$apply();
+});
 ```
 
 ---

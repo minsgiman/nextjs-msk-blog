@@ -18,16 +18,16 @@ summary: '제네릭은 어떠한 클래스 혹은 함수에서 사용할 타입�
 
 ```ts
 class Stack<T> {
-  private data: T[] = []
+  private data: T[] = [];
 
   constructor() {}
 
   push(item: T): void {
-    this.data.push(item)
+    this.data.push(item);
   }
 
   pop(): T {
-    return <T>this.data.pop()
+    return <T>this.data.pop();
   }
 }
 ```
@@ -35,10 +35,10 @@ class Stack<T> {
 - 위에서 정의한 Stack Class를 사용하면서 type 을 지정해주고 있다. 지정한 type과 다른 타입을 push하면 컴파일 에러가 발생한다.
 
 ```ts
-const numberStack = new Stack<number>()
-const stringStack = new Stack<string>()
-numberStack.push(1)
-stringStack.push('a')
+const numberStack = new Stack<number>();
+const stringStack = new Stack<string>();
+numberStack.push(1);
+stringStack.push('a');
 ```
 
 ### Generic 함수 구현
@@ -47,21 +47,21 @@ stringStack.push('a')
 
 ```ts
 function first<T>(arr: T[]): T {
-  return arr[0]
+  return arr[0];
 }
 
-first<number>([1, 2, 3]) // 1
+first<number>([1, 2, 3]); // 1
 ```
 
 - 두 개 이상의 타입변수를 사용
 
 ```ts
 function toPair<T, U>(a: T, b: U): [T, U] {
-  return [a, b]
+  return [a, b];
 }
 
-toPair<string, number>('1', 1) // [ '1', 1 ]
-toPair<number, number>(1, 1) // [ 1, 1 ]
+toPair<string, number>('1', 1); // [ '1', 1 ]
+toPair<number, number>(1, 1); // [ 1, 1 ]
 ```
 
 ### Generic 제약조건 (Generic Constraints)
@@ -70,8 +70,8 @@ toPair<number, number>(1, 1) // [ 1, 1 ]
 
 ```ts
 function loggingIdentity<T>(arg: T): T {
-  console.log(arg.length) // 오류 : T는 .length 메소드를 가지고 있지 않습니다.
-  return arg
+  console.log(arg.length); // 오류 : T는 .length 메소드를 가지고 있지 않습니다.
+  return arg;
 }
 ```
 
@@ -81,15 +81,15 @@ function loggingIdentity<T>(arg: T): T {
 
 ```ts
 interface Lengthwise {
-  length: number
+  length: number;
 }
 
 function loggingIdentity<T extends Lengthwise>(arg: T): T {
-  console.log(arg.length) // 이제 .length 프로퍼티가 있으므로 더이상 오류가 없습니다.
-  return arg
+  console.log(arg.length); // 이제 .length 프로퍼티가 있으므로 더이상 오류가 없습니다.
+  return arg;
 }
 
-loggingIdentity({ length: 10, value: 3 }) // length가 필수 프로퍼티 이므로 같이 전달해야 한다.
+loggingIdentity({ length: 10, value: 3 }); // length가 필수 프로퍼티 이므로 같이 전달해야 한다.
 ```
 
 ###

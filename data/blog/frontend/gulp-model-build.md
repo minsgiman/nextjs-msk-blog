@@ -17,11 +17,11 @@ summary: 'model명 별로 빌드 및 requireJS optimize'
 - 파일 삭제를 위한 del 사용
 
 ```js
-var gulp = require('gulp')
-var argv = require('yargs').argv
-var rjs = require('requirejs')
-var del = require('del')
-var runSequence = require('run-sequence')
+var gulp = require('gulp');
+var argv = require('yargs').argv;
+var rjs = require('requirejs');
+var del = require('del');
+var runSequence = require('run-sequence');
 ```
 
 ### model명 별로 빌드 및 requireJS optimize
@@ -34,24 +34,24 @@ var runSequence = require('run-sequence')
 
 ```js
 gulp.task('releaseCopy', function () {
-  gulp.src('./scan_ap_result.html').pipe(gulp.dest(targetDir))
+  gulp.src('./scan_ap_result.html').pipe(gulp.dest(targetDir));
   if (argv.model) {
     gulp
       .src('./' + targetDir + '/model/' + argv.model + '/' + 'index.html')
-      .pipe(gulp.dest(targetDir))
+      .pipe(gulp.dest(targetDir));
 
     gulp
       .src('./' + targetDir + '/model/' + argv.model + '/' + 'config.json')
-      .pipe(gulp.dest(targetDir))
+      .pipe(gulp.dest(targetDir));
   }
-})
+});
 
 gulp.task('releaseClean', function () {
   return del(
     [targetDir + '/*/build.txt', targetDir + '/model/*', '!' + targetDir + '/model/' + argv.model],
     { force: true }
-  )
-})
+  );
+});
 
 gulp.task('buildRel', function () {
   rjs.optimize(
@@ -84,16 +84,16 @@ gulp.task('buildRel', function () {
                       dir: targetDir + '/model/',
                     },
                     function () {
-                      runSequence('releaseCopy', 'releaseClean')
+                      runSequence('releaseCopy', 'releaseClean');
                     }
-                  )
+                  );
                 }
-              )
+              );
             }
-          )
+          );
         }
-      )
+      );
     }
-  )
-})
+  );
+});
 ```

@@ -40,26 +40,26 @@ Recoil 설치는 [Recoil 시작하기](https://recoiljs.org/ko/docs/introduction
 
 ```js
 useEffect(() => {
-  ;(async () => {
-    await updateFirstState()
-    await updateSecondState()
-    await updateThirdState()
-  })()
-}, [])
+  (async () => {
+    await updateFirstState();
+    await updateSecondState();
+    await updateThirdState();
+  })();
+}, []);
 ```
 
 ```js
 const allInOneSelector = selector({
   key: 'allInOneSelectorKey',
   set: ({ set }) => {
-    set(firstAtom, 1)
-    set(secondAtom, 2)
-    set(thirdAtom, 13)
+    set(firstAtom, 1);
+    set(secondAtom, 2);
+    set(thirdAtom, 13);
   },
-})
+});
 
 export default function App() {
-  const setAllInOneSelector = useSetRecoilState(allInOneSelector)
+  const setAllInOneSelector = useSetRecoilState(allInOneSelector);
   // ...
 }
 ```
@@ -82,18 +82,18 @@ export default function App() {
 const firstAtom = atom({
   key: 'firstAtomKey',
   default: 1,
-})
+});
 const secondAtom = atom({
   key: 'firstAtomKey',
   default: 2,
-})
+});
 
 const cumulatedAnswer = selector({
   key: 'cumulatedAnswerKey',
   get: ({ get }) => {
-    return get(firstAtom) + get(secondAtom)
+    return get(firstAtom) + get(secondAtom);
   },
-})
+});
 ```
 
 ### Recoil hook API
@@ -124,24 +124,24 @@ useRecoilCallback은 atom, selector state에 대한 snapshot을 가지고 있기
 대표적으로 Logger와 같은 케이스에서 유용하게 사용할 수 있을 듯 하다.
 
 ```js
-import { atom, useRecoilCallback } from 'recoil'
+import { atom, useRecoilCallback } from 'recoil';
 
 const itemsInCart = atom({
   key: 'itemsInCart',
   default: 0,
-})
+});
 
 function CartInfoDebug() {
   const logCartItems = useRecoilCallback(({ snapshot }) => async () => {
-    const numItemsInCart = await snapshot.getPromise(itemsInCart)
-    console.log('Items in cart: ', numItemsInCart)
-  })
+    const numItemsInCart = await snapshot.getPromise(itemsInCart);
+    console.log('Items in cart: ', numItemsInCart);
+  });
 
   return (
     <div>
       <button onClick={logCartItems}>Log Cart Items</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -171,19 +171,19 @@ export default function useTodosActions() {
 const colorCounterState = selector({
   key: 'colorCounterState',
   get: ({ get }) => {
-    let counter = { [COLORS.RED]: 0, [COLORS.BLUE]: 0, [COLORS.WHITE]: 0 }
+    let counter = { [COLORS.RED]: 0, [COLORS.BLUE]: 0, [COLORS.WHITE]: 0 };
     for (let i = 0; i < BOX_NUM; i++) {
-      const box = get(boxState(i))
-      counter[box] = counter[box] + 1
+      const box = get(boxState(i));
+      counter[box] = counter[box] + 1;
     }
-    return counter
+    return counter;
   },
   set: ({ set }) => {
     for (let i = 0; i < BOX_NUM; i++) {
-      set(boxState(i), COLORS.WHITE)
+      set(boxState(i), COLORS.WHITE);
     }
   },
-})
+});
 ```
 
 ### 비동기 데이터 쿼리
@@ -199,14 +199,14 @@ const currentUserNameQuery = selector({
   get: async ({ get }) => {
     const response = await myDBQuery({
       userID: get(currentUserIDState),
-    })
-    return response.name
+    });
+    return response.name;
   },
-})
+});
 
 function CurrentUserInfo() {
-  const userName = useRecoilValue(currentUserNameQuery)
-  return <div>{userName}</div>
+  const userName = useRecoilValue(currentUserNameQuery);
+  return <div>{userName}</div>;
 }
 ```
 
@@ -222,7 +222,7 @@ function MyApp() {
         <CurrentUserInfo />
       </React.Suspense>
     </RecoilRoot>
-  )
+  );
 }
 ```
 
@@ -235,17 +235,17 @@ const currentUserNameQuery = selector({
   get: async ({ get }) => {
     const response = await myDBQuery({
       userID: get(currentUserIDState),
-    })
+    });
     if (response.error) {
-      throw response.error
+      throw response.error;
     }
-    return response.name
+    return response.name;
   },
-})
+});
 
 function CurrentUserInfo() {
-  const userName = useRecoilValue(currentUserNameQuery)
-  return <div>{userName}</div>
+  const userName = useRecoilValue(currentUserNameQuery);
+  return <div>{userName}</div>;
 }
 
 function MyApp() {
@@ -257,7 +257,7 @@ function MyApp() {
         </React.Suspense>
       </ErrorBoundary>
     </RecoilRoot>
-  )
+  );
 }
 ```
 

@@ -112,21 +112,21 @@ cypress 공식 홈페이지 [Best Practice](https://docs.cypress.io/guides/refer
 // an example of what NOT TO DO
 describe('my form', () => {
   it('visits the form', () => {
-    cy.visit('/users/new')
-  })
+    cy.visit('/users/new');
+  });
 
   it('requires first name', () => {
-    cy.get('#first').type('Johnny')
-  })
+    cy.get('#first').type('Johnny');
+  });
 
   it('requires last name', () => {
-    cy.get('#last').type('Appleseed')
-  })
+    cy.get('#last').type('Appleseed');
+  });
 
   it('can submit a valid form', () => {
-    cy.get('form').submit()
-  })
-})
+    cy.get('form').submit();
+  });
+});
 ```
 
 - 불필요하게 나눠져 있는 테스트는 하나의 테스트 문으로 합친다
@@ -136,18 +136,18 @@ describe('my form', () => {
 ```js
 describe('my form', () => {
   it('can submit a valid form', () => {
-    cy.visit('/users/new')
+    cy.visit('/users/new');
 
-    cy.log('filling out first name') // if you really need this
-    cy.get('#first').type('Johnny')
+    cy.log('filling out first name'); // if you really need this
+    cy.get('#first').type('Johnny');
 
-    cy.log('filling out last name') // if you really need this
-    cy.get('#last').type('Appleseed')
+    cy.log('filling out last name'); // if you really need this
+    cy.get('#last').type('Appleseed');
 
-    cy.log('submitting form') // if you really need this
-    cy.get('form').submit()
-  })
-})
+    cy.log('submitting form'); // if you really need this
+    cy.get('form').submit();
+  });
+});
 ```
 
 - 테스트 앞단계에서 공유되는 코드는 before, beforeEach 문으로 이동
@@ -156,21 +156,21 @@ describe('my form', () => {
 ```js
 describe('my form', () => {
   beforeEach(() => {
-    cy.visit('/users/new')
-    cy.get('#first').type('Johnny')
-    cy.get('#last').type('Appleseed')
-  })
+    cy.visit('/users/new');
+    cy.get('#first').type('Johnny');
+    cy.get('#last').type('Appleseed');
+  });
 
   it('displays form validation', () => {
-    cy.get('#first').clear() // clear out first name
-    cy.get('form').submit()
-    cy.get('#errors').should('contain', 'First name is required')
-  })
+    cy.get('#first').clear(); // clear out first name
+    cy.get('form').submit();
+    cy.get('#errors').should('contain', 'First name is required');
+  });
 
   it('can submit a valid form', () => {
-    cy.get('form').submit()
-  })
-})
+    cy.get('form').submit();
+  });
+});
 ```
 
 <br />
@@ -180,19 +180,19 @@ describe('my form', () => {
 ```ts
 // define
 type IinterceptDefaultApi<T> = {
-  pathname: string | RegExp
-  alias: string
-  query?: Record<string, string | RegExp>
-  method?: Imethod
-  content?: T
-  argument?: Record<string, unknown>
-  setContent?: (url: string) => T
-  code?: number
-  delay?: number
-  retryCnt?: number
-  status?: number
-  routeHandler?: (req: CyHttpMessages.IncomingHttpRequest) => T | void
-}
+  pathname: string | RegExp;
+  alias: string;
+  query?: Record<string, string | RegExp>;
+  method?: Imethod;
+  content?: T;
+  argument?: Record<string, unknown>;
+  setContent?: (url: string) => T;
+  code?: number;
+  delay?: number;
+  retryCnt?: number;
+  status?: number;
+  routeHandler?: (req: CyHttpMessages.IncomingHttpRequest) => T | void;
+};
 
 declare global {
   namespace Cypress {
@@ -203,7 +203,7 @@ declare global {
        * @example
        * cy.interceptApi(options)
        */
-      interceptApi<T>(options: IinterceptDefaultApi<T>): Chainable<null>
+      interceptApi<T>(options: IinterceptDefaultApi<T>): Chainable<null>;
     }
   }
 }
@@ -224,7 +224,7 @@ Cypress.Commands.add(
     status,
     routeHandler,
   }: IinterceptDefaultApi<T>) => {
-    let cnt = 0
+    let cnt = 0;
 
     return cy
       .intercept(
@@ -234,9 +234,9 @@ Cypress.Commands.add(
           query,
         },
         (req: CyHttpMessages.IncomingHttpRequest) => {
-          const body = routeHandler?.(req)
+          const body = routeHandler?.(req);
 
-          const errorCode = code === 0 ? code : cnt > retryCnt ? 0 : code
+          const errorCode = code === 0 ? code : cnt > retryCnt ? 0 : code;
 
           const contentData =
             errorCode === 0
@@ -245,7 +245,7 @@ Cypress.Commands.add(
                 : typeof setContent === 'function'
                 ? setContent(req.url)
                 : content
-              : content
+              : content;
 
           // console.log(
           //   '#### check - interceptApi',
@@ -262,14 +262,14 @@ Cypress.Commands.add(
               message: 'ok',
             },
             delay,
-          })
+          });
 
-          cnt++
+          cnt++;
         }
       )
-      .as(alias)
+      .as(alias);
   }
-)
+);
 ```
 
 ```ts
@@ -285,8 +285,8 @@ function interceptAmountApi({ balance = 3000, code = 0 } = {}) {
     },
     code,
     routeHandler: (req) => {
-      expect(req.body.secure).to.not.be.null
+      expect(req.body.secure).to.not.be.null;
     },
-  })
+  });
 }
 ```

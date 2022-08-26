@@ -21,20 +21,20 @@ npm install mongoose
 - MongoDB 연결
 
 ```js
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 mongoose.connection.on('error', (err) => {
-  console.log('MongoDB connection error: ' + err)
-})
+  console.log('MongoDB connection error: ' + err);
+});
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose connection open')
-})
+  console.log('Mongoose connection open');
+});
 mongoose.connect('mongodb://127.0.0.1:5050/node_rest_api', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-})
-mongoose.Promise = global.Promise
+});
+mongoose.Promise = global.Promise;
 ```
 
 ## mongoose API와 장점
@@ -53,8 +53,8 @@ MongoDB는 Schema-less하다. 이는 RDMS처럼 고정 Schema가 존재하지 �
 
 ```js
 /* api/models/project.js */
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
   name: String,
@@ -83,9 +83,9 @@ const projectSchema = new Schema({
     type: Map,
     of: String,
   },
-})
+});
 
-module.exports = mongoose.model('Project', projectSchema)
+module.exports = mongoose.model('Project', projectSchema);
 ```
 
 #### 2. Promise(async,await)와 콜백을 자유자재로 사용가능
@@ -103,10 +103,10 @@ try {
     languages: req.body.languages,
     baseLang: constants.BASE_LANGUAGE,
     updateDate: 0,
-  })
-  return res.send({ code: 'ok' })
+  });
+  return res.send({ code: 'ok' });
 } catch (err) {
-  return next(err)
+  return next(err);
 }
 ```
 
@@ -116,12 +116,12 @@ exec()을 붙여서 Query를 Promise로 바꿔준다.
 
 ```js
 try {
-  const regPattern = `^${project.uuid}(.)+`
-  const regEx = new RegExp(regPattern)
-  const curTranslates = await translateModel.find({ uid: regEx }).exec()
-  return res.send({ code: 'ok', data: curTranslates })
+  const regPattern = `^${project.uuid}(.)+`;
+  const regEx = new RegExp(regPattern);
+  const curTranslates = await translateModel.find({ uid: regEx }).exec();
+  return res.send({ code: 'ok', data: curTranslates });
 } catch (err) {
-  return next(err)
+  return next(err);
 }
 ```
 
@@ -140,7 +140,7 @@ Person.find({
   .limit(10)
   .sort({ occupation: -1 })
   .select({ name: 1, occupation: 1 })
-  .exec(callback)
+  .exec(callback);
 
 // Using query builder
 Person.find({ occupation: /host/ })
@@ -154,5 +154,5 @@ Person.find({ occupation: /host/ })
   .limit(10)
   .sort('-occupation')
   .select('name occupation')
-  .exec(callback)
+  .exec(callback);
 ```

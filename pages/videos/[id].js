@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react'
-import classnames from 'classnames'
+import { useCallback, useState } from 'react';
+import classnames from 'classnames';
 
-import videosData from '@/data/videosData'
-import Link from '@/components/Link'
+import videosData from '@/data/videosData';
+import Link from '@/components/Link';
 
 export function getStaticPaths() {
   return {
@@ -12,24 +12,24 @@ export function getStaticPaths() {
       },
     })),
     fallback: false,
-  }
+  };
 }
 
 export async function getStaticProps({ params }) {
   const video = videosData.find((videoObj) => {
-    return videoObj.id === params.id
-  })
-  return { props: { video } }
+    return videoObj.id === params.id;
+  });
+  return { props: { video } };
 }
 
 export default function Video({ video }) {
-  const [isLoadFinish, setIsLoadFinish] = useState(false)
+  const [isLoadFinish, setIsLoadFinish] = useState(false);
 
   const onIframeLoad = useCallback(() => {
     if (!isLoadFinish) {
-      setIsLoadFinish(true)
+      setIsLoadFinish(true);
     }
-  }, [isLoadFinish])
+  }, [isLoadFinish]);
 
   return (
     <>
@@ -54,5 +54,5 @@ export default function Video({ video }) {
         </div>
       </div>
     </>
-  )
+  );
 }

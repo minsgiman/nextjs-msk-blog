@@ -1,13 +1,13 @@
-import { useCallback } from 'react'
-import Router from 'next/router'
+import { useCallback } from 'react';
+import Router from 'next/router';
 
-import TitleThumb from '@/components/TitleThumb'
-import videosData from '@/data/videosData'
+import TitleThumb from '@/components/TitleThumb';
+import videosData from '@/data/videosData';
 
 export default function Videos() {
   const onClick = useCallback((id) => {
-    Router.push(`/videos/${id}`)
-  }, [])
+    Router.push(`/videos/${id}`);
+  }, []);
 
   return (
     <>
@@ -35,5 +35,5 @@ export default function Videos() {
         </div>
       </div>
     </>
-  )
+  );
 }

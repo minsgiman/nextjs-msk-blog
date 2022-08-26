@@ -10,9 +10,9 @@ Performance optimizations 를 위한 useCallback, useMemo 사용은 공짜가 �
 
 ```js
 const dispense = (candy) => {
-  setCandies((allCandies) => allCandies.filter((c) => c !== candy))
-}
-const dispenseCallback = React.useCallback(dispense, [])
+  setCandies((allCandies) => allCandies.filter((c) => c !== candy));
+};
+const dispenseCallback = React.useCallback(dispense, []);
 ```
 
 위 코드에서 보듯이 useCallback 사용은 추가로 deps([])를 정의하고 React.useCallback을 실행하는 비용을 필요로 한다. <br />
@@ -22,7 +22,7 @@ useMemo 또한 마찬가지로 비용이 필요하다. <br />
 다음과 같은 경우 복잡한 연산을 하지 않는데, useMemo를 사용하는 것은 오히려 낭비다.
 
 ```js
-const initialCandies = React.useMemo(() => ['snickers', 'skittles', 'twix', 'milkyway'], [])
+const initialCandies = React.useMemo(() => ['snickers', 'skittles', 'twix', 'milkyway'], []);
 ```
 
 위의 코드는 다음과 같이 변경하는 것이 좋다.
@@ -49,20 +49,20 @@ function CandyDispenser() {
 
 ```js
 function CountButton({ onClick, count }) {
-  return <button onClick={onClick}>{count}</button>
+  return <button onClick={onClick}>{count}</button>;
 }
 
 function DualCounter() {
-  const [count1, setCount1] = React.useState(0)
-  const increment1 = () => setCount1((c) => c + 1)
-  const [count2, setCount2] = React.useState(0)
-  const increment2 = () => setCount2((c) => c + 1)
+  const [count1, setCount1] = React.useState(0);
+  const increment1 = () => setCount1((c) => c + 1);
+  const [count2, setCount2] = React.useState(0);
+  const increment2 = () => setCount2((c) => c + 1);
   return (
     <>
       <CountButton count={count1} onClick={increment1} />
       <CountButton count={count2} onClick={increment2} />
     </>
-  )
+  );
 }
 ```
 
@@ -70,8 +70,8 @@ function DualCounter() {
 
 ```js
 const CountButton = React.memo(function CountButton({ onClick, count }) {
-  return <button onClick={onClick}>{count}</button>
-})
+  return <button onClick={onClick}>{count}</button>;
+});
 ```
 
 하지만 DualCounter 가 다시 랜더링될 때마다 increment1과 increment2 는 다시 만들어지고 이는 CountButton의 prop변경으로 이어져 리랜더링을 유발한다.
@@ -82,20 +82,20 @@ useCallback을 사용하여 increment1과 increment2 을 메모이제이션한�
 
 ```js
 const CountButton = React.memo(function CountButton({ onClick, count }) {
-  return <button onClick={onClick}>{count}</button>
-})
+  return <button onClick={onClick}>{count}</button>;
+});
 
 function DualCounter() {
-  const [count1, setCount1] = React.useState(0)
-  const increment1 = React.useCallback(() => setCount1((c) => c + 1), [])
-  const [count2, setCount2] = React.useState(0)
-  const increment2 = React.useCallback(() => setCount2((c) => c + 1), [])
+  const [count1, setCount1] = React.useState(0);
+  const increment1 = React.useCallback(() => setCount1((c) => c + 1), []);
+  const [count2, setCount2] = React.useState(0);
+  const increment2 = React.useCallback(() => setCount2((c) => c + 1), []);
   return (
     <>
       <CountButton count={count1} onClick={increment1} />
       <CountButton count={count2} onClick={increment2} />
     </>
-  )
+  );
 }
 ```
 
@@ -106,8 +106,8 @@ function RenderPrimes({ iterations, multiplier }) {
   const primes = React.useMemo(() => calculatePrimes(iterations, multiplier), [
     iterations,
     multiplier,
-  ])
-  return <div>Primes! {primes}</div>
+  ]);
+  return <div>Primes! {primes}</div>;
 }
 ```
 

@@ -46,7 +46,7 @@ observable은 Observable State를 만들며, 다음과 같이 사용한다.
 const person = observable({
   firstName: 'Clive Staples',
   lastName: 'Lewis',
-})
+});
 ```
 
 #### computed
@@ -55,18 +55,18 @@ computed는 연산된 값이 필요할 때 사용한다. 의존하는 값이 변
 
 ```javascript
 class Foo {
-  @observable length = 2
+  @observable length = 2;
   @computed get squared() {
-    return this.length * this.length
+    return this.length * this.length;
   }
   set squared(value) {
     //this is automatically an action, no annotation necessary
-    this.length = Math.sqrt(value)
+    this.length = Math.sqrt(value);
   }
 }
-const foo = new Foo()
-autorun(() => console.log('foo squared : ' + foo.squared))
-foo.squared = 9
+const foo = new Foo();
+autorun(() => console.log('foo squared : ' + foo.squared));
+foo.squared = 9;
 // foo squared : 4
 // foo squared : 9
 ```
@@ -77,16 +77,16 @@ autorun은 전달받는 콜백에서 사용되는 State를 자동으로 관찰�
 autorun을 실행하면 disposer를 리턴한다. disposer를 실행하면 autorun을 중단한다.
 
 ```javascript
-var numbers = observable([1, 2, 3])
-var sum = computed(() => numbers.reduce((a, b) => a + b, 0))
+var numbers = observable([1, 2, 3]);
+var sum = computed(() => numbers.reduce((a, b) => a + b, 0));
 
-var disposer = autorun(() => console.log(sum.get()))
+var disposer = autorun(() => console.log(sum.get()));
 // prints '6'
-numbers.push(4)
+numbers.push(4);
 // prints '10'
 
-disposer()
-numbers.push(5)
+disposer();
+numbers.push(5);
 // won't print anything, nor is `sum` re-evaluated
 ```
 
@@ -102,26 +102,26 @@ reaction은 Observable State에 변경이 일어날 때, 특정작업을 할 수
 첫번째는 data function에서 리턴하는 값이고, 두번째 인자 reaction은 해당 reaction을 dispose하는 용도로 사용될 수 있다.
 
 ```javascript
-const counter = observable({ count: 0 })
+const counter = observable({ count: 0 });
 
 // invoke once of and dispose reaction: reacts to observable value.
 const reaction3 = reaction(
   () => counter.count,
   (count, reaction) => {
-    console.log('reaction 3: invoked. counter.count = ' + count)
-    reaction.dispose()
+    console.log('reaction 3: invoked. counter.count = ' + count);
+    reaction.dispose();
   }
-)
+);
 
-counter.count = 1
+counter.count = 1;
 // prints:
 // reaction 3: invoked. counter.count = 1
 
-counter.count = 2
+counter.count = 2;
 // prints:
 // (There are no logging, because of reaction disposed. But, counter continue reaction)
 
-console.log(counter.count)
+console.log(counter.count);
 // prints:
 // 2
 ```
@@ -132,33 +132,33 @@ action은 Observable State에 변화를 일으킨다. <br />
 action을 호출할 때마다 reaction이 발생하는데, 여러 action들을 transaction으로 묶어서 호출하면 transaction으로 묶은 action들이 모두 끝나고 난 다음에 reaction이 발생한다.
 
 ```javascript
-import { observable, computed, reaction, autorun, action, transaction } from 'mobx'
+import { observable, computed, reaction, autorun, action, transaction } from 'mobx';
 
 class Foo {
-  @observable datas = []
+  @observable datas = [];
 
   @computed
   get total() {
-    console.log('calculating..')
-    return this.datas.reduce((prev, curr) => prev + curr.value, 0)
+    console.log('calculating..');
+    return this.datas.reduce((prev, curr) => prev + curr.value, 0);
   }
 
   @action
   add(id, value) {
-    this.datas.push({ id, value })
+    this.datas.push({ id, value });
   }
 }
 
-const foo = new Foo()
-autorun(() => console.log('autorun total : ' + foo.total))
+const foo = new Foo();
+autorun(() => console.log('autorun total : ' + foo.total));
 
 transaction(() => {
-  foo.add('a', 4)
-  foo.add('b', 8)
-  foo.add('c', 9)
-})
+  foo.add('a', 4);
+  foo.add('b', 8);
+  foo.add('c', 9);
+});
 
-console.log('result total : ' + foo.total)
+console.log('result total : ' + foo.total);
 // calculating..
 // autorun total : 0
 // calculating..

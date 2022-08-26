@@ -56,10 +56,10 @@ npm install --save-dev enzyme enzyme-adapter-react-16 enzyme-to-json
 - Create a setupTests.js file at ./src/setupTests.js:
 
 ```js
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() })
+configure({ adapter: new Adapter() });
 ```
 
 - Test 파일 생성
@@ -85,10 +85,10 @@ configure({ adapter: new Adapter() })
   - render : 자식 컴포넌트를 포함하여 정적인 html로 렌더링한다. React lifecycle method는 테스트할 수 없다.
 
 ```js
-import { mount } from 'enzyme'
+import { mount } from 'enzyme';
 
 //...
-let component = null
+let component = null;
 
 beforeEach(() => {
   component = mount(
@@ -100,12 +100,12 @@ beforeEach(() => {
       firstvalue={okValue}
       secondvalue={nokValue}
     />
-  )
-})
+  );
+});
 
 afterEach(() => {
-  component.unmount()
-})
+  component.unmount();
+});
 ```
 
 <br />
@@ -118,8 +118,8 @@ afterEach(() => {
 
 ```js
 it('match snapshot', () => {
-  expect(component).toMatchSnapshot()
-})
+  expect(component).toMatchSnapshot();
+});
 ```
 
 <br />
@@ -134,11 +134,11 @@ it('match snapshot', () => {
 
 ```js
 it('renders title and message', () => {
-  expect(component.props().title).toBe(title)
-  expect(component.props().message).toBe(message)
-  expect(component.find('h2').contains(title)).toBe(true)
-  expect(component.find('p').text()).toBe(message)
-})
+  expect(component.props().title).toBe(title);
+  expect(component.props().message).toBe(message);
+  expect(component.find('h2').contains(title)).toBe(true);
+  expect(component.find('p').text()).toBe(message);
+});
 ```
 
 <br />
@@ -152,13 +152,13 @@ it('renders title and message', () => {
 - mock function은 테스트가 실행되는 동안 가짜함수에 어떤일들이 발생했는지를 기억하기 때문에 가짜함수가 내부적으로 어떻게 사용되는지 검증할 수 있다.
 
 ```js
-import jest from 'jest-mock'
+import jest from 'jest-mock';
 
 //...
-const okValue = 'ok'
-const nokValue = 'nok'
-const selectFn = jest.fn()
-let component = null
+const okValue = 'ok';
+const nokValue = 'nok';
+const selectFn = jest.fn();
+let component = null;
 
 beforeEach(() => {
   component = mount(
@@ -170,16 +170,16 @@ beforeEach(() => {
       firstvalue={okValue}
       secondvalue={nokValue}
     />
-  )
-})
+  );
+});
 
 //...
 
 it('click select button', () => {
-  const firstBtn = component.find('button:first-child')
-  firstBtn.simulate('click')
-  expect(selectFn).toBeCalledWith(okValue)
-})
+  const firstBtn = component.find('button:first-child');
+  firstBtn.simulate('click');
+  expect(selectFn).toBeCalledWith(okValue);
+});
 ```
 
 ---

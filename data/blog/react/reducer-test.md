@@ -12,25 +12,25 @@ reducer에 현재상태 + action(with payload) 를 전달하여 다음 상태가
 
 ```js
 // reducer
-const initialState = 0
+const initialState = 0;
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT_BY':
-      return state + action.payload
+      return state + action.payload;
     case 'DECREMENT_BY':
-      return state - action.payload
+      return state - action.payload;
     default:
-      return state
+      return state;
   }
-}
+};
 ```
 
 ```js
 describe('test reducer', () => {
   it('should return 0 as initial state', () => {
-    expect(reducer(undefined, {})).toEqual(0)
-  })
+    expect(reducer(undefined, {})).toEqual(0);
+  });
 
   it('should handle INCREMENT_BY', () => {
     expect(
@@ -38,15 +38,15 @@ describe('test reducer', () => {
         type: 'INCREMENT_BY',
         value: 2,
       })
-    ).toEqual(2)
+    ).toEqual(2);
 
     expect(
       reducer(5, {
         type: 'INCREMENT_BY',
         value: 10,
       })
-    ).toEqual(15)
-  })
+    ).toEqual(15);
+  });
 
   it('should handle DECREMENT_BY', () => {
     expect(
@@ -54,9 +54,9 @@ describe('test reducer', () => {
         type: 'DECREMENT_BY',
         value: 2,
       })
-    ).toEqual(3)
-  })
-})
+    ).toEqual(3);
+  });
+});
 ```
 
 다음과 같이 snapshot 테스트를 이용할수도 있다.
@@ -66,10 +66,10 @@ it('should handle DECREMENT_BY', () => {
   const newState = reducer(5, {
     type: 'DECREMENT_BY',
     value: 2,
-  })
+  });
 
-  expect(newState).toMatchSnapshot()
-})
+  expect(newState).toMatchSnapshot();
+});
 ```
 
 ### 참조

@@ -17,171 +17,171 @@ summary: '이진탐색트리(Binary Search Tree)는 다음과 같은 속성이 �
 이진탐색트리를 구현하고 삽입, 삭제, 중위순회(Inorder traversal)를 테스트하였다.
 
 ```javascript
-const LEFT = 0
-const RIGHT = 1
+const LEFT = 0;
+const RIGHT = 1;
 
 class TreeNode {
   constructor(value) {
-    this.value = value
-    this.descendents = {}
-    this.meta = {}
-    this.parent = null
+    this.value = value;
+    this.descendents = {};
+    this.meta = {};
+    this.parent = null;
   }
 
   get left() {
-    return this.descendents[LEFT]
+    return this.descendents[LEFT];
   }
 
   set left(node) {
-    this.descendents[LEFT] = node
+    this.descendents[LEFT] = node;
     if (node) {
-      node.parent = this
-      node.isParentLeftChild = true
+      node.parent = this;
+      node.isParentLeftChild = true;
     }
   }
 
   get right() {
-    return this.descendents[RIGHT]
+    return this.descendents[RIGHT];
   }
 
   set right(node) {
-    this.descendents[RIGHT] = node
+    this.descendents[RIGHT] = node;
     if (node) {
-      node.parent = this
-      node.isParentLeftChild = false
+      node.parent = this;
+      node.isParentLeftChild = false;
     }
   }
 }
 
 class BinarySearchTree {
   constructor() {
-    this.root = null
-    this.size = 0
+    this.root = null;
+    this.size = 0;
   }
 
   add(value) {
-    const newNode = new TreeNode(value)
+    const newNode = new TreeNode(value);
 
     if (this.root) {
-      const { found, parent } = this.findNodeAndParent(value)
+      const { found, parent } = this.findNodeAndParent(value);
       if (found) {
         // value already exist on the tree
-        found.meta.multiplicity = (found.meta.multiplicity || 1) + 1
+        found.meta.multiplicity = (found.meta.multiplicity || 1) + 1;
       } else if (value < parent.value) {
-        parent.left = newNode
+        parent.left = newNode;
       } else {
-        parent.right = newNode
+        parent.right = newNode;
       }
     } else {
-      this.root = newNode
+      this.root = newNode;
     }
 
-    this.size += 1
-    return newNode
+    this.size += 1;
+    return newNode;
   }
 
   findNodeAndParent(value) {
-    let node = this.root
-    let parent
+    let node = this.root;
+    let parent;
 
     while (node) {
       if (node.value === value) {
-        break
+        break;
       }
-      parent = node
-      node = value > node.value ? node.right : node.left
+      parent = node;
+      node = value > node.value ? node.right : node.left;
     }
 
-    return { found: node, parent }
+    return { found: node, parent };
   }
 
   find(value) {
-    let node = this.root
-    let found
+    let node = this.root;
+    let found;
 
     while (node) {
       if (node.value === value) {
-        found = node
-        break
+        found = node;
+        break;
       }
-      node = value > node.value ? node.right : node.left
+      node = value > node.value ? node.right : node.left;
     }
-    return found
+    return found;
   }
 
   remove(value) {
-    const nodeToRemove = this.find(value)
-    if (!nodeToRemove) return false
+    const nodeToRemove = this.find(value);
+    if (!nodeToRemove) return false;
 
     // Combine left and right children into one subtree without nodeToRemove
-    const nodeToRemoveChildren = this.combineLeftIntoRightSubtree(nodeToRemove)
-    console.log('nodeToRemoveChildren val : ' + nodeToRemoveChildren.value)
+    const nodeToRemoveChildren = this.combineLeftIntoRightSubtree(nodeToRemove);
+    console.log('nodeToRemoveChildren val : ' + nodeToRemoveChildren.value);
 
     if (nodeToRemove.meta.multiplicity && nodeToRemove.meta.multiplicity > 1) {
-      nodeToRemove.meta.multiplicity -= 1
+      nodeToRemove.meta.multiplicity -= 1;
     } else if (nodeToRemove === this.root) {
-      this.root = nodeToRemoveChildren
-      this.root.parent = null
+      this.root = nodeToRemoveChildren;
+      this.root.parent = null;
     } else {
-      const parent = nodeToRemove.parent
+      const parent = nodeToRemove.parent;
       if (nodeToRemove.isParentLeftChild) {
-        parent.left = nodeToRemoveChildren
+        parent.left = nodeToRemoveChildren;
       } else {
-        parent.right = nodeToRemoveChildren
+        parent.right = nodeToRemoveChildren;
       }
     }
 
-    this.size -= 1
-    return true
+    this.size -= 1;
+    return true;
   }
 
   combineLeftIntoRightSubtree(node) {
     if (node.right) {
-      const leftmost = this.getLeftmost(node.right)
-      leftmost.left = node.left
-      return node.right
+      const leftmost = this.getLeftmost(node.right);
+      leftmost.left = node.left;
+      return node.right;
     }
-    return node.left
+    return node.left;
   }
 
   getLeftmost(node) {
     if (node.left) {
-      let leftmost = node.left
+      let leftmost = node.left;
       while (leftmost.left) {
-        leftmost = leftmost.left
+        leftmost = leftmost.left;
       }
-      return leftmost
+      return leftmost;
     }
-    return node
+    return node;
   }
 
   inOrderTraversal(node = this.root) {
     if (!node) {
-      return
+      return;
     }
     if (node.left) {
-      this.inOrderTraversal(node.left)
+      this.inOrderTraversal(node.left);
     }
-    console.log(node.value)
+    console.log(node.value);
     if (node.right) {
-      this.inOrderTraversal(node.right)
+      this.inOrderTraversal(node.right);
     }
   }
 }
 
-const bst = new BinarySearchTree()
+const bst = new BinarySearchTree();
 
-bst.add(5)
-bst.add(2)
-bst.add(7)
-bst.add(6)
-bst.add(8)
-bst.add(4)
-bst.add(1)
-bst.add(3)
-bst.remove(5)
+bst.add(5);
+bst.add(2);
+bst.add(7);
+bst.add(6);
+bst.add(8);
+bst.add(4);
+bst.add(1);
+bst.add(3);
+bst.remove(5);
 
-bst.inOrderTraversal()
+bst.inOrderTraversal();
 ```
 
 결과 : 1 2 3 4 6 7 8

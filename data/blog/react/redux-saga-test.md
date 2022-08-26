@@ -75,7 +75,7 @@ describe('CustomerSaga', function () {
 
 ```ts
 it('fetchProfile success', () => {
-  const successMock = jest.fn()
+  const successMock = jest.fn();
 
   return expectSaga(fetchProfile, {
     payload: { onSuccess: successMock, filter: 'NEW' },
@@ -94,9 +94,9 @@ it('fetchProfile success', () => {
     })
     .run()
     .then(() => {
-      expect(successMock).toBeCalledWith(customerMock) // assert onSuccess mock function called
-    })
-})
+      expect(successMock).toBeCalledWith(customerMock); // assert onSuccess mock function called
+    });
+});
 ```
 
 ### effect error 테스트 및 effect 부분, 부정 assert
@@ -109,20 +109,20 @@ it('fetchProfile success', () => {
   - 아래에서 throwError(error) 를 사용하고 있다.
 
 ```ts
-import { call, select } from 'redux-saga/effects'
-import { expectSaga } from 'redux-saga-test-plan'
-import { throwError } from 'redux-saga-test-plan/providers'
+import { call, select } from 'redux-saga/effects';
+import { expectSaga } from 'redux-saga-test-plan';
+import { throwError } from 'redux-saga-test-plan/providers';
 
-import { fetchPopups } from './PopupSaga'
-import { PopupAPI } from '@api'
-import { isLoginSelector } from '@selector'
-import { ErrorHandler } from '@error'
+import { fetchPopups } from './PopupSaga';
+import { PopupAPI } from '@api';
+import { isLoginSelector } from '@selector';
+import { ErrorHandler } from '@error';
 
 describe('PopupSaga', function () {
   it('fetchPopups failed by not login status', () => {
-    const onErrorMock = jest.fn()
-    const error = new Error('Whoops')
-    const fetchPopupPayload = { target: 'ACCOUNT' }
+    const onErrorMock = jest.fn();
+    const error = new Error('Whoops');
+    const fetchPopupPayload = { target: 'ACCOUNT' };
 
     return expectSaga(fetchPopups, {
       payload: {
@@ -140,14 +140,14 @@ describe('PopupSaga', function () {
       .not.call.fn(ErrorHandler.showTemporaryErrorPopup)
       .run()
       .then(() => {
-        expect(onErrorMock).toBeCalledWith(error)
-      })
-  })
+        expect(onErrorMock).toBeCalledWith(error);
+      });
+  });
 
   it('fetchPopups failed by login status', () => {
-    const onErrorMock = jest.fn()
-    const error = new Error('Whoops')
-    const fetchPopupPayload = { target: 'MAIN' }
+    const onErrorMock = jest.fn();
+    const error = new Error('Whoops');
+    const fetchPopupPayload = { target: 'MAIN' };
 
     return expectSaga(fetchPopups, {
       type: '',
@@ -166,10 +166,10 @@ describe('PopupSaga', function () {
       .not.call.fn(ErrorHandler.showTerminationErrorPopup)
       .run()
       .then(() => {
-        expect(onErrorMock).toBeCalledWith(error)
-      })
-  })
-})
+        expect(onErrorMock).toBeCalledWith(error);
+      });
+  });
+});
 ```
 
 ### reducer와 통합 테스트
@@ -177,30 +177,30 @@ describe('PopupSaga', function () {
 saga에서 발생시키는 effect에 따라 reducer 상태가 적절하게 변경되었는지 통합 테스트를 작성할 수 있다.
 
 ```js
-const INITIAL_STATE = { users: [] }
+const INITIAL_STATE = { users: [] };
 
 function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'FETCH_USERS_SUCCESS':
-      return { ...state, users: action.payload }
+      return { ...state, users: action.payload };
     default:
-      return state
+      return state;
   }
 }
 ```
 
 ```js
-import { expectSaga } from 'redux-saga-test-plan'
+import { expectSaga } from 'redux-saga-test-plan';
 
 it('fetches the users into the store state', () => {
-  const users = ['Jeremy', 'Tucker']
+  const users = ['Jeremy', 'Tucker'];
 
   return expectSaga(fetchUsersSaga)
     .withReducer(reducer)
     .provide([[call(api.getUsers), users]])
     .hasFinalState({ users })
-    .run()
-})
+    .run();
+});
 ```
 
 ### 테스트 진행시 trouble shooting

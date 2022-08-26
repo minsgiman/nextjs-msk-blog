@@ -22,17 +22,17 @@ summary: 'javascript로 구현한 Proxy pattern'
 function GeoCoder() {
   this.getLatLng = function (address) {
     if (address === 'Amsterdam') {
-      return '52.3700° N, 4.8900° E'
+      return '52.3700° N, 4.8900° E';
     } else if (address === 'London') {
-      return '51.5171° N, 0.1062° W'
+      return '51.5171° N, 0.1062° W';
     } else if (address === 'Paris') {
-      return '48.8742° N, 2.3470° E'
+      return '48.8742° N, 2.3470° E';
     } else if (address === 'Berlin') {
-      return '52.5233° N, 13.4127° E'
+      return '52.5233° N, 13.4127° E';
     } else {
-      return ''
+      return '';
     }
-  }
+  };
 }
 ```
 
@@ -40,65 +40,65 @@ function GeoCoder() {
 
 ```js
 function GeoProxy() {
-  var geocoder = new GeoCoder()
-  var geocache = {}
+  var geocoder = new GeoCoder();
+  var geocache = {};
 
   return {
     getLatLng: function (address) {
       if (!geocache[address]) {
-        geocache[address] = geocoder.getLatLng(address)
+        geocache[address] = geocoder.getLatLng(address);
       }
-      log.add(address + ': ' + geocache[address])
-      return geocache[address]
+      log.add(address + ': ' + geocache[address]);
+      return geocache[address];
     },
     getCount: function () {
-      var count = 0
+      var count = 0;
       for (var code in geocache) {
-        count++
+        count++;
       }
-      return count
+      return count;
     },
-  }
+  };
 }
 
 // log helper
 var log = (function () {
-  var log = ''
+  var log = '';
 
   return {
     add: function (msg) {
-      log += msg + '\n'
+      log += msg + '\n';
     },
     show: function () {
-      alert(log)
-      log = ''
+      alert(log);
+      log = '';
     },
-  }
-})()
+  };
+})();
 ```
 
 ### Proxy 객체 사용
 
 ```js
 function run() {
-  var geo = new GeoProxy()
+  var geo = new GeoProxy();
 
   // geolocation requests
 
-  geo.getLatLng('Paris')
-  geo.getLatLng('London')
-  geo.getLatLng('London')
-  geo.getLatLng('London')
-  geo.getLatLng('London')
-  geo.getLatLng('Amsterdam')
-  geo.getLatLng('Amsterdam')
-  geo.getLatLng('Amsterdam')
-  geo.getLatLng('Amsterdam')
-  geo.getLatLng('London')
-  geo.getLatLng('London')
+  geo.getLatLng('Paris');
+  geo.getLatLng('London');
+  geo.getLatLng('London');
+  geo.getLatLng('London');
+  geo.getLatLng('London');
+  geo.getLatLng('Amsterdam');
+  geo.getLatLng('Amsterdam');
+  geo.getLatLng('Amsterdam');
+  geo.getLatLng('Amsterdam');
+  geo.getLatLng('London');
+  geo.getLatLng('London');
 
-  log.add('\nCache size: ' + geo.getCount())
-  log.show()
+  log.add('\nCache size: ' + geo.getCount());
+  log.show();
 }
 ```
 

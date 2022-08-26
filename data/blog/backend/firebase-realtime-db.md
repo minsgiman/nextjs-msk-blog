@@ -24,8 +24,8 @@ summary: 'Firebase Realtime DB를 사용하기 위해 Firebase에 만들어 놓�
     databaseURL: 'https://mskang-64543.firebaseio.com',
     storageBucket: 'xxxxxxx',
     messagingSenderId: 'xxxxxxx',
-  }
-  firebase.initializeApp(config)
+  };
+  firebase.initializeApp(config);
 </script>
 ```
 
@@ -46,12 +46,12 @@ summary: 'Firebase Realtime DB를 사용하기 위해 Firebase에 만들어 놓�
 - snap 파라미터는 data snapshot (Key, value, child 등등의 정보를 가지고 있음)
 
 ```js
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 
-var dbRef = firebase.database().ref().child('text')
+var dbRef = firebase.database().ref().child('text');
 dbRef.on('value', (snap) => {
-  alert(snap.val())
-})
+  alert(snap.val());
+});
 ```
 
 ---

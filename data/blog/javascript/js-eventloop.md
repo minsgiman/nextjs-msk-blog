@@ -11,15 +11,15 @@ summary: 'Javascript Engine의 call stack, Event Loop와 Event Table 그리고 E
 ```js
 /* main.js */
 var firstFunction = function () {
-  console.log("I'm first!")
-}
+  console.log("I'm first!");
+};
 
 var secondFunction = function () {
-  firstFunction()
-  console.log("I'm second!")
-}
+  firstFunction();
+  console.log("I'm second!");
+};
 
-secondFunction()
+secondFunction();
 ```
 
 - 1. 위 코드 수행 결과 아래와 같이 call stack이 쌓이고, 위에서부터 순차적으로 실행될 것이다.
@@ -34,15 +34,15 @@ secondFunction()
 
 ```js
 var firstFunction = function () {
-  console.log("I'm first!")
-}
+  console.log("I'm first!");
+};
 
 var secondFunction = function () {
-  setTimeout(firstFunction, 5000)
-  console.log("I'm second!")
-}
+  setTimeout(firstFunction, 5000);
+  console.log("I'm second!");
+};
 
-secondFunction()
+secondFunction();
 ```
 
 - (1) 위 코드 수행 중, 아래는 setTimeout이 실행되기 전까지의 call stack이다. **Event Table**과 **Event Queue**는 비어있는 상태이다.

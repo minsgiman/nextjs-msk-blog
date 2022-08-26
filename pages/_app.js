@@ -1,16 +1,16 @@
-import '@/css/tailwind.css'
-import '@/css/prism.css'
-import '@/css/custom.scss'
-import 'react-image-gallery/styles/scss/image-gallery.scss'
+import '@/css/tailwind.css';
+import '@/css/prism.css';
+import '@/css/custom.scss';
+import 'react-image-gallery/styles/scss/image-gallery.scss';
 
-import { ThemeProvider } from 'next-themes'
-import Head from 'next/head'
+import { ThemeProvider } from 'next-themes';
+import Head from 'next/head';
 
-import Analytics from '@/components/analytics'
-import LayoutWrapper from '@/components/LayoutWrapper'
-import { ClientReload } from '@/components/ClientReload'
+import Analytics from '@/components/analytics';
+import LayoutWrapper from '@/components/LayoutWrapper';
+import { ClientReload } from '@/components/ClientReload';
 
-const isDevelopment = process.env.NODE_ENV === 'development'
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -24,5 +24,5 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </LayoutWrapper>
     </ThemeProvider>
-  )
+  );
 }

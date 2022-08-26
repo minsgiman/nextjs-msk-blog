@@ -33,21 +33,21 @@ target object의 balance를 get할 때 console.log를 찍도록 handler에서 �
 const bankAccount = {
   balance: 2020,
   name: 'Georgy Glezer',
-}
+};
 
 const handler = {
   get: function (target, prop, receiver) {
     if (prop === 'balance') {
-      console.log(`Current Balance Of: ${target.name} Is: ${target.balance} `)
+      console.log(`Current Balance Of: ${target.name} Is: ${target.balance} `);
     }
 
-    return target[prop]
+    return target[prop];
   },
-}
+};
 
-const wrappedBankAcount = new Proxy(bankAccount, handler)
+const wrappedBankAcount = new Proxy(bankAccount, handler);
 
-console.log(wrappedBankAcount.balance) // access to the balance
+console.log(wrappedBankAcount.balance); // access to the balance
 
 // OUTPUT:
 // Current Balance Of: Georgy Glezer Is: 2020
@@ -62,29 +62,29 @@ target object의 balance를 set할 때 console.log를 찍고, balance가 음수�
 const bankAccount = {
   balance: 2020,
   name: 'Georgy Glezer',
-}
+};
 
 const handler = {
   set: function (obj, prop, value) {
-    console.log(`Current Balance: ${obj.balance}, New Balance: ${value}`)
+    console.log(`Current Balance: ${obj.balance}, New Balance: ${value}`);
 
     if (value < 0) {
-      console.log(`We don't allow Negative Balance!`)
-      return false
+      console.log(`We don't allow Negative Balance!`);
+      return false;
     }
-    obj[prop] = value
+    obj[prop] = value;
 
-    return true
+    return true;
   },
-}
+};
 
-const wrappedBankAcount = new Proxy(bankAccount, handler)
+const wrappedBankAcount = new Proxy(bankAccount, handler);
 
-wrappedBankAcount.balance -= 2000 // access to the balance
-console.log(wrappedBankAcount.balance)
+wrappedBankAcount.balance -= 2000; // access to the balance
+console.log(wrappedBankAcount.balance);
 
-wrappedBankAcount.balance -= 50 // access to the balance
-console.log(wrappedBankAcount.balance)
+wrappedBankAcount.balance -= 50; // access to the balance
+console.log(wrappedBankAcount.balance);
 
 // OUTPUT:
 // Current Balance: 2020, New Balance: 20
@@ -103,37 +103,37 @@ const bankAccount = {
   balance: 10,
   name: 'Georgy Glezer',
   get dollars() {
-    console.log('Calculating Dollars')
-    return this.balance * 3.43008459
+    console.log('Calculating Dollars');
+    return this.balance * 3.43008459;
   },
-}
+};
 
 let cache = {
   currentBalance: null,
   currentValue: null,
-}
+};
 
 const handler = {
   get: function (obj, prop) {
     if (prop === 'dollars') {
-      let value = cache.currentBalance !== obj.balance ? obj[prop] : cache.currentValue
+      let value = cache.currentBalance !== obj.balance ? obj[prop] : cache.currentValue;
 
-      cache.currentValue = value
-      cache.currentBalance = obj.balance
+      cache.currentValue = value;
+      cache.currentBalance = obj.balance;
 
-      return value
+      return value;
     }
 
-    return obj[prop]
+    return obj[prop];
   },
-}
+};
 
-const wrappedBankAcount = new Proxy(bankAccount, handler)
+const wrappedBankAcount = new Proxy(bankAccount, handler);
 
-console.log(wrappedBankAcount.dollars)
-console.log(wrappedBankAcount.dollars)
-console.log(wrappedBankAcount.dollars)
-console.log(wrappedBankAcount.dollars)
+console.log(wrappedBankAcount.dollars);
+console.log(wrappedBankAcount.dollars);
+console.log(wrappedBankAcount.dollars);
+console.log(wrappedBankAcount.dollars);
 
 // OUTPUT:
 // Calculating Dollars
@@ -152,29 +152,29 @@ const bankAccount = {
   balance: 2020,
   name: 'Georgy Glezer',
   get text() {
-    return `${this.name} Balance Is: ${this.balance}`
+    return `${this.name} Balance Is: ${this.balance}`;
   },
-}
+};
 
 const objectWithDom = (object, domId) => {
   const handler = {
     set: function (obj, prop, value) {
-      obj[prop] = value
+      obj[prop] = value;
 
-      document.getElementById(domId).innerHTML = obj.text
+      document.getElementById(domId).innerHTML = obj.text;
 
-      return true
+      return true;
     },
-  }
+  };
 
-  return new Proxy(object, handler)
-}
+  return new Proxy(object, handler);
+};
 
 // create a dom element with id: bank-account
-const wrappedBankAccount = objectWithDom(bankAccount, 'bank-account')
+const wrappedBankAccount = objectWithDom(bankAccount, 'bank-account');
 
-wrappedBankAccount.balance = 26
-wrappedBankAccount.balance = 100000
+wrappedBankAccount.balance = 26;
+wrappedBankAccount.balance = 100000;
 ```
 
 위의 예제들에서 본 것 처럼 Proxy 객체는 활용 방법이 매우 많고, 우리가 알고 있는 (Vue, MobX 등) 많은 라이브러리들도 이를 사용하여 구현되었다.

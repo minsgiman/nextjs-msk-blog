@@ -40,15 +40,15 @@ var fnUpdateDDNSInfo = function (updateData) {
         type: hx.eventName.UPDATE_DDNS_INFO,
         success: true,
         data: data,
-      })
+      });
     },
     errorCb = function (response, textStatus, errorThrown) {
       pageManager.fireEvent({
         type: hx.eventName.UPDATE_DDNS_INFO,
         success: false,
-      })
-    }
+      });
+    };
 
-  hx.util.callAjax(setting, successCb, errorCb)
-}
+  hx.util.callAjax(setting, successCb, errorCb);
+};
 ```

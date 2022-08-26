@@ -13,24 +13,24 @@ summary: 'vue 유용한 directives, components 정리'
 - Example
 
 ```js
-import VueHotKey from 'v-hotkey'
-Vue.use(VueHotKey)
+import VueHotKey from 'v-hotkey';
+Vue.use(VueHotKey);
 
 export default {
   data() {
     return {
       show: true,
-    }
+    };
   },
   methods: {
     toggle() {
-      this.show = !this.show
+      this.show = !this.show;
     },
     show() {
-      this.show = true
+      this.show = true;
     },
     hide() {
-      this.show = false
+      this.show = false;
     },
   },
   computed: {
@@ -42,10 +42,10 @@ export default {
           keydown: this.hide,
           keyup: this.show,
         },
-      }
+      };
     },
   },
-}
+};
 ```
 
 ```html
@@ -63,8 +63,8 @@ export default {
 - Example
 
 ```js
-import VClickOutside from 'v-click-outside'
-Vue.use(VClickOutside)
+import VClickOutside from 'v-click-outside';
+Vue.use(VClickOutside);
 
 export default {
   data() {
@@ -77,23 +77,23 @@ export default {
         //       this directive dynamically use this attribute.
         isActive: true,
       },
-    }
+    };
   },
   methods: {
     onClickOutside(event) {
-      console.log('Clicked outside. Event: ', event)
+      console.log('Clicked outside. Event: ', event);
     },
     handler() {
-      console.log('Clicked outside (Using config), middleware returned true :)')
+      console.log('Clicked outside (Using config), middleware returned true :)');
     },
     // Note: The middleware will be executed if the event was fired outside the element.
     //       It should have only sync functionality and it should return a boolean to
     //       define if the handler should be fire or not
     middleware(event) {
-      return event.target.className !== 'click_area'
+      return event.target.className !== 'click_area';
     },
   },
-}
+};
 ```
 
 ```html
@@ -110,21 +110,21 @@ export default {
 - Example
 
 ```js
-import Clipboard from 'v-clipboard'
-Vue.use(Clipboard)
+import Clipboard from 'v-clipboard';
+Vue.use(Clipboard);
 
 export default {
   data() {
     return {
       valueStatic: 'This is copy',
-    }
+    };
   },
   methods: {
     dynamicCopy() {
-      return this.valueStatic + ' dynamically'
+      return this.valueStatic + ' dynamically';
     },
   },
-}
+};
 ```
 
 ```html
@@ -141,8 +141,8 @@ export default {
 - Example
 
 ```js
-import VueScrollTo from 'vue-scrollto'
-Vue.use(VueScrollTo)
+import VueScrollTo from 'vue-scrollto';
+Vue.use(VueScrollTo);
 ```
 
 ```html
@@ -156,7 +156,7 @@ Vue.use(VueScrollTo)
 
 ```js
 /* Programmatically */
-var VueScrollTo = require('vue-scrollto')
+var VueScrollTo = require('vue-scrollto');
 
 var options = {
   container: '#container',
@@ -175,15 +175,15 @@ var options = {
   },
   x: false,
   y: true,
-}
+};
 
-var cancelScroll = VueScrollTo.scrollTo(element, duration, options)
+var cancelScroll = VueScrollTo.scrollTo(element, duration, options);
 
 // or alternatively inside your components you can use
-cancelScroll = this.$scrollTo(element, duration, options)
+cancelScroll = this.$scrollTo(element, duration, options);
 
 // to cancel scrolling you can call the returned function
-cancelScroll()
+cancelScroll();
 ```
 
 ## v-tooltip
@@ -193,16 +193,16 @@ cancelScroll()
 - Example
 
 ```js
-import VTooltip from 'v-tooltip'
-Vue.use(VTooltip)
+import VTooltip from 'v-tooltip';
+Vue.use(VTooltip);
 
 export default {
   data() {
     return {
       tooltipMsg: 'This is a button.',
-    }
+    };
   },
-}
+};
 ```
 
 ```html
@@ -218,30 +218,30 @@ export default {
 - Example
 
 ```js
-import VScrollLock from 'v-scroll-lock'
+import VScrollLock from 'v-scroll-lock';
 Vue.use(VScrollLock, {
   bodyScrollOptions: {
     // body scroll이 차지하고 있던 영역이 사라진 만큼 Element들이 움직이는 것을 방지하기 위한 옵션
     // body에 padding-right: 15px 스타일을 적용한다.
     reserveScrollBarGap: true,
   },
-})
+});
 
 export default {
   data() {
     return {
       open: false,
-    }
+    };
   },
   methods: {
     closeModal() {
-      this.open = false
+      this.open = false;
     },
     openModal() {
-      this.open = true
+      this.open = true;
     },
   },
-}
+};
 ```
 
 ```html
@@ -259,38 +259,38 @@ export default {
 - Example
 
 ```js
-import InfiniteScroll from 'vue-infinite-scroll'
-Vue.use(InfiniteScroll)
+import InfiniteScroll from 'vue-infinite-scroll';
+Vue.use(InfiniteScroll);
 
-let count = 0
+let count = 0;
 
 export default {
   data() {
     return {
       listData: [],
       busy: true,
-    }
+    };
   },
   mounted: function () {
-    this.loadMore()
+    this.loadMore();
   },
   methods: {
     loadMore() {
-      this.busy = true
+      this.busy = true;
 
       if (count > 100) {
-        return
+        return;
       }
       setTimeout(() => {
         for (let i = 0, j = 10; i < j; i += 1) {
-          this.listData.push({ name: count, id: count })
-          count += 1
+          this.listData.push({ name: count, id: count });
+          count += 1;
         }
-        this.busy = false
-      }, 500)
+        this.busy = false;
+      }, 500);
     },
   },
-}
+};
 ```
 
 ```html
@@ -325,8 +325,8 @@ export default {
 - Example
 
 ```js
-import Ripple from 'vue-ripple-directive'
-Vue.directive('ripple', Ripple)
+import Ripple from 'vue-ripple-directive';
+Vue.directive('ripple', Ripple);
 ```
 
 ```html
@@ -362,16 +362,16 @@ Vue.directive('ripple', Ripple)
 - Example
 
 ```js
-import { focus } from 'vue-focus'
+import { focus } from 'vue-focus';
 
 export default {
   directives: { focus: focus },
   methods: {
     moveDown: function () {
-      this.focused = Math.min(this.focused + 1, this.items.length - 1)
+      this.focused = Math.min(this.focused + 1, this.items.length - 1);
     },
     moveUp: function () {
-      this.focused = Math.max(this.focused - 1, 0)
+      this.focused = Math.max(this.focused - 1, 0);
     },
   },
   data() {
@@ -385,9 +385,9 @@ export default {
         { value: 'world' },
         { value: '' },
       ],
-    }
+    };
   },
-}
+};
 ```
 
 ```html
@@ -417,14 +417,14 @@ export default {
 - Example
 
 ```js
-import vBlur from 'v-blur'
-Vue.use(vBlur)
+import vBlur from 'v-blur';
+Vue.use(vBlur);
 
 export default {
   methods: {
     toggleBlur: function () {
-      this.blurConfig.isBlurred = !this.blurConfig.isBlurred
-      this.isBlurred = !this.isBlurred
+      this.blurConfig.isBlurred = !this.blurConfig.isBlurred;
+      this.isBlurred = !this.isBlurred;
     },
   },
   data() {
@@ -436,9 +436,9 @@ export default {
         filter: 'blur(1.2px)',
         transition: 'all .5s linear',
       },
-    }
+    };
   },
-}
+};
 ```
 
 ```html
@@ -456,17 +456,17 @@ export default {
 - Example
 
 ```js
-import Vuelidate from 'vuelidate'
-Vue.use(Vuelidate)
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);
 
-import { required, minLength, between } from 'vuelidate/lib/validators'
+import { required, minLength, between } from 'vuelidate/lib/validators';
 
 export default {
   data() {
     return {
       name: '',
       age: 0,
-    }
+    };
   },
   validations: {
     name: {
@@ -477,7 +477,7 @@ export default {
       between: between(20, 30),
     },
   },
-}
+};
 ```
 
 ```html
@@ -511,8 +511,8 @@ export default {
 - Example
 
 ```js
-import Multiselect from 'vue-multiselect'
-import 'vue-multiselect/dist/vue-multiselect.min.css'
+import Multiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 export default {
   data() {
@@ -541,12 +541,12 @@ export default {
         { title: 'Explorer', desc: 'Discovering new species!', img: '/images/creatures.png' },
         { title: 'Miner', desc: 'We need to go deeper!', img: '/images/resource_lab.png' },
       ],
-    }
+    };
   },
   components: {
     Multiselect,
   },
-}
+};
 ```
 
 ```html
@@ -602,7 +602,7 @@ export default {
 - Example
 
 ```js
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
 
 export default {
   components: {
@@ -617,9 +617,9 @@ export default {
         { id: 13, name: 'item3' },
         { id: 14, name: 'item4' },
       ],
-    }
+    };
   },
-}
+};
 ```
 
 ```html

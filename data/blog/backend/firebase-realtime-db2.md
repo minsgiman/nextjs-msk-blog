@@ -12,17 +12,17 @@ summary: 'Child Data Add, Changed, Removed 이벤트 연결'
 - snap.key는 DB Data의 Key이다.
 
 ```js
-firebase.initializeApp(config)
+firebase.initializeApp(config);
 
-var dbRefObj = firebase.database().ref().child('object')
-var dbRefList = dbRefObj.child('hobbies')
+var dbRefObj = firebase.database().ref().child('object');
+var dbRefList = dbRefObj.child('hobbies');
 
 dbRefList.on('child_added', (snap) => {
-  var li = document.createElement('li')
-  li.innerText = snap.val()
-  li.id = snap.key
-  ulList.appendChild(li)
-})
+  var li = document.createElement('li');
+  li.innerText = snap.val();
+  li.id = snap.key;
+  ulList.appendChild(li);
+});
 ```
 
 #### Child Data Changed 이벤트 연결
@@ -32,9 +32,9 @@ dbRefList.on('child_added', (snap) => {
 
 ```js
 dbRefList.on('child_changed', (snap) => {
-  var liChanged = document.getElementById(snap.key)
-  liChanged.innerText = snap.val()
-})
+  var liChanged = document.getElementById(snap.key);
+  liChanged.innerText = snap.val();
+});
 ```
 
 #### Child Data Removed 이벤트 연결
@@ -43,9 +43,9 @@ dbRefList.on('child_changed', (snap) => {
 
 ```js
 dbRefList.on('child_removed', (snap) => {
-  var liRemoved = document.getElementById(snap.key)
-  liRemoved.remove()
-})
+  var liRemoved = document.getElementById(snap.key);
+  liRemoved.remove();
+});
 ```
 
 ---

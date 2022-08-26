@@ -30,14 +30,14 @@ configValue = {
   peerConnectionConstraints: {
     optional: [{ DtlsSrtpKeyAgreement: true }],
   },
-}
+};
 ```
 
 - peerConnectionConfig 의 iceServers 설정에서 STUN 서버는 모두 빼고 TURN 서버만 넣는다.
 
 ```js
-configValue.peerConnectionConfig.iceServers = []
-var i, len
+configValue.peerConnectionConfig.iceServers = [];
+var i, len;
 if (message.stunserver) {
   // for (i = 0, len = message.stunserver.length; i < len; i+=1) {
   //     configValue.peerConnectionConfig.iceServers.push(message.stunserver[i]);
@@ -45,7 +45,7 @@ if (message.stunserver) {
 }
 if (message.turnserver) {
   for (i = 0, len = message.turnserver.length; i < len; i += 1) {
-    configValue.peerConnectionConfig.iceServers.push(message.turnserver[i])
+    configValue.peerConnectionConfig.iceServers.push(message.turnserver[i]);
   }
 }
 ```

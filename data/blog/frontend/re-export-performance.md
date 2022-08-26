@@ -9,15 +9,15 @@ summary: 'barrel 파일을 통해 외부에 공개할 기능을 관리하고 외
 barrel 파일은 여러 모듈을 묶어서 re-export 하고 다음과 같이 사용한다.
 
 ```js
-export * from './Foo'
-export * from './Far'
-export * from './FooBar'
+export * from './Foo';
+export * from './Far';
+export * from './FooBar';
 ```
 
 그러면 외부에서 barrel 파일을 통해 다음과 같이 import 할 수 있다.
 
 ```js
-import { Foo, Bar, FooBar } from '@components'
+import { Foo, Bar, FooBar } from '@components';
 ```
 
 barrel 파일을 통해 외부에 공개할 기능을 관리하고 외부에서 깔끔하게 import 할 수 있다. <br />
@@ -29,28 +29,28 @@ barrel 파일을 통해 외부에 공개할 기능을 관리하고 외부에서 
 
 ```js
 // @components/index.js
-export * from './Foo'
-export * from './Bar'
-export * from './FooBar'
+export * from './Foo';
+export * from './Bar';
+export * from './FooBar';
 ```
 
 ```js
 // MainPage.js
-import { Foo } from '@components'
+import { Foo } from '@components';
 
 // ...
 ```
 
 ```js
 // DynamicPage.js
-import { Bar } from '@components'
+import { Bar } from '@components';
 
 // ...
 ```
 
 ```js
 // @components/Bar.js
-import QrCode from 'qrcode'
+import QrCode from 'qrcode';
 
 // ...
 ```

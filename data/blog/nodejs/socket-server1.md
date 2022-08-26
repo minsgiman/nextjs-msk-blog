@@ -25,15 +25,15 @@ pm2.start(
   },
   function (err, app) {
     if (err) {
-      console.log('master start error!')
-      return
+      console.log('master start error!');
+      return;
     }
     var i,
       len = 20,
-      workerId
+      workerId;
 
     for (i = 0; i < len; i += 1) {
-      workerId = '' + (i + 1)
+      workerId = '' + (i + 1);
       pm2.start(
         {
           name: 'Worker',
@@ -45,10 +45,10 @@ pm2.start(
           error_file: '/dev/null',
         },
         function (err, app) {}
-      )
+      );
     }
   }
-)
+);
 ```
 
 ### 2. Master & Worker 간의 Communication
@@ -65,24 +65,24 @@ pm2.start(
 var getPID = function (callback) {
   pm2.list(function (err, list) {
     var i,
-      len = list.length
+      len = list.length;
 
     for (i = 0; i < len; i += 1) {
       if (list[i].name === 'Master') {
-        masterPID = list[i].pm2_env.pm_id
+        masterPID = list[i].pm2_env.pm_id;
       } else if (process.pid === list[i].pid) {
-        processPID = list[i].pm2_env.pm_id
-        processNumber = list[i].pm2_env.args[0]
+        processPID = list[i].pm2_env.pm_id;
+        processNumber = list[i].pm2_env.args[0];
       }
     }
 
     if (masterPID === null || processPID === null) {
-      callback(new Error('Fail to Get masterPID or processPID'), null)
+      callback(new Error('Fail to Get masterPID or processPID'), null);
     } else {
-      callback(null)
+      callback(null);
     }
-  })
-}
+  });
+};
 
 pm2.sendDataToProcessId(
   masterPID,
@@ -98,24 +98,24 @@ pm2.sendDataToProcessId(
   },
   function (err, res) {
     if (err) {
-      var regex = /unknown/g
+      var regex = /unknown/g;
       if (regex.exec(err)) {
         setTimeout(function () {
-          process.exit(0)
-        }, 3000)
+          process.exit(0);
+        }, 3000);
       } else {
-        targetCallback = replyMessageCallbackList[keyValue]
+        targetCallback = replyMessageCallbackList[keyValue];
         if (targetCallback) {
-          targetCallback('error')
+          targetCallback('error');
         }
-        delete replyMessageCallbackList[keyValue]
-        callback(new Error('Message Send Error'), null)
+        delete replyMessageCallbackList[keyValue];
+        callback(new Error('Message Send Error'), null);
       }
     } else {
-      callback(null)
+      callback(null);
     }
   }
-)
+);
 ```
 
 ### 3. Mater 또는 Worker 가 죽는 경우 처리

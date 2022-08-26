@@ -24,22 +24,22 @@ summary: '모든 작은 문제들은 한번만 푼다. 따라서 정답을 구�
 
 ```javascript
 function fibonacci(i) {
-  if (i === 0) return 0
-  if (i === 1) return 1
-  return fibonacci(i - 1) + fibonacci(i - 2)
+  if (i === 0) return 0;
+  if (i === 1) return 1;
+  return fibonacci(i - 1) + fibonacci(i - 2);
 }
 ```
 
 - 동적 프로그래밍을 적용하여 fibonacci(i)의 결과를 캐시해두면 실행시간이 O(n)이 될 수 있다.
 
 ```javascript
-const fibCache = []
+const fibCache = [];
 function fibonacci(i) {
-  if (i === 0) return 0
-  if (i === 1) return 1
+  if (i === 0) return 0;
+  if (i === 1) return 1;
   if (!fibCache[i]) {
-    fibCache[i] = fibonacci(i - 1) + fibonacci(i - 2)
+    fibCache[i] = fibonacci(i - 1) + fibonacci(i - 2);
   }
-  return fibCache[i]
+  return fibCache[i];
 }
 ```

@@ -20,7 +20,7 @@ summary: 'RequireJS를 사용한 AMD지원'
 requirejs.config({
   baseUrl: 'js',
   paths: paths,
-})
+});
 ```
 
 2.  모듈 정의 상단에 의존성이 있는 모듈들을 선언해준다. 크게 Page모듈, Service모듈, Component모듈로 나누었다.

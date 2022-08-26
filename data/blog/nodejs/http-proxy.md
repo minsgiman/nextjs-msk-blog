@@ -11,13 +11,13 @@ express와 함께 http-proxy 라이브러리를 사용하여 구현하였다.
 **/json/\*** Request들을 'https://xxx.azurewebsites.net' 으로 보낸다.
 
 ```javascript
-const httpProxy = require('http-proxy')
+const httpProxy = require('http-proxy');
 
-const proxy = httpProxy.createProxyServer({ changeOrigin: true })
+const proxy = httpProxy.createProxyServer({ changeOrigin: true });
 
 app.all('/json/*', function (req, res) {
-  proxy.web(req, res, { target: 'https://xxx.azurewebsites.net' })
-})
+  proxy.web(req, res, { target: 'https://xxx.azurewebsites.net' });
+});
 ```
 
 proxyReq 이벤트 핸들러를 통해 bodyDecoder-middleware를 적용해주어야 post Request시에 에러가 발생하지 않는다.
@@ -25,174 +25,174 @@ proxyReq 이벤트 핸들러를 통해 bodyDecoder-middleware를 적용해주어
 ```javascript
 proxy.on('proxyReq', (proxyReq, req, res, options) => {
   if (!req.body || !Object.keys(req.body).length) {
-    return
+    return;
   }
 
-  let contentType = proxyReq.getHeader('Content-Type')
-  let bodyData
+  let contentType = proxyReq.getHeader('Content-Type');
+  let bodyData;
 
   if (contentType.includes('application/json')) {
-    bodyData = JSON.stringify(req.body)
+    bodyData = JSON.stringify(req.body);
   }
 
   if (contentType.includes('application/x-www-form-urlencoded')) {
-    bodyData = queryString.stringify(req.body)
+    bodyData = queryString.stringify(req.body);
   }
 
   if (bodyData) {
-    proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData))
-    proxyReq.write(bodyData)
+    proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+    proxyReq.write(bodyData);
   }
-})
+});
 ```
 
 서버 전체 코드
 
 ```javascript
 /** server.js **/
-const createError = require('http-errors')
-const express = require('express')
-const httpProxy = require('http-proxy')
-const path = require('path')
-const queryString = require('querystring')
-const cookieParser = require('cookie-parser')
-const logger = require('morgan')
-const debug = require('debug')('myexpressapp:server')
-const http = require('http')
-const app = express()
+const createError = require('http-errors');
+const express = require('express');
+const httpProxy = require('http-proxy');
+const path = require('path');
+const queryString = require('querystring');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const debug = require('debug')('myexpressapp:server');
+const http = require('http');
+const app = express();
 
 if (process) {
   process.on('uncaughtException', function (err) {
     // Exception Handler
-    console.log('Error Worker Caught exception: ' + err)
-  })
+    console.log('Error Worker Caught exception: ' + err);
+  });
 }
 
-app.disable('x-powered-by')
+app.disable('x-powered-by');
 app.use(function (req, res, next) {
-  let protocol = req.headers['x-forwarded-proto'] || req.protocol
+  let protocol = req.headers['x-forwarded-proto'] || req.protocol;
   if (protocol == 'https') {
-    next()
+    next();
   } else {
-    let from = `${protocol}://${req.hostname}${req.url}`
-    let to = `https://${req.hostname}${req.url}`
-    res.redirect(to)
+    let from = `${protocol}://${req.hostname}${req.url}`;
+    let to = `https://${req.hostname}${req.url}`;
+    res.redirect(to);
   }
-})
+});
 
 app.use(function (req, res, next) {
   if (req.url.indexOf('/json') === -1 && req.url.indexOf('/install') === -1) {
     if (req.url === '/') {
-      res.header('Cache-Control', 'no-store')
+      res.header('Cache-Control', 'no-store');
     } else {
-      res.header('Cache-Control', 'public, max-age=86400')
+      res.header('Cache-Control', 'public, max-age=86400');
     }
   }
-  next()
-})
-app.use(express.static(path.join(__dirname, 'public')))
+  next();
+});
+app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-const proxy = httpProxy.createProxyServer({ changeOrigin: true })
+const proxy = httpProxy.createProxyServer({ changeOrigin: true });
 
 proxy.on('proxyRes', function (proxyRes, req, res) {
-  const cookies = proxyRes.headers['set-cookie']
+  const cookies = proxyRes.headers['set-cookie'];
   if (cookies && cookies.length) {
     proxyRes.headers['set-cookie'] = cookies.map((cookie) => {
-      return cookie.replace(/Domain=.*;\s/, 'Domain=xxx.com;')
-    })
+      return cookie.replace(/Domain=.*;\s/, 'Domain=xxx.com;');
+    });
   }
-})
+});
 
 proxy.on('proxyReq', (proxyReq, req, res, options) => {
   if (!req.body || !Object.keys(req.body).length) {
-    return
+    return;
   }
 
-  let contentType = proxyReq.getHeader('Content-Type')
-  let bodyData
+  let contentType = proxyReq.getHeader('Content-Type');
+  let bodyData;
 
   if (contentType.includes('application/json')) {
-    bodyData = JSON.stringify(req.body)
+    bodyData = JSON.stringify(req.body);
   }
 
   if (contentType.includes('application/x-www-form-urlencoded')) {
-    bodyData = queryString.stringify(req.body)
+    bodyData = queryString.stringify(req.body);
   }
 
   if (bodyData) {
-    proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData))
-    proxyReq.write(bodyData)
+    proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+    proxyReq.write(bodyData);
   }
-})
+});
 
 app.all('/json/*', function (req, res) {
-  proxy.web(req, res, { target: 'https://xxx.azurewebsites.net' })
-})
+  proxy.web(req, res, { target: 'https://xxx.azurewebsites.net' });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404))
-})
+  next(createError(404));
+});
 
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500)
-  res.render('error')
-})
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000')
-app.set('port', port)
+const port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-const server = http.createServer(app)
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
-  const port = parseInt(val, 10)
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
-    return val
+    return val;
   }
 
   if (port >= 0) {
     // port number
-    return port
+    return port;
   }
 
-  return false
+  return false;
 }
 
 /**
@@ -201,23 +201,23 @@ function normalizePort(val) {
 
 function onError(error) {
   if (error.syscall !== 'listen') {
-    throw error
+    throw error;
   }
 
-  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
-      process.exit(1)
-      break
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
-      process.exit(1)
-      break
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
     default:
-      throw error
+      throw error;
   }
 }
 
@@ -226,9 +226,9 @@ function onError(error) {
  */
 
 function onListening() {
-  const addr = server.address()
-  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
-  debug('Listening on ' + bind)
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
 }
 ```
 

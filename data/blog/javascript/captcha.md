@@ -27,12 +27,12 @@ summary: 'CAPTCHA(Completely Automated Public Turing test to tell Computers and 
 - 아래 코드와 같이 getResponse를 통해 구글 서버로부터 보안토큰을 받으면 체크가 성공된 것이다.
 
 ```js
-var captchaId, token
+var captchaId, token;
 
 //...
 
 if (grecaptcha) {
-  token = grecaptcha.getResponse(captchaId)
+  token = grecaptcha.getResponse(captchaId);
   if (token) {
     //Check OK
   } else {

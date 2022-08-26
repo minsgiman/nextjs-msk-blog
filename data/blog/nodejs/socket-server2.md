@@ -13,23 +13,23 @@ summary: 'https서버 생성 | socket.io 서버 생성 | socketWildcard를 사�
 - key, cert, passphrase option 으로 인증서 설정을 해준다.
 
 ```js
-var expressApp = express()
-expressApp.set('views', path.join(__dirname, 'views'))
-expressApp.set('view engine', 'ejs')
-expressApp.use(bodyParser.urlencoded({ extended: false }))
-expressApp.use(bodyParser.json())
-expressApp.use(express.static(path.join(__dirname, 'public')))
+var expressApp = express();
+expressApp.set('views', path.join(__dirname, 'views'));
+expressApp.set('view engine', 'ejs');
+expressApp.use(bodyParser.urlencoded({ extended: false }));
+expressApp.use(bodyParser.json());
+expressApp.use(express.static(path.join(__dirname, 'public')));
 
 var options = {
   key: fs.readFileSync(constants.SSL_KEY),
   cert: fs.readFileSync(constants.SSL_CERT),
   passphrase: constants.SSL_PASSWD,
   requestCert: true,
-}
+};
 
 var httpsServer = https
   .createServer(options, expressApp)
-  .listen(constants.SERVER_PORT, function () {})
+  .listen(constants.SERVER_PORT, function () {});
 ```
 
 ### 2. socket.io 서버 생성
@@ -45,7 +45,7 @@ var httpsServer = https
 io = require('socket.io').listen(httpsServer, {
   pingTimeout: constants.PING * TIMEOUT * 1000,
   pingInterval: constants.PING * INTERVAL * 1000,
-})
+});
 ```
 
 ### 3. socketWildcard를 사용한 Socket Router 구현
@@ -62,24 +62,24 @@ io = require('socket.io').listen(httpsServer, {
 
 ```js
 //worker.js
-var socketWildcard = require('socketio-wildcard')()
+var socketWildcard = require('socketio-wildcard')();
 
-io.use(socketWildcard)
+io.use(socketWildcard);
 
 io.on('connection', function (socket) {
-  require('./router/socketMsgRouter.js')(socket)
-})
+  require('./router/socketMsgRouter.js')(socket);
+});
 
 //socketMsgRouter.js
 module.exports = function socketMsgRouter(socket) {
   socket.on('*', function (sioRawMessageJSON) {
-    var controller, controllerName, eventMessageObj
+    var controller, controllerName, eventMessageObj;
 
     //sioRawMessage 소켓이벤트로 들어온 raw메시지이고, sioEventMessage는 소켓이벤트 메시지.
     if (sioRawMessageJSON && sioRawMessageJSON.data) {
       //logger.debugLog('sioRawMessageJSON.data : ' + JSON.stringify(sioRawMessageJSON.data));
       var event = sioRawMessageJSON.data[0],
-        sioEventMessageJSON = sioRawMessageJSON.data[1]
+        sioEventMessageJSON = sioRawMessageJSON.data[1];
       // ...
       // ...
     }
@@ -88,26 +88,26 @@ module.exports = function socketMsgRouter(socket) {
       event: event,
       socketId: socket.id,
       messageJSON: sioEventMessageJSON,
-    }
+    };
     // ...
     // ...
     // event명을 보고, 해당 event를 처리하는 controller로 보낸다.
     if (eventMessageObj && eventMessageObj.event) {
       var event = eventMessageObj.event,
-        clientEventMap = require('./clientEventMap')
-      controllerName = eventControllerMap[eventMessageObj.event]
+        clientEventMap = require('./clientEventMap');
+      controllerName = eventControllerMap[eventMessageObj.event];
 
       if (clientEventMap[eventMessageObj.event]) {
         if (controllerName) {
-          controller = require('./../controllers/' + controllerName)
+          controller = require('./../controllers/' + controllerName);
           if (controller) {
-            controller(eventMessageObj, controllerResultCallback)
+            controller(eventMessageObj, controllerResultCallback);
           }
         }
       }
     }
-  })
+  });
   // ...
   // ...
-}
+};
 ```

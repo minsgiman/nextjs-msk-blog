@@ -18,13 +18,13 @@ summary: '먼저 firebase의 Authentication 탭의 로그인 방법 메뉴에서
 
 ```js
 btnLogin.addEventListener('click', (e) => {
-  var email = txtEmail.value
-  var pass = txtPassword.value
-  var auth = firebase.auth()
+  var email = txtEmail.value;
+  var pass = txtPassword.value;
+  var auth = firebase.auth();
 
-  var promise = auth.signInWithEmailAndPassword(email, pass)
-  promise.catch((e) => console.log(e.message))
-})
+  var promise = auth.signInWithEmailAndPassword(email, pass);
+  promise.catch((e) => console.log(e.message));
+});
 ```
 
 #### 사용자 계정 만들기
@@ -33,13 +33,13 @@ btnLogin.addEventListener('click', (e) => {
 
 ```js
 btnSignUp.addEventListener('click', (e) => {
-  var email = txtEmail.value
-  var pass = txtPassword.value
-  var auth = firebase.auth()
+  var email = txtEmail.value;
+  var pass = txtPassword.value;
+  var auth = firebase.auth();
 
-  var promise = auth.createUserWithEmailAndPassword(email, pass)
-  promise.catch((e) => console.log(e.message))
-})
+  var promise = auth.createUserWithEmailAndPassword(email, pass);
+  promise.catch((e) => console.log(e.message));
+});
 ```
 
 #### 인증상태 변경 감시
@@ -51,12 +51,12 @@ btnSignUp.addEventListener('click', (e) => {
 firebase.auth().onAuthStateChanged((firebaseUser) => {
   if (firebaseUser) {
     //Login
-    console.log(firebaseUser)
+    console.log(firebaseUser);
   } else {
     //Logout
-    console.log('not logged in')
+    console.log('not logged in');
   }
-})
+});
 ```
 
 #### 로그아웃
@@ -65,8 +65,8 @@ firebase.auth().onAuthStateChanged((firebaseUser) => {
 
 ```js
 btnLogout.addEventListener('click', (e) => {
-  firebase.auth().signOut()
-})
+  firebase.auth().signOut();
+});
 ```
 
 ---

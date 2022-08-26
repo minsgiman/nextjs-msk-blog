@@ -18,21 +18,21 @@ Webpack을 통한 빌드시 App의 Config를 설정하는 방법에 대하여 �
 
 ```js
 // webpack.config.js
-const argv = require('yargs').argv
-const webpack = require('webpack')
-const alphaConfig = require('./config/config.alpha.json')
-const betaConfig = require('./config/config.beta.json')
-const realConfig = require('./config/config.real.json')
+const argv = require('yargs').argv;
+const webpack = require('webpack');
+const alphaConfig = require('./config/config.alpha.json');
+const betaConfig = require('./config/config.beta.json');
+const realConfig = require('./config/config.real.json');
 
-const ENV = argv.env || 'alpha'
+const ENV = argv.env || 'alpha';
 
 function composeConfig(env) {
   if (env === 'alpha') {
-    return { ...alphaConfig }
+    return { ...alphaConfig };
   } else if (env === 'beta') {
-    return { ...betaConfig }
+    return { ...betaConfig };
   } else if (env === 'real') {
-    return { ...realConfig }
+    return { ...realConfig };
   }
 }
 
@@ -43,12 +43,12 @@ module.exports = {
       __APP_CONFIG__: JSON.stringify(composeConfig(ENV)),
     }),
   ],
-}
+};
 
 // config.js
-const config = __APP_CONFIG__
+const config = __APP_CONFIG__;
 
-export default config
+export default config;
 ```
 
 - DefinePlugin을 통해 선언한 환경변수를 브라우저의 콘솔에서 출력하려고 하면 not defined 에러가 발생한다.
@@ -63,7 +63,7 @@ export default config
 
 ```js
 /* webpack.config.js */
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 module.exports = {
   plugins: [
@@ -74,12 +74,12 @@ module.exports = {
     new webpack.EnvironmentPlugin(['DEBUG']),
     /* new webpack.EnvironmentPlugin({ DEBUG: 'off' }) -> Default is 'off' */
   ],
-}
+};
 
 /* src/index.js */
 if (process.env.DEBUG === 'on') {
-  console.log(`APP_NAME:`, APP_NAME)
-  console.log(`VERSION:`, VERSION)
+  console.log(`APP_NAME:`, APP_NAME);
+  console.log(`VERSION:`, VERSION);
 }
 ```
 

@@ -26,17 +26,17 @@ selector로 className을 사용하는 방법을 지양하는 이유는 일반적
 [priority](https://testing-library.com/docs/queries/about/#priority)에서 제시한 우선순위에 따라 사용한다.
 
 ```js
-cy.findByRole('dialog').click()
-cy.findByRole('button', { name: /Jackie Chan/i }).click()
+cy.findByRole('dialog').click();
+cy.findByRole('button', { name: /Jackie Chan/i }).click();
 
-cy.findByLabelText('Label 1').click().type('Hello Input Labelled By Id')
-cy.findAllByLabelText(/^Label \d$/).should('have.length', 2)
-cy.findByPlaceholderText('Input 1').click().type('Hello Placeholder')
-cy.findAllByPlaceholderText(/^Input \d$/).should('have.length', 2)
-cy.findByText('Button Text 1').click().should('contain', 'Button Clicked')
-cy.findByAltText('Image Alt Text 1').click()
+cy.findByLabelText('Label 1').click().type('Hello Input Labelled By Id');
+cy.findAllByLabelText(/^Label \d$/).should('have.length', 2);
+cy.findByPlaceholderText('Input 1').click().type('Hello Placeholder');
+cy.findAllByPlaceholderText(/^Input \d$/).should('have.length', 2);
+cy.findByText('Button Text 1').click().should('contain', 'Button Clicked');
+cy.findByAltText('Image Alt Text 1').click();
 
-cy.findByDisplayValue('Display Value 1').click().clear().type('Some new text')
+cy.findByDisplayValue('Display Value 1').click().clear().type('Some new text');
 ```
 
 위의 쿼리들로 요소를 선택하기 어렵다면, data-testid를 사용할 수 있다. <br />
@@ -47,7 +47,7 @@ data-testid를 통한 selector는 다음과 같이 사용한다.
 ```
 
 ```js
-cy.findByTestId('middle-popup-input').focus().type(memo)
+cy.findByTestId('middle-popup-input').focus().type(memo);
 ```
 
 ---

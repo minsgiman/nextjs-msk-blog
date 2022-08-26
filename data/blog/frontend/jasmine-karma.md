@@ -14,51 +14,51 @@ summary: 'Jasmine은 자바스크립트를 위한 BDD(Behavior Driven Developmen
 
 ```js
 describe('software update check', function () {
-  var isGetEvent = false
+  var isGetEvent = false;
   beforeEach(function (done) {
     startDetectWithType(1).then(
       function () {
-        isGetEvent = true
-        done()
+        isGetEvent = true;
+        done();
       },
       function () {
-        isGetEvent = false
-        done()
+        isGetEvent = false;
+        done();
       }
-    )
-  }, 10 * 1000)
+    );
+  }, 10 * 1000);
 
   it('check get software update event', function () {
-    expect(isGetEvent).toBeTruthy()
-  })
-})
+    expect(isGetEvent).toBeTruthy();
+  });
+});
 
 function startDetectWithType(otaSpec) {
   var deferred = $.Deferred(),
-    timeoutHandle
-  var eventType
+    timeoutHandle;
+  var eventType;
 
   swupdate.onUpdateEvent = function (SwUpdateEventInfo) {
-    eventType = SwUpdateEventInfo.getInfo('event')
+    eventType = SwUpdateEventInfo.getInfo('event');
     if (eventType === EEventDetectSuccess) {
-      isFoundSW = true
-      clearTimeout(timeoutHandle)
-      deferred.resolve()
+      isFoundSW = true;
+      clearTimeout(timeoutHandle);
+      deferred.resolve();
     } else if (eventType === EEventDetectFail) {
-      isFoundSW = false
-      clearTimeout(timeoutHandle)
-      deferred.resolve()
+      isFoundSW = false;
+      clearTimeout(timeoutHandle);
+      deferred.resolve();
     }
-  }
+  };
 
-  swupdate.startDetectWithType(otaSpec)
+  swupdate.startDetectWithType(otaSpec);
 
   timeoutHandle = setTimeout(function () {
-    deferred.reject()
-    console.log('Timeout ... ')
-  }, 10 * 1000)
+    deferred.reject();
+    console.log('Timeout ... ');
+  }, 10 * 1000);
 
-  return deferred
+  return deferred;
 }
 ```
 
@@ -109,12 +109,12 @@ function startDetectWithType(otaSpec) {
 ```js
 /*global module */
 module.exports = function (config) {
-  'use strict'
-  var data
+  'use strict';
+  var data;
   try {
-    data = require('../../.individual.json')
+    data = require('../../.individual.json');
   } catch (e) {
-    data = { nfs: './build' }
+    data = { nfs: './build' };
   }
   config.set({
     basePath: '../..',
@@ -159,6 +159,6 @@ module.exports = function (config) {
     captureTimeout: 600000,
     browserNoActivityTimeout: 600000,
     singleRun: true,
-  })
-}
+  });
+};
 ```

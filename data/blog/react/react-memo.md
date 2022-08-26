@@ -25,10 +25,10 @@ export function Movie({ title, releaseDate }) {
       <div>Movie title: {title}</div>
       <div>Release date: {releaseDate}</div>
     </div>
-  )
+  );
 }
 
-export const MemoizedMovie = React.memo(Movie)
+export const MemoizedMovie = React.memo(Movie);
 ```
 
 메모이징 한 결과를 재사용 함으로써, React에서 리렌더링을 할 때 가상 DOM에서 달라진 부분을 확인하지 않아 성능상의 이점을 누릴 수 있다.
@@ -57,20 +57,20 @@ const Checks = ({ checkList, labels, onCheck }) => {
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 
 export default React.memo(Checks, (prevProp, nextProp) => {
   let i,
-    len = nextProp.checkList.length
+    len = nextProp.checkList.length;
 
   for (i = 0; i < len; i += 1) {
     if (prevProp.checkList[i] !== nextProp.checkList[i]) {
-      return false
+      return false;
     }
   }
-  return true
-})
+  return true;
+});
 ```
 
 비교 함수가 false를 리턴하면 props가 변경된 것으로 보고 리렌더링을 한다.
@@ -95,10 +95,10 @@ React.memo()를 사용하기 좋은 케이스는 함수형 컴포넌트가 같�
 
 ```js
 function Logout({ username, onLogout }) {
-  return <div onClick={onLogout}>Logout {username}</div>
+  return <div onClick={onLogout}>Logout {username}</div>;
 }
 
-const MemoizedLogout = React.memo(Logout)
+const MemoizedLogout = React.memo(Logout);
 
 function MyApp({ store, cookies }) {
   return (
@@ -108,7 +108,7 @@ function MyApp({ store, cookies }) {
       </header>
       {store.content}
     </div>
-  )
+  );
 }
 ```
 
@@ -116,12 +116,12 @@ function MyApp({ store, cookies }) {
 useCallback()을 이용해서 콜백 인스턴스를 보존시킨다.
 
 ```js
-const MemoizedLogout = React.memo(Logout)
+const MemoizedLogout = React.memo(Logout);
 
 function MyApp({ store, cookies }) {
   const onLogout = useCallback(() => {
-    cookies.clear()
-  }, [])
+    cookies.clear();
+  }, []);
   return (
     <div className="main">
       <header>
@@ -129,7 +129,7 @@ function MyApp({ store, cookies }) {
       </header>
       {store.content}
     </div>
-  )
+  );
 }
 ```
 

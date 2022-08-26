@@ -23,14 +23,14 @@ Web Page에서 dataLayer에 push하는 이벤트에 따라 GTM에서 설정해�
 단순히 다음과 같이 GTM dataLayer.push 하는 부분의 실행시간을 측정해볼 수도 있다.
 
 ```js
-console.time('GTM event')
+console.time('GTM event');
 
 dataLayer.push({
   event,
   ...data,
-})
+});
 
-console.timeEnd('GTM event')
+console.timeEnd('GTM event');
 ```
 
 <br />

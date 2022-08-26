@@ -29,6 +29,6 @@ const siteMetadata = {
     // https://vercel.com/docs/environment-variables
     provider: '', // supported providers: giscus, utterances, disqus
   },
-}
+};
 
-module.exports = siteMetadata
+module.exports = siteMetadata;

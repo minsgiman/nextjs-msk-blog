@@ -14,15 +14,15 @@ summary: 'Intersection 타입은 여러 타입을 하나로 결합한다. 타입
 
 ```ts
 interface Animal {
-  kind: string
+  kind: string;
 }
 interface Person {
-  firstName: string
-  lastName: string
-  age: number
+  firstName: string;
+  lastName: string;
+  age: number;
 }
 interface Employee {
-  employeeCode: string
+  employeeCode: string;
 }
 let employee: Animal & Person & Employee = {
   kind: 'human',
@@ -30,7 +30,7 @@ let employee: Animal & Person & Employee = {
   lastName: 'Smith',
   age: 20,
   employeeCode: '123',
-}
+};
 ```
 
 ### Union Types
@@ -41,23 +41,23 @@ let employee: Animal & Person & Employee = {
 
 ```ts
 interface Animal {
-  kind: string
+  kind: string;
 }
 interface Person {
-  firstName: string
-  lastName: string
-  age: number
+  firstName: string;
+  lastName: string;
+  age: number;
 }
 interface Employee {
-  employeeCode: string
+  employeeCode: string;
 }
 let employee: Animal | Person | Employee = {
   kind: 'human',
   firstName: 'Jane',
   lastName: 'Smith',
   age: 20,
-}
-console.log(employee)
+};
+console.log(employee);
 ```
 
 - 하지만, employee의 멤버에 접근하려면 Union의 모든 타입에 공통으로 가지고 있는 멤버만 접근할 수 있다.<br />
@@ -73,24 +73,24 @@ Property 'kind' does not exist on type 'Person'.(2339)
 
 ```ts
 interface Animal {
-  kind: string
+  kind: string;
 }
 interface Person {
-  firstName: string
-  lastName: string
-  age: number
+  firstName: string;
+  lastName: string;
+  age: number;
 }
 interface Employee {
-  employeeCode: string
-  age: string
+  employeeCode: string;
+  age: string;
 }
 let employee: Animal | Person | Employee = {
   kind: 'human',
   firstName: 'Jane',
   lastName: 'Smith',
   age: '20',
-}
-console.log(employee.kind)
+};
+console.log(employee.kind);
 ```
 
 ---

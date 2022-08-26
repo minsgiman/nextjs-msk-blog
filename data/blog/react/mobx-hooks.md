@@ -19,24 +19,24 @@ useContext와 함께 **MobXProviderContext**를 사용하면 mobx-react의 **Pro
 
 ```javascript
 /* /src/stores/useStores.tsx */
-import React from 'react'
-import { MobXProviderContext } from 'mobx-react'
+import React from 'react';
+import { MobXProviderContext } from 'mobx-react';
 
 export function useStores() {
-  return React.useContext(MobXProviderContext)
+  return React.useContext(MobXProviderContext);
 }
 ```
 
 ```javascript
 /* /src/App.tsx */
-import React from 'react'
-import './App.css'
-import { Provider } from 'mobx-react'
-import { LoginStore, UserStore } from './stores'
-import UserInfo from './components/userInfo'
+import React from 'react';
+import './App.css';
+import { Provider } from 'mobx-react';
+import { LoginStore, UserStore } from './stores';
+import UserInfo from './components/userInfo';
 
-const user = new UserStore(['paul', 'mike'])
-const login = new LoginStore()
+const user = new UserStore(['paul', 'mike']);
+const login = new LoginStore();
 
 const App = () => {
   return (
@@ -44,10 +44,10 @@ const App = () => {
       <div>lorem</div>
       <UserInfo />
     </Provider>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 ## react 컴포넌트에서 store 사용
@@ -57,31 +57,31 @@ export default App
 
 ```javascript
 /* /src/components/userInfo.tsx */
-import { observer } from 'mobx-react'
-import { useStores } from '../stores'
+import { observer } from 'mobx-react';
+import { useStores } from '../stores';
 
 const UserInfo = observer(() => {
-  const { user } = useStores()
+  const { user } = useStores();
   const addItem = () => {
-    user.addName('added')
-  }
+    user.addName('added');
+  };
   const updateText = () => {
-    user.updateText('updated')
-  }
+    user.updateText('updated');
+  };
 
   return (
     <div>
       <h2>{user.text}</h2>
       <button onClick={updateText}>update</button>
       {user.names.map((name: string, index: number) => {
-        return <p key={`${name} + ${index}`}>{name}</p>
+        return <p key={`${name} + ${index}`}>{name}</p>;
       })}
       <button onClick={addItem}>add</button>
     </div>
-  )
-})
+  );
+});
 
-export default UserInfo
+export default UserInfo;
 ```
 
 ## MobX Store 구현
@@ -90,23 +90,23 @@ makeAutoObservable(this)를 사용해서 해당 클래스를 옵저버블한 상
 
 ```javascript
 /* /src/stores/UserStore.ts */
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx';
 
 export class UserStore {
-  names: string[] = []
-  text: string = 'teststr'
+  names: string[] = [];
+  text: string = 'teststr';
 
   constructor(names: string[]) {
-    this.names = names
-    makeAutoObservable(this)
+    this.names = names;
+    makeAutoObservable(this);
   }
 
   addName = (name: string) => {
-    this.names.push(name)
-  }
+    this.names.push(name);
+  };
 
   updateText = (text: string) => {
-    this.text = text
-  }
+    this.text = text;
+  };
 }
 ```

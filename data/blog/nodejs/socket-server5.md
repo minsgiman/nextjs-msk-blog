@@ -19,39 +19,39 @@ summary: 'Zookeeper Client 구현 | Kafka Producer'
 - Zookeeper Client를 통해 Zookeeper에서 트리형태로 관리하고 있는 노드 데이터를 읽어오고, 업데이트한다. (zclient.exists, zclient.setData, zclient.getChildren)
 
 ```js
-var zooKeeper = require('node-zookeeper-client')
+var zooKeeper = require('node-zookeeper-client');
 
 this.zookeeperClientInit = function () {
-  var that = this
+  var that = this;
   zclient = zooKeeper.createClient('' + constants.ZOOKEEPER_URL, {
     sessionTimeout: 10000,
     spinDelay: 1000,
     retries: 10000,
-  })
+  });
 
   zclient.once('expired', function () {
-    that.zookeeperClientInit()
-  })
+    that.zookeeperClientInit();
+  });
 
   zclient.once('connected', function () {
-    isInit = true
-    var sInfo = '' + constants.MY_SERVER_IP + ':' + constants.MY_SERVER_PORT
-    var sData = '{cpu:20}'
-    var sPath = '/status/MyServer/' + sInfo
+    isInit = true;
+    var sInfo = '' + constants.MY_SERVER_IP + ':' + constants.MY_SERVER_PORT;
+    var sData = '{cpu:20}';
+    var sPath = '/status/MyServer/' + sInfo;
     zclient.exists(sPath, function (error, stat) {
       if (error) {
-        logger.errorLog(' ZooKeeper Init - ' + error.stack)
-        return
+        logger.errorLog(' ZooKeeper Init - ' + error.stack);
+        return;
       }
       if (stat) {
         zclient.setData(sPath, new Buffer(sData), function (error, stat) {
           if (error) {
-            console.log(error.stack)
-            logger.errorLog(' ZooKeeper Init - ' + error.stack)
-            return
+            console.log(error.stack);
+            logger.errorLog(' ZooKeeper Init - ' + error.stack);
+            return;
           }
-        })
-        getServerInfo('/status/Was')
+        });
+        getServerInfo('/status/Was');
       } else {
         zclient.create(
           sPath,
@@ -61,8 +61,8 @@ this.zookeeperClientInit = function () {
             if (error) {
               logger.errorLog(
                 ' ZooKeeper Init - Failed to create node (' + path + '), error (' + error + ')'
-              )
-              return
+              );
+              return;
             } else {
               logger.debugLog(
                 ' ZooKeeper Init - node (' +
@@ -70,24 +70,24 @@ this.zookeeperClientInit = function () {
                   ') is successfully created, set data (' +
                   sData +
                   ')'
-              )
-              getServerInfo('/status/Was')
+              );
+              getServerInfo('/status/Was');
             }
           }
-        )
+        );
       }
-    })
-  })
-  zclient.connect()
-}
+    });
+  });
+  zclient.connect();
+};
 
 function getServerInfo(path) {
   zclient.getChildren(path, null, function (error, children, stat) {
     if (error) {
-      return
+      return;
     }
-    var serverList = children
-  })
+    var serverList = children;
+  });
 }
 ```
 
@@ -100,7 +100,7 @@ function getServerInfo(path) {
 - producer.produce(topic, partition, msg, key, timestamp, opaque) 로 메시지를 전송한다.
 
 ```js
-var kafka = require('node-rdkafka')
+var kafka = require('node-rdkafka');
 
 producer = new kafka.Producer(
   {
@@ -122,62 +122,62 @@ producer = new kafka.Producer(
     'request.required.acks': 1,
     'produce.offset.report': true,
   }
-)
+);
 
-producer.setPollInterval(100)
+producer.setPollInterval(100);
 
 producer.on('event.stats', function (stats) {
   var message = JSON.parse(stats.message),
-    currentTime
+    currentTime;
   if (message) {
-    currentTime = new Date().getTime()
+    currentTime = new Date().getTime();
     if (currentTime > lastLogTime + 20 * 1000) {
-      lastLogTime = currentTime
-      logger.debugLog(' Kafka(qsize) : ' + message.msg_cnt)
+      lastLogTime = currentTime;
+      logger.debugLog(' Kafka(qsize) : ' + message.msg_cnt);
     }
   } else {
-    logger.debugLog(' Kafka(qsize) : message parse error')
+    logger.debugLog(' Kafka(qsize) : message parse error');
   }
-})
+});
 
 producer.on('event.log', function (log) {
-  logger.debugLog(' Kafka(I) : ' + JSON.stringify(log))
-})
+  logger.debugLog(' Kafka(I) : ' + JSON.stringify(log));
+});
 
 producer.on('event.error', function (err) {
-  logger.debugLog(' Kafka(ERR1) : ' + err)
-})
+  logger.debugLog(' Kafka(ERR1) : ' + err);
+});
 
 producer.on('delivery-report', function (err, report) {
-  if (err) logger.debugLog(' Kafka(ERR2) : ' + err)
-})
+  if (err) logger.debugLog(' Kafka(ERR2) : ' + err);
+});
 
-producer.connect()
+producer.connect();
 
 producer.on('ready', function () {
-  connected = true
-  logger.debugLog(' complete to initiate Kafka ' + producer.isConnected())
-})
+  connected = true;
+  logger.debugLog(' complete to initiate Kafka ' + producer.isConnected());
+});
 
 this.sendData = function (topic, partition, data, callback) {
   if (connected == true) {
-    var msg = JSON.stringify(data)
+    var msg = JSON.stringify(data);
     try {
-      var res = producer.produce(topic, partition, new Buffer(msg), null, Date.now())
+      var res = producer.produce(topic, partition, new Buffer(msg), null, Date.now());
       if (res == true) {
-        logger.debugLog(' Kafka(S) : topic(' + topic + ') msg(' + msg + ')')
-        callback(0)
+        logger.debugLog(' Kafka(S) : topic(' + topic + ') msg(' + msg + ')');
+        callback(0);
       } else {
-        logger.debugLog(' Kafka(S) Fail: ' + msg)
-        callback(1)
+        logger.debugLog(' Kafka(S) Fail: ' + msg);
+        callback(1);
       }
     } catch (err) {
-      logger.debugLog(' Kafka(ERR3) : ' + err)
-      callback(1)
+      logger.debugLog(' Kafka(ERR3) : ' + err);
+      callback(1);
     }
   } else {
-    logger.debugLog(' Kafka not connected!')
-    callback(1)
+    logger.debugLog(' Kafka not connected!');
+    callback(1);
   }
-}
+};
 ```

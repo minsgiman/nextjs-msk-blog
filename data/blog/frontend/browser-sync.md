@@ -35,9 +35,9 @@ gulp.task('serve', function () {
     ui: {
       port: 3001,
     },
-  })
-  gulp.watch(['js/*.js', 'js/*/*.js', 'js/*/*/*.js'], browserSync.reload)
-  gulp.watch(['css/*.css'], browserSync.reload)
-  gulp.watch(['./*.html'], browserSync.reload)
-})
+  });
+  gulp.watch(['js/*.js', 'js/*/*.js', 'js/*/*/*.js'], browserSync.reload);
+  gulp.watch(['css/*.css'], browserSync.reload);
+  gulp.watch(['./*.html'], browserSync.reload);
+});
 ```

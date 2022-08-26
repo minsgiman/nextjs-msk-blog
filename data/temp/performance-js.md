@@ -33,17 +33,17 @@ JS 번들 사이즈가 크다면 파싱부터 실행까지 브라우저에서 �
 require()는 function, 조건문 등의 내부에서 마음대로 사용할 수 있고, 다음과 같은 lazy loading 패턴을 가능하게 합니다. <br>
 
 ```js
-const http = require('http')
+const http = require('http');
 
 const addOrSubtract = (a, b, action = 'ADD') => {
   if (action === 'ADD') {
-    return require('./add.js')(a, b)
+    return require('./add.js')(a, b);
   }
 
   if (action === 'SUBTRACT') {
-    return require('./subtract.js')(a, b)
+    return require('./subtract.js')(a, b);
   }
-}
+};
 ```
 
 이러한 commonJS의 속성은 번들러가 정적으로 모듈간의 의존성 파악과 사용하지 않는 부분들을 판단하기 어렵게 만들게 됩니다.
@@ -113,7 +113,7 @@ async script chunk를 선택해서 개별로 prefetch를 설정하는 방법은 
 (Webpack [magic-comments](https://webpack.js.org/api/module-methods/#magic-comments))
 
 ```js
-import(/* webpackPrefetch: true */ 'module')
+import(/* webpackPrefetch: true */ 'module');
 ```
 
 (named chunk를 사용할 경우 preload-webpack-plugin의 include에 명시)
@@ -124,7 +124,7 @@ plugins: [
     rel: 'preload',
     include: ['home'],
   }),
-]
+];
 ```
 
 <br>
@@ -139,7 +139,7 @@ Size가 크면서 초기부터 로드할 필요가 없는, 어쩌면 사용되�
 async function initLottie() {
   const lottie = await import(
     /* webpackChunkName: "lottie-light" */ 'lottie-web/build/player/lottie_light'
-  )
+  );
 
   // ...
 }
@@ -167,23 +167,23 @@ async function initLottie() {
 ```js
 const SendMoney = lazy(() =>
   import(/* webpackChunkName: "SendMoney" */ '@components/moneyTransfer/sendMoney/SendMoney')
-)
+);
 const RequestToPay = lazy(() =>
   import(
     /* webpackChunkName: "RequestToPay" */ '@components/moneyTransfer/requestToPay/RequestToPay'
   )
-)
+);
 const SplitBill = lazy(() =>
   import(/* webpackChunkName: "SplitBill" */ '@components/moneyTransfer/splitBill/SplitBill')
-)
+);
 const Receiver = lazy(() =>
   import(/* webpackChunkName: "Receiver" */ '@components/moneyTransfer/receiver/Receiver')
-)
+);
 const ScheduleTransfer = lazy(() =>
   import(
     /* webpackChunkName: "ScheduleTransfer" */ '@components/moneyTransfer/scheduleTransfer/ScheduleTransfer'
   )
-)
+);
 
 export default function MoneyTransfer() {
   return (
@@ -195,7 +195,7 @@ export default function MoneyTransfer() {
       <Route path={Routes.TRANSFER.SCHEDULE.index} component={ScheduleTransfer} />
       <Redirect from="*" to={Routes.TRANSFER.SEND.index} />
     </Switch>
-  )
+  );
 }
 ```
 

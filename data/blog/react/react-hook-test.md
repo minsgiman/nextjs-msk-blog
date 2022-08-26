@@ -27,29 +27,29 @@ summary: '리액트 커스텀 훅을 테스트하기 위해서 여러 가지 방
 
 ```js
 test('should display initialValue and increment if passed', () => {
-  const { result } = renderHook(() => useCounter(300))
+  const { result } = renderHook(() => useCounter(300));
 
-  expect(result.current.count).toBe(300)
+  expect(result.current.count).toBe(300);
 
   act(() => {
-    result.current.increment()
-  })
+    result.current.increment();
+  });
 
-  expect(result.current.count).toBe(301)
-})
+  expect(result.current.count).toBe(301);
+});
 ```
 
 ```js
 test('v2 - allows customization of the step', () => {
-  const { result } = renderHook(useCounter, { initialProps: { step: 2 } })
-  expect(result.current.count).toBe(0)
+  const { result } = renderHook(useCounter, { initialProps: { step: 2 } });
+  expect(result.current.count).toBe(0);
 
-  act(() => result.current.increment())
-  expect(result.current.count).toBe(2)
+  act(() => result.current.increment());
+  expect(result.current.count).toBe(2);
 
-  act(() => result.current.decrement())
-  expect(result.current.count).toBe(0)
-})
+  act(() => result.current.decrement());
+  expect(result.current.count).toBe(0);
+});
 ```
 
 2. hook 렌더 함수인 renderReadModelHook 를 구현한다. <br />
@@ -63,9 +63,9 @@ const renderReadModelHook = (
 ) => {
   const {
     result: { current },
-  } = renderHook(() => useReduxReadModel(query, initialState, options))
-  return current
-}
+  } = renderHook(() => useReduxReadModel(query, initialState, options));
+  return current;
+};
 ```
 
 3. 마운트시에 API fetch를 수행하는 hook을 테스트한다. <br />
@@ -74,48 +74,48 @@ const renderReadModelHook = (
 ```js
 describe('Fetch Data on Mount Hook', () => {
   it('calls fetch with the given id and resource', async () => {
-    const expected = { complete: false, id: '1', title: 'something', userId: '2' }
-    fetch.mockResponseOnce(JSON.stringify(expected))
+    const expected = { complete: false, id: '1', title: 'something', userId: '2' };
+    fetch.mockResponseOnce(JSON.stringify(expected));
 
     const props = {
       id: '1',
       resource: 'todo',
-    }
+    };
 
-    const { result, waitForNextUpdate } = renderHook(() => useFetchDataOnMount(props))
+    const { result, waitForNextUpdate } = renderHook(() => useFetchDataOnMount(props));
 
-    await waitForNextUpdate()
+    await waitForNextUpdate();
 
-    expect(fetch).toHaveBeenCalledTimes(1)
-    expect(fetch).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/todo/1')
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/todo/1');
 
-    expect(result.current).toEqual(expected)
-  })
-})
+    expect(result.current).toEqual(expected);
+  });
+});
 ```
 
 ```js
 describe('use the fetch', () => {
   it('initial data state is loading and data empty', () => {
-    const { result } = renderHook(() => useTheFetch('people'))
+    const { result } = renderHook(() => useTheFetch('people'));
 
-    expect(result.current).toStrictEqual({ loading: true, data: null })
-  })
+    expect(result.current).toStrictEqual({ loading: true, data: null });
+  });
 
   it('data is fetched and not loading', async () => {
-    const fakeSWData = { result: [{ name: 'Luke Skywalker' }] }
-    getStarWars.mockResolvedValue(fakeSWData)
-    const { result, waitForNextUpdate } = renderHook(() => useTheFetch('people'))
+    const fakeSWData = { result: [{ name: 'Luke Skywalker' }] };
+    getStarWars.mockResolvedValue(fakeSWData);
+    const { result, waitForNextUpdate } = renderHook(() => useTheFetch('people'));
 
-    await waitForNextUpdate()
+    await waitForNextUpdate();
 
-    expect(getStarWars).toBeCalledWith('people')
+    expect(getStarWars).toBeCalledWith('people');
     expect(result.current).toStrictEqual({
       loading: false,
       data: fakeSWData,
-    })
-  })
-})
+    });
+  });
+});
 ```
 
 ---

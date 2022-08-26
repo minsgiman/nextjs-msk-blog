@@ -15,19 +15,19 @@ PascalCase를 사용하고, 명시적으로 type 정의인 것을 표현하기 �
 ```ts
 // bad
 interface IFloatingMenuButtonProps {
-  labelText: string
-  onClick?: () => void
+  labelText: string;
+  onClick?: () => void;
 }
-type IRadioValue = string | number | boolean | undefined
+type IRadioValue = string | number | boolean | undefined;
 ```
 
 ```ts
 // good
 interface FloatingMenuButtonProps {
-  labelText: string
-  onClick?: () => void
+  labelText: string;
+  onClick?: () => void;
 }
-type RadioValue = string | number | boolean | undefined
+type RadioValue = string | number | boolean | undefined;
 ```
 
 ## type vs interface
@@ -40,13 +40,13 @@ union 또는 intersection을 사용할 때 type을 사용하고, extends 또는 
 ```ts
 type EmailConfig = {
   // ...
-}
+};
 
 type DbConfig = {
   // ...
-}
+};
 
-type Config = EmailConfig | DbConfig
+type Config = EmailConfig | DbConfig;
 
 // ...
 
@@ -85,10 +85,10 @@ type EnforcedPopupProps {
 
 ```ts
 type LoginArgs = {
-  isRedirectAfterLogin?: boolean
-  reConsent?: boolean
-  pathname?: string
-}
+  isRedirectAfterLogin?: boolean;
+  reConsent?: boolean;
+  pathname?: string;
+};
 ```
 
 ## API 타입 정의
@@ -99,15 +99,15 @@ API 관련 타입 정의는 끝에 "Response" "Request" suffix를 붙인다.
 
 ```ts
 type CustomerStatusResponse = {
-  guestStatus: string
-  externalId: string
-  customerId: string
-  loanUserId: string
-}
+  guestStatus: string;
+  externalId: string;
+  customerId: string;
+  loanUserId: string;
+};
 
 type CustomerStatusRequest = {
-  customerId: string
-}
+  customerId: string;
+};
 ```
 
 ## enum 대신 Union type 사용
@@ -133,8 +133,8 @@ export const POPUP_TARGET = {
   INIT: 'INIT',
   INTRO: 'INTRO',
   MAIN: 'MAIN',
-} as const
-export type POPUP_TARGET = typeof POPUP_TARGET[keyof typeof POPUP_TARGET]
+} as const;
+export type POPUP_TARGET = typeof POPUP_TARGET[keyof typeof POPUP_TARGET];
 ```
 
 ## Type assertion
@@ -145,14 +145,14 @@ type assertion시에 "as" syntax를 사용하고 angle-bracket syntax는 사용�
 
 ```ts
 interface Foo {
-  foo: string
+  foo: string;
 }
 
 // bad
-console.log((<Foo>getFooLikeStructure()).foo)
+console.log((<Foo>getFooLikeStructure()).foo);
 
 // good
-console.log((getFooLikeStructure() as Foo).foo)
+console.log((getFooLikeStructure() as Foo).foo);
 ```
 
 ## unknown vs any
@@ -163,27 +163,27 @@ any를 사용하면 typescript를 사용하는 의미가 없어지기 때문에,
 
 ```ts
 // bad
-let variable: any
+let variable: any;
 
 // good
-let variable: unknown
+let variable: unknown;
 ```
 
 타입 체크 Util 함수에 Type Guard를 정의하고 unknown 타입에 적극 활용한다.
 
 ```ts
 export const isString = (v: unknown): v is string => {
-  return typeof v === 'string'
-}
+  return typeof v === 'string';
+};
 ```
 
 ```ts
-import { ObjectUtility } from '@utils'
+import { ObjectUtility } from '@utils';
 
-let variable: unknown
+let variable: unknown;
 
 if (ObjectUtility.isString(variable)) {
-  variable.toUpperCase()
+  variable.toUpperCase();
 }
 ```
 
@@ -231,39 +231,39 @@ Utility Types은 적극적으로 활용하여 공통 타입을 변환하여 사�
 ```ts
 // bad
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
-  createdAt: number
+  title: string;
+  description: string;
+  completed: boolean;
+  createdAt: number;
 }
 
 type TodoPreview = {
-  title: string
-  completed: boolean
-  createdAt: number
-}
+  title: string;
+  completed: boolean;
+  createdAt: number;
+};
 
 const todo: TodoPreview = {
   title: 'Clean room',
   completed: false,
   createdAt: 1615544252770,
-}
+};
 ```
 
 ```ts
 // good
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
-  createdAt: number
+  title: string;
+  description: string;
+  completed: boolean;
+  createdAt: number;
 }
 
-type TodoPreview = Omit<ITodo, 'description'>
+type TodoPreview = Omit<ITodo, 'description'>;
 
 const todo: TodoPreview = {
   title: 'Clean room',
   completed: false,
   createdAt: 1615544252770,
-}
+};
 ```

@@ -46,72 +46,72 @@ summary: '그래프는 정점과 간선으로 이루어져 있는데 간선을 �
 ```javascript
 class Stack {
   constructor() {
-    this._arr = []
+    this._arr = [];
   }
   push(item) {
-    this._arr.push(item)
+    this._arr.push(item);
   }
   pop() {
-    return this._arr.pop()
+    return this._arr.pop();
   }
   isEmpty() {
-    return !this._arr.length
+    return !this._arr.length;
   }
 }
 
 class Graph {
   constructor() {
-    this.edges = {}
-    this.nodes = []
+    this.edges = {};
+    this.nodes = [];
   }
 
   addNode(node) {
-    this.nodes.push(node)
-    this.edges[node] = []
+    this.nodes.push(node);
+    this.edges[node] = [];
   }
 
   addEdge(node1, node2, weight = 1) {
-    this.edges[node1].push({ node: node2, weight: weight })
-    this.edges[node2].push({ node: node1, weight: weight })
+    this.edges[node1].push({ node: node2, weight: weight });
+    this.edges[node2].push({ node: node1, weight: weight });
   }
 
   DFS(node) {
-    const stack = new Stack()
-    const visitedMap = {}
-    stack.push(node)
-    visitedMap[node] = true
+    const stack = new Stack();
+    const visitedMap = {};
+    stack.push(node);
+    visitedMap[node] = true;
 
     while (!stack.isEmpty()) {
-      let topNode = stack.pop()
-      console.log(topNode)
+      let topNode = stack.pop();
+      console.log(topNode);
 
       this.edges[topNode]
         .filter((edge) => !visitedMap[edge.node])
         .forEach((edge) => {
-          stack.push(edge.node)
-          visitedMap[edge.node] = true
-        })
+          stack.push(edge.node);
+          visitedMap[edge.node] = true;
+        });
     }
   }
 }
 
-let g = new Graph()
-g.addNode('A')
-g.addNode('B')
-g.addNode('C')
-g.addNode('D')
-g.addNode('E')
-g.addNode('F')
-g.addNode('G')
+let g = new Graph();
+g.addNode('A');
+g.addNode('B');
+g.addNode('C');
+g.addNode('D');
+g.addNode('E');
+g.addNode('F');
+g.addNode('G');
 
-g.addEdge('A', 'C')
-g.addEdge('A', 'B')
-g.addEdge('A', 'D')
-g.addEdge('D', 'E')
-g.addEdge('E', 'F')
-g.addEdge('B', 'G')
+g.addEdge('A', 'C');
+g.addEdge('A', 'B');
+g.addEdge('A', 'D');
+g.addEdge('D', 'E');
+g.addEdge('E', 'F');
+g.addEdge('B', 'G');
 
-g.DFS('A')
+g.DFS('A');
 ```
 
 결과 : A D E F B G C

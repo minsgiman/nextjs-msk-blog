@@ -22,9 +22,9 @@ var mixin = {
     return {
       message: 'hello',
       foo: 'abc',
-    }
+    };
   },
-}
+};
 
 new Vue({
   mixins: [mixin],
@@ -32,13 +32,13 @@ new Vue({
     return {
       message: 'goodbye',
       bar: 'def',
-    }
+    };
   },
   created: function () {
-    console.log(this.$data)
+    console.log(this.$data);
     // => { message: "goodbye", foo: "abc", bar: "def" }
   },
-})
+});
 ```
 
 - 동일한 LifeCycle hook 함수는 merge되어, 모든 함수가 호출된다. 또한 mixin hook은 컴포넌트 자체의 hook 이전에 호출된다.
@@ -46,16 +46,16 @@ new Vue({
 ```js
 var mixin = {
   created: function () {
-    console.log('mixin hook called')
+    console.log('mixin hook called');
   },
-}
+};
 
 new Vue({
   mixins: [mixin],
   created: function () {
-    console.log('component hook called')
+    console.log('component hook called');
   },
-})
+});
 
 // => "mixin hook called"
 // => "component hook called"
@@ -69,29 +69,29 @@ new Vue({
 var mixin = {
   methods: {
     foo: function () {
-      console.log('foo')
+      console.log('foo');
     },
     conflicting: function () {
-      console.log('from mixin')
+      console.log('from mixin');
     },
   },
-}
+};
 
 var vm = new Vue({
   mixins: [mixin],
   methods: {
     bar: function () {
-      console.log('bar')
+      console.log('bar');
     },
     conflicting: function () {
-      console.log('from self')
+      console.log('from self');
     },
   },
-})
+});
 
-vm.foo() // => "foo"
-vm.bar() // => "bar"
-vm.conflicting() // => "from self"
+vm.foo(); // => "foo"
+vm.bar(); // => "bar"
+vm.conflicting(); // => "from self"
 ```
 
 ### extends

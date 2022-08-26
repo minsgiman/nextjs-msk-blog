@@ -81,9 +81,9 @@ RSC를 사용하면 클라이언트, 서버 컴포넌트 두 종류가 생긴다
 
 ```js
 // ES modules
-import ReactDOMServer from 'react-dom/server'
+import ReactDOMServer from 'react-dom/server';
 
-ReactDOMServer.renderToString(element)
+ReactDOMServer.renderToString(element);
 ```
 
 `renderToString` 함수를 통해 초기 렌더링 결과를 HTML로 반환하고, 이를 바탕으로 첫 요청의 응답으로 마크업을 포함한 HTML문서를 사용자에게 빠르게 보여준다. <br />
@@ -135,14 +135,14 @@ export default function NoteList({searchText}) {
 #### Note.server.js
 
 ```js
-import db from 'db.server'
+import db from 'db.server';
 // (A1) We import from NoteEditor.client.js - a Client Component.
-import NoteEditor from 'NoteEditor.client'
+import NoteEditor from 'NoteEditor.client';
 
 function Note(props) {
-  const { id, isEditing } = props
+  const { id, isEditing } = props;
   // (B) Can directly access server data sources during render, e.g. databases
-  const note = db.posts.get(id)
+  const note = db.posts.get(id);
 
   return (
     <div>
@@ -151,7 +151,7 @@ function Note(props) {
       {/* (A2) Dynamically render the editor only if necessary */}
       {isEditing ? <NoteEditor note={note} /> : null}
     </div>
-  )
+  );
 }
 ```
 
@@ -165,18 +165,18 @@ client 컴포넌트들은 자동적으로 코드 스플리팅이 적용되어 �
 
 ```js
 export default function NoteEditor(props) {
-  const note = props.note
-  const [title, setTitle] = useState(note.title)
-  const [body, setBody] = useState(note.body)
+  const note = props.note;
+  const [title, setTitle] = useState(note.title);
+  const [body, setBody] = useState(note.body);
   const updateTitle = (event) => {
-    setTitle(event.target.value)
-  }
+    setTitle(event.target.value);
+  };
   const updateBody = (event) => {
-    setTitle(event.target.value)
-  }
+    setTitle(event.target.value);
+  };
   const submit = () => {
     // ...save note...
-  }
+  };
 
   return (
     <form action="..." method="..." onSubmit={submit}>
@@ -185,7 +185,7 @@ export default function NoteEditor(props) {
         {body}
       </textarea>
     </form>
-  )
+  );
 }
 ```
 
@@ -198,10 +198,10 @@ export default function NoteEditor(props) {
 
 ```js
 // Tweets.server.js
-import { fetch } from 'react-fetch' // React's Suspense-aware fetch()
-import Tweet from './Tweet.client'
+import { fetch } from 'react-fetch'; // React's Suspense-aware fetch()
+import Tweet from './Tweet.client';
 export default function Tweets() {
-  const tweets = fetch(`/tweets`).json()
+  const tweets = fetch(`/tweets`).json();
   return (
     <ul>
       {tweets.slice(0, 2).map((tweet) => (
@@ -210,12 +210,12 @@ export default function Tweets() {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 // Tweet.client.js
 export default function Tweet({ tweet }) {
-  return <div onClick={() => alert(`Written by ${tweet.username}`)}>{tweet.body}</div>
+  return <div onClick={() => alert(`Written by ${tweet.username}`)}>{tweet.body}</div>;
 }
 
 // OuterServerComponent.server.js
@@ -227,7 +227,7 @@ export default function OuterServerComponent() {
         <Tweets />
       </Suspense>
     </ClientComponent>
-  )
+  );
 }
 ```
 

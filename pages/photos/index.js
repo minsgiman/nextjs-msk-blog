@@ -1,13 +1,13 @@
-import { useCallback } from 'react'
-import Router from 'next/router'
+import { useCallback } from 'react';
+import Router from 'next/router';
 
-import TitleThumb from '@/components/TitleThumb'
-import photosData from '@/data/photosData'
+import TitleThumb from '@/components/TitleThumb';
+import photosData from '@/data/photosData';
 
 export default function Photos() {
   const onClick = useCallback((id) => {
-    Router.push(`/photos/${id}`)
-  }, [])
+    Router.push(`/photos/${id}`);
+  }, []);
 
   return (
     <>
@@ -35,5 +35,5 @@ export default function Photos() {
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -23,5 +23,5 @@ summary: '브라우저는 가비지콜렉션을 수행하여 메모리 관리를
 - 더 이상 사용하지 않는 value는 reference를 제거하여 가비지로 만들어 주어야 한다.
 
 ```js
-this._svcList = null
+this._svcList = null;
 ```

@@ -1,22 +1,22 @@
-import Head from 'next/head'
-import Link from '@/components/Link'
-import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
+import Head from 'next/head';
+import Link from '@/components/Link';
+import PageTitle from '@/components/PageTitle';
+import SectionContainer from '@/components/SectionContainer';
 //import { BlogSEO } from '@/components/SEO'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import Tag from '@/components/Tag';
+import siteMetadata from '@/data/siteMetadata';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 
-const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
+const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+  )}`;
 
-const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
-  const { slug, fileName, date, title, tags } = frontMatter
+  const { slug, fileName, date, title, tags } = frontMatter;
 
   return (
     <SectionContainer>
@@ -107,5 +107,5 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
         </div>
       </article>
     </SectionContainer>
-  )
+  );
 }

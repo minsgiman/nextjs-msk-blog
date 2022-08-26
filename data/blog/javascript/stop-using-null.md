@@ -27,12 +27,12 @@ typeof 부분은 의도한 것이 아닌 자바스크립트의 오류이나 변�
 
 ```js
 function sayHello(name = 'World') {
-  console.log('Hello, ' + name + '!')
+  console.log('Hello, ' + name + '!');
 }
 
-sayHello('Jim') // Hello, Jim!
-sayHello(undefined) // Hello, World!
-sayHello(null) // Hello, null!
+sayHello('Jim'); // Hello, Jim!
+sayHello(undefined); // Hello, World!
+sayHello(null); // Hello, null!
 ```
 
 ### [Typescript Team - Coding-guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined)

@@ -24,8 +24,8 @@ summary: '잘 모를 수도 있는 크롬 개발자 도구 팁 정리'
   ```
 
   ```js
-  monitorEvents(window, ['click', 'scroll']) // 버블링 되서 모든 요소 이벤트 다 찍힘
-  unmonitorEvents(window, ['click', 'resize', 'scroll'])
+  monitorEvents(window, ['click', 'scroll']); // 버블링 되서 모든 요소 이벤트 다 찍힘
+  unmonitorEvents(window, ['click', 'resize', 'scroll']);
   ```
 
 - 참고 : https://developers.google.com/web/updates/2015/05/quickly-monitor-events-from-the-console-panel
@@ -36,7 +36,7 @@ summary: '잘 모를 수도 있는 크롬 개발자 도구 팁 정리'
 - 실시간으로 expression 값 모니터링
 
   ```js
-  document.querySelector('input#search').value
+  document.querySelector('input#search').value;
   // apple
   ```
 
@@ -45,8 +45,8 @@ summary: '잘 모를 수도 있는 크롬 개발자 도구 팁 정리'
 - 이전에는 console에서 다음과 같이 입력하면 에러가 났었는데, chrome 92버전부터 재선언 가능하도록 됨
 
   ```js
-  const foo = 23
-  const foo = 24
+  const foo = 23;
+  const foo = 24;
   ```
 
 <br />

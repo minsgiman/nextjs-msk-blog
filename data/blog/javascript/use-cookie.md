@@ -19,12 +19,12 @@ summary: '쿠키는 세션정보 유지에 많이 사용되며, 보안에 취약
 ```js
 hx.util.setCookie = function (name, value, exdays) {
   var expires,
-    d = new Date()
+    d = new Date();
 
-  d.setDate(d.getDate() + exdays)
-  expires = 'expires=' + d.toGMTString()
-  document.cookie = name + '=' + value + ';' + expires
-}
+  d.setDate(d.getDate() + exdays);
+  expires = 'expires=' + d.toGMTString();
+  document.cookie = name + '=' + value + ';' + expires;
+};
 ```
 
 ### getCookie Function 구현
@@ -33,19 +33,19 @@ hx.util.setCookie = function (name, value, exdays) {
 hx.util.getCookie = function (name) {
   var i,
     len,
-    strName = name + '='
-  var cookieArr = document.cookie.split(';')
+    strName = name + '=';
+  var cookieArr = document.cookie.split(';');
 
-  len = cookieArr.length
+  len = cookieArr.length;
   for (i = 0; i < len; i += 1) {
-    var strCookie = cookieArr[i]
+    var strCookie = cookieArr[i];
     while (strCookie.charAt(0) === ' ') {
-      strCookie = strCookie.substring(1)
+      strCookie = strCookie.substring(1);
     }
     if (strCookie.indexOf(strName) === 0) {
-      return strCookie.substring(strName.length, strCookie.length)
+      return strCookie.substring(strName.length, strCookie.length);
     }
   }
-  return ''
-}
+  return '';
+};
 ```

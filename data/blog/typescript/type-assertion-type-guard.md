@@ -14,7 +14,7 @@ summary: '타입 단언(Type Assertion)은 프로그래머가 수동적으로 �
 
 ```ts
 class Character {
-  hp: number = 100
+  hp: number = 100;
   runAway() {
     /* ... */
   }
@@ -40,11 +40,11 @@ class Warrior extends Character {
 
 function battle(character: Character) {
   if (character.isWizard()) {
-    character.fireBall() // ERROR: Property 'fireBall' does not exist on type 'Character'.
+    character.fireBall(); // ERROR: Property 'fireBall' does not exist on type 'Character'.
   } else if (character.isWarrior()) {
-    character.attack() // ERROR: Property 'attack' does not exist on type 'Character'.
+    character.attack(); // ERROR: Property 'attack' does not exist on type 'Character'.
   } else {
-    character.runAway()
+    character.runAway();
   }
 }
 ```
@@ -54,11 +54,11 @@ function battle(character: Character) {
 ```ts
 function battle(character: Character) {
   if (character.isWizard()) {
-    ;(character as Wizard).fireBall() // or (<Wizard>character).fireBall()
+    (character as Wizard).fireBall(); // or (<Wizard>character).fireBall()
   } else if (character.isWarrior()) {
-    ;(character as Warrior).attack() // or (<Warrior>character).attack();
+    (character as Warrior).attack(); // or (<Warrior>character).attack();
   } else {
-    character.runAway()
+    character.runAway();
   }
 }
 ```
@@ -76,10 +76,10 @@ function battle(character: Character) {
 ```ts
 class Character {
   isWizard(): this is Wizard {
-    return this instanceof Wizard
+    return this instanceof Wizard;
   }
   isWarrior(): this is Warrior {
-    return this instanceof Warrior
+    return this instanceof Warrior;
   }
 }
 ```

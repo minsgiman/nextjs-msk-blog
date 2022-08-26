@@ -43,7 +43,7 @@ plugins: [
 다음과 같이 [Webpack magic-comments](https://webpack.js.org/api/module-methods/#magic-comments)를 통해서 개별로 prefetch를 설정할 수 있다.
 
 ```js
-import(/* webpackPrefetch: true */ 'module')
+import(/* webpackPrefetch: true */ 'module');
 ```
 
 이 방법은 위의 webpackPrefetch 를 설정해놓은 부모 청크가 로드 될 때 prefetch한다. <br />
@@ -54,8 +54,8 @@ import(/* webpackPrefetch: true */ 'module')
 ```js
 // not work, always prefetch when chunk load
 const handleClick = () => {
-  import(/* webpackPrefetch: true */ './pageA.js')
-}
+  import(/* webpackPrefetch: true */ './pageA.js');
+};
 ```
 
 <br />
@@ -74,21 +74,21 @@ const lazyImport = {
   PageA: () => import(/* webpackChunkName: "PageA" */ 'PageA.js'),
   PageB: () => import(/* webpackChunkName: "PageB" */ 'PageB.js'),
   PageC: () => import(/* webpackChunkName: "PageC" */ 'PageC.js'),
-}
+};
 
-let PageA, PageB, PageC
+let PageA, PageB, PageC;
 
 retryableLazy(lazyImport.PageA, (component) => {
-  PageA = component
-})
+  PageA = component;
+});
 
 retryableLazy(lazyImport.PageB, (component) => {
-  PageB = component
-})
+  PageB = component;
+});
 
 retryableLazy(lazyImport.PageC, (component) => {
-  PageC = component
-})
+  PageC = component;
+});
 
 export default function PageRoute() {
   return (
@@ -97,7 +97,7 @@ export default function PageRoute() {
       <Route path={Routes.PageB} render={() => <PageB lazyImport={lazyImport.PageC} />} />
       <Route path={Routes.PageC} component={PageC} />
     </Switch>
-  )
+  );
 }
 ```
 
@@ -109,8 +109,8 @@ export default function PageA({ lazyImport }) {
 
   useEffect(() => {
     // ...
-    lazyImport?.() // lazy import when mounted
-  }, [])
+    lazyImport?.(); // lazy import when mounted
+  }, []);
 
   // ...
 }
@@ -124,8 +124,8 @@ export default function PageB({ lazyImport }) {
 
   const handleMouseOver = useCallback(() => {
     // ...
-    lazyImport?.() // lazy import when mouse over
-  }, [])
+    lazyImport?.(); // lazy import when mouse over
+  }, []);
 
   // ...
 }

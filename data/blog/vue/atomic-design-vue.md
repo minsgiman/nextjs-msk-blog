@@ -18,7 +18,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
   <b-button v-on="$listeners" :variant="color" :disabled="disabled">{{text}}</b-button>
 </template>
 <script>
-  import { BButton } from 'bootstrap-vue'
+  import { BButton } from 'bootstrap-vue';
 
   export default {
     components: {
@@ -38,7 +38,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
         default: false,
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -61,7 +61,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
         default: '',
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -78,8 +78,8 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
 </template>
 
 <script>
-  import { aTitle } from './../../atoms/title'
-  import { aText } from './../../atoms/text'
+  import { aTitle } from './../../atoms/title';
+  import { aText } from './../../atoms/text';
 
   export default {
     components: {
@@ -96,7 +96,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
         default: '',
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -111,7 +111,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
   </ul>
 </template>
 <script>
-  import { aLink } from '../../atoms/link'
+  import { aLink } from '../../atoms/link';
 
   export default {
     components: {
@@ -121,11 +121,11 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
       links: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -146,8 +146,8 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
 </template>
 
 <script>
-  import { aButton } from '../../atoms/button'
-  import { mLinks } from '../../molecules/links'
+  import { aButton } from '../../atoms/button';
+  import { mLinks } from '../../molecules/links';
 
   export default {
     components: {
@@ -158,11 +158,11 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
       links: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -178,7 +178,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
 </template>
 
 <script>
-  import { mCard } from '../../molecules/card'
+  import { mCard } from '../../molecules/card';
 
   export default {
     components: {
@@ -188,11 +188,11 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
       cards: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -215,10 +215,10 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
 </template>
 
 <script>
-  import { oHeader } from '../../organisms/header'
-  import { oFooter } from '../../organisms/footer'
-  import { mBanner } from '../../molecules/banner'
-  import { oCardGrid } from '../../organisms/card-grid'
+  import { oHeader } from '../../organisms/header';
+  import { oFooter } from '../../organisms/footer';
+  import { mBanner } from '../../molecules/banner';
+  import { oCardGrid } from '../../organisms/card-grid';
 
   export default {
     components: {
@@ -231,29 +231,29 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
       links: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
       cards: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
       fLinks: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
       sLinks: {
         type: Array,
         default: function () {
-          return []
+          return [];
         },
       },
     },
-  }
+  };
 </script>
 ```
 
@@ -267,7 +267,7 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
 </template>
 
 <script>
-  import { tHome } from '../../templates/home'
+  import { tHome } from '../../templates/home';
 
   export default {
     components: {
@@ -296,9 +296,9 @@ Atomic Design에 대한 설명은 다음 Link를 참고한다.<br />
           { url: '/', name: 'f2-2' },
           { url: '/', name: 'f2-3' },
         ],
-      }
+      };
     },
-  }
+  };
 </script>
 ```
 

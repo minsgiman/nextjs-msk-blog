@@ -33,13 +33,13 @@ sanitize-html은 script 태그를 제거하고 HTML 태그를 허용하는 경�
 웹프론트와 NodeJS에서 모두 사용할 수 있다.
 
 ```js
-import sanitizeHtml from 'sanitize-html'
+import sanitizeHtml from 'sanitize-html';
 
-var dirty = '<script>some really tacky HTML<' + '/script><h1>H1 Title</h1>'
-console.log(dirty)
+var dirty = '<script>some really tacky HTML<' + '/script><h1>H1 Title</h1>';
+console.log(dirty);
 
-var clean1 = sanitizeHtml(dirty)
-console.log(clean1)
+var clean1 = sanitizeHtml(dirty);
+console.log(clean1);
 
 var clean2 = sanitizeHtml(dirty, {
   allowedTags: ['b', 'i', 'em', 'strong', 'a', 'h1'],
@@ -47,8 +47,8 @@ var clean2 = sanitizeHtml(dirty, {
     a: ['href'],
   },
   allowedIframeHostnames: ['www.youtube.com'],
-})
-console.log(clean2)
+});
+console.log(clean2);
 
 // <script>some really tacky HTML</script><h1>H1 Title</h1>
 // H1 Title

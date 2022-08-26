@@ -46,8 +46,8 @@ request.post(
 - 각 request method는 http 요청의 response가 사이즈가 큰 경우 stream으로 pipe시킬 수 있다.
 
 ```js
-var fileStream = fs.createWriteStream('xxx.png')
-request('https://xxx/images/white.png').pipe(fileStream)
+var fileStream = fs.createWriteStream('xxx.png');
+request('https://xxx/images/white.png').pipe(fileStream);
 ```
 
 ### 3. SwiftStack Authentication

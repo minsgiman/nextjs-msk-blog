@@ -26,7 +26,7 @@ useSWR은 내부적으로 cache와 revalidate를 관리해주기 때문에 개�
 ### API option
 
 ```js
-const { data, error, isValidating, mutate } = useSWR(key, fetcher, options)
+const { data, error, isValidating, mutate } = useSWR(key, fetcher, options);
 ```
 
 - **key**: request의 unique key string ('/api/user')
@@ -46,13 +46,13 @@ SWR 내부적으로 중복 request를 제거하기 때문에 아래 예제의 us
 
 ```js
 function useUser() {
-  return useSWR('/api/user', fetcher)
+  return useSWR('/api/user', fetcher);
 }
 function Avatar() {
-  const { data, error } = useUser()
-  if (error) return <Error />
-  if (!data) return <Spinner />
-  return <img src={data.avatar_url} />
+  const { data, error } = useUser();
+  if (error) return <Error />;
+  if (!data) return <Spinner />;
+  return <img src={data.avatar_url} />;
 }
 function App() {
   return (
@@ -63,7 +63,7 @@ function App() {
       <Avatar />
       <Avatar />
     </>
-  )
+  );
 }
 ```
 
@@ -90,17 +90,17 @@ const { data } = useSWR('/todo.json', {
   revalidateOnMount: false,
   revalidateOnFocus: false,
   revalidateOnReconnect: false,
-})
+});
 
-if (!data) return <div>No Cached Data..</div>
+if (!data) return <div>No Cached Data..</div>;
 
 return (
   <div>
     {data.todos.map((todo) => {
-      return <div key={todo.id}>{todo.title}</div>
+      return <div key={todo.id}>{todo.title}</div>;
     })}
   </div>
-)
+);
 ```
 
 ### 로컬 cache 변경
@@ -109,19 +109,19 @@ useSWR hook에서 제공하는 mutate를 사용하여 cache를 변경할 수 있
 다음 예제와 같이 user 정보를 업데이트 하는 것이 성공하였다면, 로컬에서 user 데이터가 어떻게 갱신되었는지 알고 있기 때문에 user를 다시 fetch 하는 것이 아니라, mutate 함수를 사용해서 로컬 cache만 업데이트 할 수 있다.
 
 ```js
-import useSWR from 'swr'
+import useSWR from 'swr';
 
 function UserInfo() {
   const { data, error, mutate } = useSWR('/api/user', (url) => {
-    return fetch(url).then((res) => res.json())
-  })
+    return fetch(url).then((res) => res.json());
+  });
 
   const handleChange = async (user) => {
-    await updateUser(user)
-    mutate(user, false)
-  }
+    await updateUser(user);
+    mutate(user, false);
+  };
 
-  return <div>~생략~</div>
+  return <div>~생략~</div>;
 }
 ```
 

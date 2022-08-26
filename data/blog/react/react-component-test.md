@@ -37,22 +37,22 @@ RTL은 테스트가 사용자가 앱과 상호작용하는 방식과 유사해�
 function renderComplexInput(
   props?: Partial<Omit<ComplexInputProps, 'onClickName' | 'onClickContact'>>
 ) {
-  const onNameClick = jest.fn()
-  const onClickContact = jest.fn()
+  const onNameClick = jest.fn();
+  const onClickContact = jest.fn();
 
-  render(<ComplexInput onReceiverClick={onNameClick} onClickContact={onClickContact} {...props} />)
+  render(<ComplexInput onReceiverClick={onNameClick} onClickContact={onClickContact} {...props} />);
 
-  const contactButton = () => screen.queryByTestId('button-contact')
-  const inputTitle = () => screen.getByTestId('span-title')
-  const inputKeywordSearch = () => screen.getByTestId('input-keyword-search')
-  const emptyResultBox = () => screen.queryByTestId('div-empty-result-box')
+  const contactButton = () => screen.queryByTestId('button-contact');
+  const inputTitle = () => screen.getByTestId('span-title');
+  const inputKeywordSearch = () => screen.getByTestId('input-keyword-search');
+  const emptyResultBox = () => screen.queryByTestId('div-empty-result-box');
 
   function clickContactButton() {
-    userEvent.click(contactButton() as HTMLElement)
+    userEvent.click(contactButton() as HTMLElement);
   }
 
   function typeSearchKeyword(keyword: string) {
-    userEvent.type(inputKeywordSearch(), keyword)
+    userEvent.type(inputKeywordSearch(), keyword);
   }
 
   return {
@@ -64,32 +64,32 @@ function renderComplexInput(
     typeSearchKeyword,
     onNameClick,
     onClickContact,
-  }
+  };
 }
 
 it('IOS에서는 contact 버튼이 보여지지 않아야 한다.', () => {
-  mockUserAgent(true) // ios user agent mock
-  const { contactButton } = renderComplexInput()
+  mockUserAgent(true); // ios user agent mock
+  const { contactButton } = renderComplexInput();
 
-  expect(contactButton()).not.toBeInTheDocument()
-})
+  expect(contactButton()).not.toBeInTheDocument();
+});
 
 it('AOS에서는 contact 버튼이 보여지고 클릭이 동작한다.', () => {
-  mockUserAgent(false) // aos user agent mock
-  const { contactButton, clickContactButton, onClickContact } = renderComplexInput()
+  mockUserAgent(false); // aos user agent mock
+  const { contactButton, clickContactButton, onClickContact } = renderComplexInput();
 
-  expect(contactButton()).toBeInTheDocument()
+  expect(contactButton()).toBeInTheDocument();
 
-  clickContactButton()
-  expect(onClickContact).toHaveBeenCalled()
-})
+  clickContactButton();
+  expect(onClickContact).toHaveBeenCalled();
+});
 
 it(`검색결과가 없으면 검색결과없음 문구가 보여져야 한다.`, () => {
-  const { typeSearchKeyword, emptyResultBox } = renderComplexInput()
+  const { typeSearchKeyword, emptyResultBox } = renderComplexInput();
 
-  typeSearchKeyword('xxxxx')
-  expect(emptyResultBox()).toBeInTheDocument()
-})
+  typeSearchKeyword('xxxxx');
+  expect(emptyResultBox()).toBeInTheDocument();
+});
 ```
 
 renderComplexInput 에서 구현한 선언적 프로그래밍을 통해 함수명을 읽기만 해도 어떤 테스트를 하는지 즉시 파악할 수 있다. <br />

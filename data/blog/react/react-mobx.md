@@ -39,17 +39,17 @@ MobX를 React와 사용하면 쉽게 State를 관리할 수 있고, setState도 
 - RootStore를 만들어서 import한 스토어들을 생성할 때 this로 RootStore를 전달해주면 RootStore를 통해서 다른 Store에 접근할 수 있다.
 
 ```javascript
-import CounterStore from './counter'
-import MarketStore from './market'
+import CounterStore from './counter';
+import MarketStore from './market';
 
 class RootStore {
   constructor() {
-    this.counter = new CounterStore(this)
-    this.market = new MarketStore(this)
+    this.counter = new CounterStore(this);
+    this.market = new MarketStore(this);
   }
 }
 
-export default RootStore
+export default RootStore;
 ```
 
 **_src/stores/counter.js_**
@@ -57,22 +57,22 @@ export default RootStore
 - this.root.market.list 와 같이 market store의 list에 접근할 수 있다.
 
 ```javascript
-import { observable, action } from 'mobx'
+import { observable, action } from 'mobx';
 
 export default class CounterStore {
-  @observable number = 0
+  @observable number = 0;
 
   constructor(root) {
-    this.root = root
+    this.root = root;
   }
 
   @action increase = () => {
-    this.number += 1
-  }
+    this.number += 1;
+  };
 
   @action decrease = () => {
-    this.number -= 1
-  }
+    this.number -= 1;
+  };
 }
 ```
 
@@ -82,21 +82,21 @@ export default class CounterStore {
 - root store에 있는 counter, market 스토어를 Provider에 전달한다.
 
 ```javascript
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'mobx-react'
-import './index.less'
-import App from './App'
-import RootStore from './stores'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'mobx-react';
+import './index.less';
+import App from './App';
+import RootStore from './stores';
 
-const root = new RootStore()
+const root = new RootStore();
 
 ReactDOM.render(
   <Provider {...root}>
     <App />
   </Provider>,
   document.getElementById('root')
-)
+);
 ```
 
 ### React 컴포넌트에 Store 주입
@@ -106,24 +106,24 @@ ReactDOM.render(
 - setState를 사용하지 않아도 mobx-react의 observer가 observable 값이 변할 때 컴포넌트의 forceUpdate를 호출하게 함으로써 변화가 화면에 반영된다.
 
 ```javascript
-import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
+import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
 
 @inject(({ market }) => ({ total: market.total }))
 @observer
 class TotalPrice extends Component {
   render() {
-    const { total } = this.props
+    const { total } = this.props;
     return (
       <div>
         <hr />
         <p>{total}</p>
       </div>
-    )
+    );
   }
 }
 
-export default TotalPrice
+export default TotalPrice;
 ```
 
 ### MobX의 React 컴포넌트 최적화
@@ -136,7 +136,7 @@ export default TotalPrice
 @observer
 class MyComponent extends Component {
   render() {
-    const { todos, user } = this.props
+    const { todos, user } = this.props;
     return (
       <div>
         {user.name}
@@ -146,7 +146,7 @@ class MyComponent extends Component {
           ))}
         </ul>
       </div>
-    )
+    );
   }
 }
 ```
@@ -157,27 +157,27 @@ class MyComponent extends Component {
 @observer
 class MyComponent extends Component {
   render() {
-    const { todos, user } = this.props
+    const { todos, user } = this.props;
     return (
       <div>
         {user.name}
         <TodosView todos={todos} />
       </div>
-    )
+    );
   }
 }
 
 @observer
 class TodosView extends Component {
   render() {
-    const { todos } = this.props
+    const { todos } = this.props;
     return (
       <ul>
         {todos.map((todo) => (
           <TodoView todo={todo} key={todo.id} />
         ))}
       </ul>
-    )
+    );
   }
 }
 ```

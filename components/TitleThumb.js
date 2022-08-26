@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react'
+import React, { useCallback } from 'react';
 
-import Image from './Image'
+import Image from './Image';
 
 const TitleThumb = ({ id, onClick, imgUrl, title, description, startDate }) => {
   const handleClick = useCallback(() => {
-    onClick(id)
-  }, [id, onClick])
+    onClick(id);
+  }, [id, onClick]);
 
   return (
     <div className="title_thumb" onClick={handleClick}>
@@ -20,7 +20,7 @@ const TitleThumb = ({ id, onClick, imgUrl, title, description, startDate }) => {
         <p>{description}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TitleThumb
+export default TitleThumb;

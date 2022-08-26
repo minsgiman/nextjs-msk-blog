@@ -31,17 +31,17 @@ useContext 를 통해 사용하는 Context의 value가 변경되면, 해당 Cont
 ```js
 // FireProvider.js
 const FireProvider = ({ children }) => {
-  const [fire, setFire] = useState('this is fire')
+  const [fire, setFire] = useState('this is fire');
 
   const value = {
     fire,
     setFire,
-  }
+  };
 
-  return <FireContext.Provider value={value}>{children}</FireContext.Provider>
-}
+  return <FireContext.Provider value={value}>{children}</FireContext.Provider>;
+};
 
-export default FireProvider
+export default FireProvider;
 ```
 
 ```js
@@ -58,31 +58,31 @@ export default FireProvider
 ```js
 // FireButton.js
 export default function FireButton() {
-  const { setFire } = useContext(FireContext)
+  const { setFire } = useContext(FireContext);
 
   function onClick() {
-    setFire('fire button click')
+    setFire('fire button click');
   }
 
-  return <button onClick={onClick}>Button</button>
+  return <button onClick={onClick}>Button</button>;
 }
 ```
 
 ```js
 // FireText.js
 export default function FireText() {
-  const { fire } = useContext(FireContext)
+  const { fire } = useContext(FireContext);
 
-  return <h1>{fire}</h1>
+  return <h1>{fire}</h1>;
 }
 ```
 
 ```js
 // Title.js
 export default function Title() {
-  useContext(FireContext)
+  useContext(FireContext);
 
-  return <h1>Title</h1>
+  return <h1>Title</h1>;
 }
 ```
 
@@ -102,39 +102,39 @@ export default function Title() {
 ```js
 // FireProvider.js
 const FireProvider = ({ children }) => {
-  const fireTextRef = useRef()
+  const fireTextRef = useRef();
 
-  return <FireContext.Provider value={{ fireTextRef }}>{children}</FireContext.Provider>
-}
+  return <FireContext.Provider value={{ fireTextRef }}>{children}</FireContext.Provider>;
+};
 ```
 
 ```js
 // FireButton.js
 export default function FireButton() {
-  const { fireTextRef } = useContext(FireContext)
-  let clickNum = 0
+  const { fireTextRef } = useContext(FireContext);
+  let clickNum = 0;
 
   function onClick() {
-    clickNum += 1
+    clickNum += 1;
 
     if (fireTextRef.current && fireTextRef.current.setFire) {
-      fireTextRef.current.setFire(`fire button click ${clickNum} times`)
+      fireTextRef.current.setFire(`fire button click ${clickNum} times`);
     }
   }
 
-  return <button onClick={onClick}>Button</button>
+  return <button onClick={onClick}>Button</button>;
 }
 ```
 
 ```js
 // FireText.js
 export default function FireText() {
-  const { fireTextRef } = useContext(FireContext)
-  const [fire, setFire] = useState('this is fire')
+  const { fireTextRef } = useContext(FireContext);
+  const [fire, setFire] = useState('this is fire');
 
-  fireTextRef.current = { setFire }
+  fireTextRef.current = { setFire };
 
-  return <h1>{fire}</h1>
+  return <h1>{fire}</h1>;
 }
 ```
 

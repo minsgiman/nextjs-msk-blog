@@ -19,23 +19,23 @@ summary: '버블정렬과 선택정렬은 구현이 간단하지만 비효율적
 
 ```javascript
 function bubbleSort(arr) {
-  let result = [...arr] // 원본 데이터 복사
+  let result = [...arr]; // 원본 데이터 복사
 
   for (let i = 0; i < result.length - 1; i++) {
     for (let j = 0; j < result.length - i; j++) {
       if (result[j] > result[j + 1]) {
-        let temp = result[j]
-        result[j] = result[j + 1]
-        result[j + 1] = temp
+        let temp = result[j];
+        result[j] = result[j + 1];
+        result[j + 1] = temp;
       }
     }
   }
 
-  return result
+  return result;
 }
 
-let items = [8, 4, 9, 2, 5, 10, 15, 22, 88, 63, 18]
-bubbleSort(items) // [2, 4, 5, 8, 9, 10, 15, 18, 22, 63, 88]
+let items = [8, 4, 9, 2, 5, 10, 15, 22, 88, 63, 18];
+bubbleSort(items); // [2, 4, 5, 8, 9, 10, 15, 18, 22, 63, 88]
 ```
 
 ### 선택정렬 알고리즘
@@ -48,29 +48,29 @@ bubbleSort(items) // [2, 4, 5, 8, 9, 10, 15, 18, 22, 63, 88]
 ```javascript
 function selectionSort(arr = []) {
   // copy array
-  let result = [...arr]
+  let result = [...arr];
 
   for (let i = 0; i < result.length - 1; i++) {
     // 현재 인덱스를 최소값이라고 가정한다.
-    let minimunNumberPos = i
+    let minimunNumberPos = i;
 
     // 오직 정렬되지 않은 배열에서만 탐색하기 위해서 j를 i + 1로 설정한다.
     for (let j = i + 1; j < result.length; j++) {
       if (result[minimunNumberPos] > result[j]) {
-        minimunNumberPos = j
+        minimunNumberPos = j;
       }
     }
 
     // swap
     if (minimunNumberPos !== i) {
-      let temp = result[minimunNumberPos]
-      result[minimunNumberPos] = result[i]
-      result[i] = temp
+      let temp = result[minimunNumberPos];
+      result[minimunNumberPos] = result[i];
+      result[i] = temp;
     }
   }
 
-  return result
+  return result;
 }
 
-console.log(selectionSort([2, 1, 4, 3, 5])) // [1,2,3,4,5]
+console.log(selectionSort([2, 1, 4, 3, 5])); // [1,2,3,4,5]
 ```

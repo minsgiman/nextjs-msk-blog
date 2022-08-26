@@ -41,45 +41,45 @@ Separate chaining 방법을 사용한 Hash Table
 ```javascript
 class HashTable {
   constructor(size) {
-    this.buckets = new Array(size)
-    this.size = size
+    this.buckets = new Array(size);
+    this.size = size;
   }
   hash(key) {
-    return key.toString().length % this.size
+    return key.toString().length % this.size;
   }
   set(key, value) {
-    let index = this.hash(key)
+    let index = this.hash(key);
     if (!this.buckets[index]) {
-      this.buckets[index] = []
+      this.buckets[index] = [];
     }
-    this.buckets[index].push([key, value])
-    return index
+    this.buckets[index].push([key, value]);
+    return index;
   }
   get(key) {
-    let index = this.hash(key)
+    let index = this.hash(key);
     if (!this.buckets[index]) {
-      return null
+      return null;
     }
     for (let entry of this.buckets[index]) {
       if (entry[0] === key) {
         // key
-        return entry[1] // value
+        return entry[1]; // value
       }
     }
   }
 }
 
-const hashTable = new HashTable(10)
+const hashTable = new HashTable(10);
 
-hashTable.set('userid1', 'example')
-hashTable.set('userid20', 'say')
-hashTable.set('userid30', 'other')
-hashTable.set('userid4', 'sara')
-hashTable.set('userid5', 'one')
+hashTable.set('userid1', 'example');
+hashTable.set('userid20', 'say');
+hashTable.set('userid30', 'other');
+hashTable.set('userid4', 'sara');
+hashTable.set('userid5', 'one');
 
-console.log(hashTable.get('userid1')) // example
-console.log(hashTable.get('userid20')) // say
-console.log(hashTable.get('userid30')) // other
-console.log(hashTable.get('userid4')) // sara
-console.log(hashTable.get('userid5')) // one
+console.log(hashTable.get('userid1')); // example
+console.log(hashTable.get('userid20')); // say
+console.log(hashTable.get('userid30')); // other
+console.log(hashTable.get('userid4')); // sara
+console.log(hashTable.get('userid5')); // one
 ```

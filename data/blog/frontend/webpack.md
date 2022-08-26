@@ -35,9 +35,9 @@ summary: 'webpack을 사용하는 이유, 왜 이런 기능이 필요?, webpack.
 
 ```js
 // webpack.config.dev.js
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var path = require('path');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-eval-source-map',
@@ -69,7 +69,7 @@ module.exports = {
     contentBase: './dist',
     hot: true,
   },
-}
+};
 ```
 
 ### 느낀점
