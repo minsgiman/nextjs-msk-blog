@@ -145,3 +145,7 @@ function FrameworkSelect() {
 - [Effective Component 지속 가능한 성장과 컴포넌트](https://www.youtube.com/watch?v=fR8tsJ2r7Eg)
 
 - [React component as prop](https://www.developerway.com/posts/react-component-as-prop-the-right-way)
+
+- [Applying SOLID principles in React](https://medium.com/dailyjs/applying-solid-principles-in-react-14905d9c5377)
+
+- [(번역) React에 SOLID 원칙 적용하기](https://dev-boku.tistory.com/entry/%EB%B2%88%EC%97%AD-React%EC%97%90-SOLID-%EC%9B%90%EC%B9%99-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
