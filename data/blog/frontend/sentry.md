@@ -320,6 +320,40 @@ class ApiError<T = unknown> extends Error implements AxiosError<T> {
 }
 ```
 
+## 소스맵 설정
+
+sentry로 소스맵을 올리기 위해서는 [@sentry/cli](https://docs.sentry.io/product/cli/installation/)가 필요하다. <br />
+[@sentry/webpack-plugin](https://www.npmjs.com/package/@sentry/webpack-plugin)에도 `@sentry/cli`에 디펜던시가 있어서 `@sentry/webpack-plugin` 설치를 통해서도 소스맵 설정이 가능하다.
+
+```
+// yarn.lock
+
+"@sentry/webpack-plugin@^1.18.9":
+  version "1.18.9"
+  resolved "https://registry.yarnpkg.com/@sentry/webpack-plugin/-/webpack-plugin-1.18.9.tgz#acb48c0f96fdb9e73f1e1db374ea31ded6d883a8"
+  integrity sha512-+TrenJrgFM0QTOwBnw0ZXWMvc0PiOebp6GN5EbGEx3JPCQqXOfXFzCaEjBtASKRgcNCL7zGly41S25YR6Hm+jw==
+  dependencies:
+    "@sentry/cli" "^1.74.4"
+```
+
+sentry-cli를 위한 config 파일은 직접 만들어줘야 한다. (공식문서 : https://docs.sentry.io/cli/configuration/) <br />
+
+##### vi ~/.sentryclirc
+
+```
+[defaults]
+url=전송할 센트리 서버 빌드 url
+org=전송할 센트리 서버에 있고 token을 발급한 유저가 권한이 있는 조직
+project= 전송할 센트리 서버에 있고 token을 발급한 유저가 권한이 있는 조직안의 프로젝트
+
+[auth]
+token=발급된 Auth Token 붙여넣기
+```
+
+위의 auth token은 Sentry 대시보드에서 발급받는다.
+
+- 유저 프로필 > API keys > Create New Token > 발급된 Auth token을 복사
+
 ## Sentry SDK Tree Shaking
 
 sentry sdk에 tree shaking을 적용하고 싶다면, 다음과 같이 **\_\_SENTRY_DEBUG\_\_**, **\_\_SENTRY_TRACING\_\_** flag를 false로 설정한다. <br />

@@ -122,9 +122,14 @@ Hubot을 하나 띄우는 대신, Hubot 프로세스(아래에서 Master)가 직
 
 ### 그 밖에..
 
-슬랙 메시지로 멘션과 함께 :cookie: 이모지를 붙이면 Bot이 Cookie 선물 메시지를 전송한다. <br />
-그 와 동시에 전달한 cookie 기록은 MongoDB에 저장돤다. <br />
-이 후에 이를 활용하여 Leaderboard 를 만들 수도 있고 활용 방안을 고민 중이다.
+개발하면서 위에서 언급한 내용 외 참고한 부분들
+
+- [Path aliases with TypeScript in Node.js](https://levelup.gitconnected.com/path-aliases-with-typescript-in-node-js-230803e3f200)
+- [Node.js 기반에서 환경변수 사용하기 (dotenv, cross-env)](https://velog.io/@public_danuel/process-env-on-node-js)
+- [Node.js 웹 앱의 도커라이징](https://nodejs.org/ko/docs/guides/nodejs-docker-webapp/)
+- [yarn 사용하는 경우 도커라이징](https://www.peterkimzz.com/super-easy-docker/)
+
+기능 구현은 슬랙 메시지로 멘션과 함께 :cookie: 이모지를 붙이면 Bot이 Cookie 선물 메시지를 전송하고 그 와 동시에 전달한 cookie 기록은 MongoDB에 저장되도록 하였는데 이 후에 이를 활용하여 Leaderboard 를 만들 수도 있고 활용 방안을 고민 중이다.
 
 ---
 
