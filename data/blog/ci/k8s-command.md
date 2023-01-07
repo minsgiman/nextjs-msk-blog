@@ -6,7 +6,7 @@ draft: false
 summary: 'kubeconfig 파일은 k8s의 설정 파일로, kubectl 명령어로 apiserver에 접근할 때 사용할 인증정보를 담고 있다.'
 ---
 
-### kubeconfig 설정
+## kubeconfig 설정
 
 [kubeconfig](https://kubernetes.io/ko/docs/concepts/configuration/organize-cluster-access-kubeconfig/) 파일은 k8s의 설정 파일로, `kubectl`명령어로 apiserver에 접근할 때 사용할 인증정보를 담고 있다.
 
@@ -20,7 +20,7 @@ kubeconfig 파일의 위치는 `~/.kube/config` 에 둔다.
 export KUBECONFIG=$HOME/kubeconfig_mskang.yaml
 ```
 
-### Pod, namespace 조회
+## Pod, namespace 조회
 
 | 설명                                            | command                                  |
 | ----------------------------------------------- | ---------------------------------------- |
@@ -32,7 +32,7 @@ export KUBECONFIG=$HOME/kubeconfig_mskang.yaml
 | hubot-hey-cookie pod 상세 정보                  | kubectl describe pod/hubot-hey-cookie    |
 | List all pods with labels                       | kubectl get pods --show-labels           |
 
-### Deployment
+## Deployment
 
 Deployment는
 
@@ -68,7 +68,7 @@ $ kubectl rollout history deployment/${deployment_name} --revision=2
 $ kubectl rollout undo deployment/${deployment_name} --to-revision=2
 ```
 
-### Pod 재시작
+## Pod 재시작
 
 #### 1. Scale
 
@@ -88,7 +88,7 @@ $ kubectl scale deployment ${deployment_name} --replicas=1
 $ kubectl rollout restart deployment ${deployment_name}
 ```
 
-### Pod delete
+## Pod delete
 
 참고 : https://jamesdefabia.github.io/docs/user-guide/kubectl/kubectl_delete/
 
@@ -102,7 +102,7 @@ $ kubectl delete pods hubot-hey-cookie
 pod "hubot-hey-cookie" deleted
 ```
 
-### 동작중인 컨테이너의 셸에 접근하기
+## 동작중인 컨테이너의 셸에 접근하기
 
 참고 : https://kubernetes.io/ko/docs/tasks/debug/debug-application/get-shell-running-container/
 
@@ -112,7 +112,7 @@ $ kubectl exec --stdin --tty ${pod_name} -- /bin/bash
 
 사용하는 linux 시스템에 따라 /bin/bash 대신에 /bin/sh 를 사용해야 할 수도 있다.
 
-### 모든 kubectl 명령에서 사용하는 기본 namespace 설정
+## 모든 kubectl 명령에서 사용하는 기본 namespace 설정
 
 참고 : https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/namespaces/
 
@@ -120,7 +120,7 @@ $ kubectl exec --stdin --tty ${pod_name} -- /bin/bash
 $ kubectl config set-context --current --namespace=<insert-namespace-name-here>
 ```
 
-### 에러시 로그 확인
+## 에러시 로그 확인
 
 에러시에 다음의 커맨드로 pod 상세정보와 로그를 확인한다.
 
@@ -135,7 +135,7 @@ $ kubectl logs -f ${pod_name}
 $ $ kubectl logs -f ${pod_name} --since=10h
 ```
 
-### Secret 생성
+## Secret 생성
 
 다음 명령을 사용하여 `slack-bot-token` 이라는 name의 `SLACK_BOT_TOKEN: <your-hubot-api-token>` 데이터를 가지는 secret을 namespace에 생성할 수 있다.
 
