@@ -100,6 +100,7 @@ Slack 이벤트 listen은 Hubot 내부적으로 [WebSocket 기반의 RTM Client]
 - [chat.getPermalink](https://api.slack.com/methods/chat.getPermalink) : 메시지 링크를 얻는다.
 - [conversations.replies](https://api.slack.com/methods/conversations.replies) : 메시지를 blocks형태로 조회해서 reach text정보를 얻을 수 있다.
 - [chat.postMessage](https://api.slack.com/methods/chat.postMessage) : 메시지를 전송할 수 있는 API
+- [conversations.info](https://api.slack.com/methods/conversations.info) : channel 정보를 조회한다.
 
 <br />
 

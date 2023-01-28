@@ -68,6 +68,10 @@ summary: 'remote | branch flow | commit | stash | squash | tag | useful command'
 
 - **git push origin 1.0.0(tag 이름)** : 태그 올리기
 
+### cherry-pick
+
+- **git cherry-pick 555f8b4(commit hash)** : 다른 브랜치에 적용된 커밋사항을 현재 브랜치로 가져올 수 있다. 코드에 대한 수정사항은 물론이고 커밋로그와 작성자 역시 그대로 가져와진다.
+
 ### useful command
 
 - **git config --global alias.ac "commit -am"** : 커맨드 alias를 만든다. (git ac "notice!" 와 같이 사용할 수 있다.)
