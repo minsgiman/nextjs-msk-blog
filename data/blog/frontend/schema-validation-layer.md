@@ -1,5 +1,5 @@
 ---
-title: Schema Validation Layer
+title: Schema Validation Layer (with zod)
 date: '2023-01-29'
 tags: ['schema', 'validation', 'frontend', 'zod']
 draft: false

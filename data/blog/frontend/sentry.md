@@ -59,6 +59,7 @@ Sentry.init({
       routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
     }),
   ],
+  autoSessionTracking: false,
   tracesSampleRate: 1.0,
   beforeBreadcrumb(breadcrumb, hint) {
     return breadcrumb.category === 'ui.click' ? null : breadcrumb;
@@ -78,6 +79,7 @@ Sentry 설정에 필요한 기본 정보는 다음과 같다.
   - React의 경우 BrowserTracing - routingInstrumentation에 [React Router Integration](https://docs.sentry.io/platforms/javascript/guides/react/configuration/integrations/react-router/)을 설정 하면된다.
 - tracesSampleRate : performance monitoring을 추적하는 비율 (0.0 ~ 1.0로 설정 가능)
   - dev환경에서는 1.0로 테스트하고, production에서는 낮게 설정하는 것을 권고하고 있다. 자세한 내용은 [Set Up Performance](https://docs.sentry.io/platforms/javascript/guides/react/performance/)을 참고
+- autoSessionTracking : release 버전별 crash비율, 에러증가율과 같은 [Release Health](https://docs.sentry.io/product/releases/health/) 정보를 수집한다. [sentry v6부터 default true](https://github.com/getsentry/sentry-javascript/pull/3099)로 동작한다. request 트래픽을 많이 유발 (route redirect 시 마다 2건의 request 발생) 할 수 있으므로, 꼭 필요한 정보가 아니라면 false로 설정한다.
 
 hooks 설정도 지원하고 있는데, Sentry에 이벤트를 전송하기 전에 이벤트를 선택적으로 수정해서 데이터를 보낼 수 있는 [beforeSend](https://docs.sentry.io/platforms/javascript/guides/ember/configuration/filtering/#using-platformidentifier-namebefore-send-), [beforeBreadcrumb](https://docs.sentry.io/platforms/javascript/enriching-events/breadcrumbs/#customize-breadcrumbs)와 같은 옵션도 제공하고 있다. <br />
 이 밖에 다양한 기본 설정 옵션은 [Confiure Basic Options](https://docs.sentry.io/platforms/javascript/guides/react/configuration/options/) 를 참고한다.
