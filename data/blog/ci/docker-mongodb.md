@@ -1,12 +1,14 @@
 ---
-title: Docker를 사용하여 MongoDB 설치하고 접속하기
+title: Docker를 사용하여 MongoDB 설치하고 authentication 설정하기
 date: '2023-1-1'
 tags: ['docker', 'mongodb', 'CI']
 draft: false
 summary: 'Docker 홈페이지에 접속하여 자신의 OS에 맞는 Docker를 내려 받아 설치한다.'
 ---
 
-## 1. Docker 설치
+## Docker를 사용하여 MongoDB 설치하고 접속하기
+
+#### 1. Docker 설치
 
 [Docker 홈페이지](https://www.docker.com/products/docker-desktop/)에 접속하여 자신의 OS에 맞는 Docker를 내려 받아 설치한다. <br />
 설치가 완료되면 다음 명령어를 실행하여 버전을 출력해 보자.
@@ -16,7 +18,7 @@ $ docker -v
 Docker version 19.03.13, build 4484c46d9d
 ```
 
-## 2. MongoDB Docker 이미지 다운로드
+#### 2. MongoDB Docker 이미지 다운로드
 
 다음 명령어로 MongoDB Docker 이미지를 다운로드한다. 태그에 버전을 지정하지 않으면 최신 버전을 다운로드한다.
 
@@ -50,7 +52,7 @@ REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 mongo        latest    07630e791de3   12 days ago   449MB
 ```
 
-## 3. MongoDB Docker 컨테이너 생성 및 실행
+#### 3. MongoDB Docker 컨테이너 생성 및 실행
 
 ```
 $ docker run --name mongodb-container -v ~/data:/data/db -d -p 27017:27017 mongo
@@ -65,7 +67,7 @@ $ docker run --name mongodb-container -v ~/data:/data/db -d -p 27017:27017 mongo
 $ docker ps -a
 ```
 
-## 4. MongoDB Docker 컨테이너 시작/중지/재시작
+#### 4. MongoDB Docker 컨테이너 시작/중지/재시작
 
 ```
 # MongoDB Docker 컨테이너 중지
@@ -78,11 +80,65 @@ $ docker start mongodb-container
 $ docker restart mongodb-container
 ```
 
-## 5. MongoDB Docker 컨테이너 접속
+#### 5. MongoDB Docker 컨테이너 접속
 
 ```
 $ docker exec -it mongodb-container bash
 root@073c229db4e5:/# mongo
+```
+
+## Docker MongoDB에 authentication 설정하기
+
+기본적인 방법은 [MongoDB Auhtentication](https://www.mongodb.com/features/mongodb-authentication) 을 참고한다. <br />
+
+#### 1. mongo docker 인스턴스를 실행한다.
+
+```
+$ docker run --name mongodb-container -v ~/data:/data/db -d -p 27017:27017 mongo
+```
+
+#### 2. 실행한 docker 컨테이너에 접속한다.
+
+```
+$ docker exec -it mongodb-container bash
+root@b07599e429fb:/#
+```
+
+#### 3. mongo shell에 접속하여 'cookie' db에 read & write 권한을 가진 user를 생성한다.
+
+```
+root@b07599e429fb:/# mongo
+> use cookie
+> db.createUser({
+    user: 'admin',
+    pwd: 'secretPassword',
+    roles: [{ role: 'readWrite', db:'cookie' }]
+})
+```
+
+#### 4. [MongoDB Docker](https://hub.docker.com/_/mongo/?tab=tags)를 참고하여, [mongod --auth](https://www.mongodb.com/docs/manual/reference/program/mongod/#cmdoption-mongod-auth)로 authentication을 활성화하여 다시 실행한다.
+
+```
+$ docker stop mongo
+$ docker run --name mongodb-container -v ~/data:/data/db -d -p 27017:27017 mongo mongod --auth
+```
+
+#### 5. 생성한 user id, pwd를 통해 접속할 수 있다.
+
+```
+mongo <ip>:27017/cookie -u admin -p secretPassword
+```
+
+node에서 mongoose를 통해 접속할때는 다음과 같은 URI로 connect한다. ( [참고](https://www.mongodb.com/community/forums/t/how-can-connect-to-mongo-db-authentication-by-node-js/124406) )
+
+```js
+mongoose.connect(
+  `mongodb://admin:secretPassword@<ip>:27017/cookie?authMechanism=DEFAULT&authSource=cookie`,
+  {
+    dbName: 'cookie',
+  },
+  () => {}
+);
 ```
 
 ---
@@ -90,3 +146,5 @@ root@073c229db4e5:/# mongo
 ### 참고
 
 - [docker hub mongo](https://hub.docker.com/_/mongo?tab=description)
+
+- [How to enable authentication on MongoDB through Docker?](https://stackoverflow.com/questions/34559557/how-to-enable-authentication-on-mongodb-through-docker)
