@@ -45,6 +45,11 @@ When조건이 만족한 이슈중에 한번 더 filter를 걸기 위해 설정�
 ### 3. [“Then” Conditions: Actions](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#then-conditions-actions)
 위에서 Triggers, Filters 조건을 만족하였을 때 실제로 slack, mail 등으로 alert을 보내기 위한 설정을한다. 자세한 내용은 공식문서를 참고한다.
 
+### 4. [Action Interval (Rate Limit)](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#action-interval-rate-limit)
+위의 Triggers, Filters 조건을 만족하였을 때, action이 수행될 수 있는 빈도를 제어한다. <br />
+예를 들어 Action Interval을 1분으로 설정하였다면, 1분내에서는 조건이 여러번 만족되더라도 action이 한번 수행된다.  
+
+
 ## Metric Alerts
 
 Metric Alerts 설정은 Type + Function + Time Interval로 구성되어 있다.
