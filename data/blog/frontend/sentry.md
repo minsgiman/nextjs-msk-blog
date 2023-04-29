@@ -75,8 +75,32 @@ Sentry 설정에 필요한 기본 정보는 다음과 같다.
 - release: 애플리케이션 버전 (보통 package.json에 명시한 버전을 사용. 이는 버전별 오류 추적을 용이하게 한다.)
 - environment: 애플리케이션 환경 (dev, production 등)
 - integrations: 플랫폼 SDK별 통합 구성 설정
-  - [BrowserTracing](https://docs.sentry.io/platforms/javascript/performance/instrumentation/automatic-instrumentation/)을 통해 pageload/navigation 성능을 측정할 수 있다.
+  - [BrowserTracing](https://docs.sentry.io/platforms/javascript/performance/instrumentation/automatic-instrumentation/)을 통해 pageload/navigation/HTTP request 과정을 추적하여 성능의 병목 구간을 추적할 수 있다.
   - React의 경우 BrowserTracing - routingInstrumentation에 [React Router Integration](https://docs.sentry.io/platforms/javascript/guides/react/configuration/integrations/react-router/)을 설정 하면된다.
+  - path parameter가 있는 경우에도 동일한 route로 sentry에서 처리하도록 [React Router Integration - Parameterized Transaction Names](https://docs.sentry.io/platforms/javascript/guides/react/configuration/integrations/react-router/#parameterized-transaction-names) 의 아래 부분을 참고하여 설정해주었다.
+    - ex) account/saving/1, account/saving/2 는 sentry에서 동일하게 account/saving/:accountId 로 처리 -> 이는 Page별 성능분석을 할때 필요하다
+    ```ts
+       import { Route, Router, Switch, matchPath } from 'react-router-dom';
+       import { createBrowserHistory } from 'history';
+       import * as Sentry from '@sentry/react';
+  
+       const history = createBrowserHistory();
+  
+       // Array of Route Config Objects
+       // Make sure the order of the routes is correct. The longest url under the same parent should be placed first and in decreasing order.
+       const routes = [{ path: '/users/:userid' }, { path: '/users' }, { path: '/' }];
+  
+       Sentry.init({
+          integrations: [
+            new Sentry.BrowserTracing({
+              routingInstrumentation: Sentry.reactRouterV5Instrumentation(history, routes, matchPath),
+            }),
+          ],
+          // We recommend adjusting this value in production, or using tracesSampler
+          // for finer control
+          tracesSampleRate: 1.0,
+       });
+    ```
 - tracesSampleRate : performance monitoring을 추적하는 비율 (0.0 ~ 1.0로 설정 가능)
   - dev환경에서는 1.0로 테스트하고, production에서는 낮게 설정하는 것을 권고하고 있다. 자세한 내용은 [Set Up Performance](https://docs.sentry.io/platforms/javascript/guides/react/performance/)을 참고
 - autoSessionTracking : release 버전별 crash비율, 에러증가율과 같은 [Release Health](https://docs.sentry.io/product/releases/health/) 정보를 수집한다. [sentry v6부터 default true](https://github.com/getsentry/sentry-javascript/pull/3099)로 동작한다. request 트래픽을 많이 유발 (route redirect 시 마다 2건의 request 발생) 할 수 있으므로, 꼭 필요한 정보가 아니라면 false로 설정한다.
@@ -226,11 +250,50 @@ export declare enum Severity {
 ```
 
 ## Breadcrumbs
-
-Breadcrumbs로 이벤트 발생 과정을 추적할 수 있다. Breadcrumbs를 추가하면 에러 이벤트를 생성하지는 않고, 버퍼에 쌓였다가 다음 이벤트를 전송할때 같이 전송된다.
+Breadcrumbs로 에러가 발생한 과정을 추적할 수 있다. Breadcrumbs를 추가하면 버퍼에 쌓아 두었다가 Sentry로 다음 이벤트를 전송할때 같이 보내진다.
 
 > While capturing an event, you can also record the breadcrumbs that lead up to that event. Breadcrumbs are different from events: they will not create an event in Sentry, but will be buffered until the next event is sent.
 
+Breadcrumbs는 직접 만들수도 있고, Sentry SDK를 통해 자동으로 기록되기도 한다.
+
+### Automatic Breadcrumbs
+Sentry SDK를 통해 [자동으로 기록되는 breadcrumbs 이벤트](https://docs.sentry.io/platforms/javascript/enriching-events/breadcrumbs/#automatic-breadcrumbs)들은 다음과 같다.
+* 요소 click
+* XHR request
+* console
+* navigation
+
+#### 요소 click breadcrumbs 개선
+자동으로 기록될 때 요소 click 이벤트는 다음과 같이 css selector 로 기록되는데 어떤 버튼을 누른건지 알아보기가 어렵다.
+
+<img src="/static/images/breadcrumbs-click.png" />
+
+그래서 element에 data-testid 속성이 있다면 이것으로 css selector 대신 보여주도록 다음과 같이 설정하였다.
+  * 설정 참고 : https://sentry-docs-o2paie5ivq-uc.a.run.app/error-reporting/configuration/filtering/?platform=javascript#before-breadcrumb
+
+```ts
+sentryInit({
+    ...
+    beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+        if (breadcrumb.category === 'ui.click') {
+            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            const testId = (hint?.event?.target?.dataset?.testid || '') as string;
+            if (testId) {
+              breadcrumb.message = `testId: ${testId}`;
+            }
+        }
+        return breadcrumb;
+    },
+})
+```
+
+위 설정을 적용하면 breadcrumbs - description에서 css selector 대신에 다음과 같이 "testId: xxx" 로 보여진다.
+
+<img src="/static/images/click-breadcrumb.png" />
+
+### Manual Breadcrumbs
+직접 Breadcrumb를 추가할 수도 있다. <br />
 아래에서 IBreadcrumb interface는 [Breadcrumbs Interface](https://develop.sentry.dev/sdk/event-payloads/breadcrumbs/)를 참고하였다.
 
 ```ts
@@ -321,6 +384,21 @@ class ApiError<T = unknown> extends Error implements AxiosError<T> {
   this.toJSON = error.toJSON;
 }
 ```
+
+## Dashboards
+Sentry에서 제공하는 여러 지표들로 Chart나 Table을 만들어서 볼 수 있는 [Dashboards](https://docs.sentry.io/product/dashboards/)를 센트리는 제공하고 있다.
+
+다음과 같이 user affected by error 정보를 확인해볼 수 있다.
+
+<img src="/static/images/sentry-dashboard-barchart.png" />
+
+또한 다음과 같이 table columns에 계산값을 넣어서 확인하는 것도 가능하다.
+
+`
+(1 - (count_if(level,equals,error) / (count_if(event.type,equals,transaction) / 0.1))) * 100
+`
+
+<img width="500" src="/static/images/sentry-dashboard-table.png" />
 
 ## 소스맵 설정
 

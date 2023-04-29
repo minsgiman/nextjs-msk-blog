@@ -18,7 +18,7 @@ Sentry에서 설정할 수 있는 Alerts에는 [Issue Alerts](https://docs.sentr
 
 Issue Alerts 설정은 Triggers, Filters, Actions 으로 이루어진다.
 
-### 1. ["When" Conditions: Triggers](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#when-conditions-triggers)
+#### 1. ["When" Conditions: Triggers](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#when-conditions-triggers)
 알림을 통해 모니터링 하고싶은 조건을 설정한다.
 
 * New issue is created
@@ -28,7 +28,7 @@ Issue Alerts 설정은 Triggers, Filters, Actions 으로 이루어진다.
 * 이슈를 겪은 unique users수가 특정 숫자보다 높아질 때
 * 특정 기간동안 전체 세션 중 몇% 이상 겪었을 때
 
-### 2. ["If" Conditions: Filters](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#if-conditions-filters)
+#### 2. ["If" Conditions: Filters](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#if-conditions-filters)
 When조건이 만족한 이슈중에 한번 더 filter를 걸기 위해 설정한다.
 
 * The issue is older or newer than a certain duration.
@@ -42,19 +42,23 @@ When조건이 만족한 이슈중에 한번 더 filter를 걸기 위해 설정�
 * The event's level \{matches\} \{level\}. 
    * Match types: equal to, less than or equal to, or greater than or equal to.
 
-### 3. [“Then” Conditions: Actions](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#then-conditions-actions)
+#### 3. [“Then” Conditions: Actions](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#then-conditions-actions)
 위에서 Triggers, Filters 조건을 만족하였을 때 실제로 slack, mail 등으로 alert을 보내기 위한 설정을한다. 자세한 내용은 공식문서를 참고한다.
 
-### 4. [Action Interval (Rate Limit)](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#action-interval-rate-limit)
+#### 4. [Action Interval (Rate Limit)](https://docs.sentry.io/product/alerts/create-alerts/issue-alert-config/#action-interval-rate-limit)
 위의 Triggers, Filters 조건을 만족하였을 때, action이 수행될 수 있는 빈도를 제어한다. <br />
 예를 들어 Action Interval을 1분으로 설정하였다면, 1분내에서는 조건이 여러번 만족되더라도 action이 한번 수행된다.  
+
+#### Issue Alert 설정 예제
+
+<img src="/static/images/issue-alert.png" />
 
 
 ## Metric Alerts
 
 Metric Alerts 설정은 Type + Function + Time Interval로 구성되어 있다.
 
-### 1. [Type의 종류](https://docs.sentry.io/product/alerts/create-alerts/metric-alert-config/#metrics-types-for-alerting)는 다음과 같다.
+#### 1. [Type의 종류](https://docs.sentry.io/product/alerts/create-alerts/metric-alert-config/#metrics-types-for-alerting)는 다음과 같다.
 * Errors
    * Number of Errors
    * Users Experiencing Errors
@@ -70,7 +74,7 @@ Metric Alerts 설정은 Type + Function + Time Interval로 구성되어 있다.
    * First Input Delay
    * Cumulative Layout Shift
 
-### 2. 사용할 수 있는 [Function](https://docs.sentry.io/product/alerts/create-alerts/metric-alert-config/#functions-for-metric-types)은 다음과 같다. <br />
+#### 2. 사용할 수 있는 [Function](https://docs.sentry.io/product/alerts/create-alerts/metric-alert-config/#functions-for-metric-types)은 다음과 같다. <br />
 예를 들어 Metric type을 LCP로 설정할 때 `p75(measurement.lcp)` 와 같이 설정할 수 있다.
 
 * count()
@@ -86,9 +90,13 @@ Metric Alerts 설정은 Type + Function + Time Interval로 구성되어 있다.
 * p99()
 * p100()
 
-### 3. [Time Interval](https://docs.sentry.io/product/alerts/create-alerts/metric-alert-config/#time-interval)을 통해 설정된 기간동안 Sentry에서 수치를 집계한다.
+#### 3. [Time Interval](https://docs.sentry.io/product/alerts/create-alerts/metric-alert-config/#time-interval)을 통해 설정된 기간동안 Sentry에서 수치를 집계한다.
 Time Interval은 1분에서 1일 사이로 설정한다.
 자세한 설정은 공식문서를 참고한다.
+
+#### Metric Alert 설정 예제
+
+<img src="/static/images/metric-alert.png" />
 
 ## Best Practices
 
