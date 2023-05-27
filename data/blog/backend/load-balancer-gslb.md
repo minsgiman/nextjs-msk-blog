@@ -12,6 +12,28 @@ GSLB는 CDN(content delivery network)을 가능하게 하는 기술이다.
 CDN은 미리 정적인 자원들(html, css, javascript 등)을 캐싱하여 사용자의 위치와 가까운 곳에 복사본을 노드에 저장하고, 빠른 속도로 자원들을 제공할 수 있게 해준다. <br />
 cdn은 ddos같은 서버 다운을 시킬 수도 있는 악의적인 공격을 방어하는데도 매우 효율적이다.
 
+CDN에서 WAF(Web Application Firewall)를 설정하여 악의적인 웹 트래픽을 탐지하고 차단하여 Web Application의 보안을 강화할 수 있다. WAF는 다양한 보안 규칙을 사용하여 Web Application에서 발생할 수 있는 다양한 유형의 공격을 탐지한다. <br /> 
+이러한 규칙 중 하나에 "rate limit" 규칙이 있다. "rate limit" 규칙은 Application에 대한 요청을 제한하는데 사용된다. <br />
+다음은 CDN(Cloudflare)에서 WAF rate limit rules 를 설정한 예이다.
+
+```
+WAF rate limit rules
+
+* Rule: directory traversal  
+* Condition: 동일한 IP로부터 30분내 origin 서버로부터 404 응답을 받은 request가 30회 이상
+
+* Rule: unauthorized attempts
+* Condition: 동일한 IP로부터 1분내 origin 서버로부터 401 or 403 응답을 받은 request가 20회 이상
+
+* Rule: POST method (100 req/2 min)
+* Condition: 동일한 IP로부터 2분내 POST method 요청이 100회 이상
+
+* Rule: high volume of requests (500 req/10 min)
+* Condition: 동일한 IP로부터 10분내 request가 500회 이상
+```
+
+위의 룰에 걸리게되면 CDN(Cloudflare)에서 origin 서버로 request를 forward 하지 않고, 대신 Error Page를 보내거나 API 요청인 경우는 429(Too Many Requests) response를 보낸다.
+
 ## 1. GSLB
 
 GSLB는 DNS 서비스의 발전된 형태이다.
