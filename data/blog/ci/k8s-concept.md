@@ -10,7 +10,9 @@ summary: '쿠버네티스(Kubernetes)는 컨테이너화 된 애플리케이션�
 
 쿠버네티스에 10개의 물리적 서버가 있다면 내가 만든 App은 1번 서버, 다른 개발자의 App은 2번 서버 이렇게 각각 올라가는 것이 아니라 서로 다른 App 모두 같은 물리적 서버를 공유할 수 있어서 한꺼번에 올라가며, 쿠버네티스에 의해 분배, 관리(Container Orchestration) 되는 구조이다.
 
-## Kubernetes Cluster
+<br />
+
+# Kubernetes Cluster
 
 쿠버네티스를 이루는 구성은 다음과 같다.
 
@@ -44,7 +46,9 @@ summary: '쿠버네티스(Kubernetes)는 컨테이너화 된 애플리케이션�
 - [kube-proxy](https://kubernetes.io/ko/docs/concepts/overview/components/#kube-proxy) : kubernetes Cluster안에서 가상 네트워크를 동작할 수있게하는 역할을 한다.
   Node로 들어오는 네트워크 트래픽을 적합한 container로 라우팅하며 Node의 네트워크 트래픽을 로드밸런싱해준다. 클러스터내의 Pod와 서비스의 연결을 통해 pod끼리의 통신을 가능하게 한다.
 
-## Kubernetes Object
+<br />
+
+# Kubernetes Object
 
 [쿠버네티스 Object](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/kubernetes-objects/)는 쿠버네티스 시스템에서 영속성을 가지는 오브젝트이다. 즉 오브젝트가 생성되면 쿠버네티스는 이 상태를 영구히 유지하기 위해 작동한다. <br />
 쿠버네티스의 오브젝트는 spec과 status등의 값을 가지는데, 여기에는 오브젝트를 생성한 의도나 오브젝트를 관리할 때 원하는 상태 등을 설정한다.
@@ -191,13 +195,13 @@ dev 목적의 사용자는 dev namespace에 접근하여 오브젝트를 배치 
 
 위 그림에서 보듯이 namespace별로 리소스 할당량을 지정할 수 있다. 또한 사용자별로 namespace 접근 권한을 관리할 수 있다.
 
-### Volume
+## Volume
 
 [Volume](https://kubernetes.io/ko/docs/concepts/storage/volumes/)은 Pod가 사라지더라고 저장/보존이 가능하며 Pod에서 사용할 수 있는 디렉터리를 제공한다. <br />
 
 쿠버네티스에서 Pod는 고정된 개념이 아니며 끊임없이 사라지고 생성된다. 그렇기 때문에 Pod는 디렉터리도 임시로 사용한다. Pod가 사라지더라도 사용할 수 있는 디렉터리는 볼륨 오브젝트를 통해 생성하여 사용할 수 있다.
 
-### Service
+## Service
 
 [Service](https://kubernetes.io/ko/docs/concepts/services-networking/service/)는 Pod 앞단에서 네트워크 말단이 되는 리소스이다. <br />
 Label Selector를 통해서 Pod를 타겟팅하고 로드밸런싱 역할을 한다.
@@ -214,7 +218,7 @@ Service에는 다음과 같은 타입이 있다.
 쿠버네티스는 자체 DNS서버를 가지고 있어 클러스터 내부에서만 사용가능한 DNS를 설정해서 사용할 수 있다. <br />
 이것은 쿠버네티스상에서 통신할때 IP기반이 아닌 DNS를 통해 연결할 수 있음을 뜻하며 위의 그림과 같이 Pod에서 다른 Pod의 서비스를 연결할때 사용된다.
 
-### Ingress
+## Ingress
 
 [Ingress](https://kubernetes.io/ko/docs/concepts/services-networking/ingress/)는 외부에서 들어온 HTTP와 HTTPS 트래픽을 ingress resouce를 생성하여 Cluster내부의 Service로 L7영역에서 라우팅하며 로드밸런싱, TLS, 도메인 기반의 Virtual Hosting을 제공한다. <br />
 
@@ -343,6 +347,66 @@ spec:
         - mydomain.xxx.com
       secretName: tls-xxx.com
 ```
+
+## egress
+
+egress는 ingress와 반대로 내부 네트워크에서 외부로 나가는 트래픽을 제어할 수 있다. <br />
+egress의 주요 목적은 보안 및 제어를 강화하는 것이며, 다음과 같은 중요한 기능을 가지고 있다.
+
+* 보안 강화: 내부 네트워크에서 외부로 향하는 트래픽을 필터링하여 악성 콘텐츠, 악의적인 사이트 또는 악성 소프트웨어로부터 내부 시스템을 보호합니다. 이를 통해 내부 네트워크의 보안 취약성을 줄일 수 있습니다.
+* 콘텐츠 필터링: 내부 사용자들이 특정 콘텐츠에 액세스하는 것을 제한하거나 특정 콘텐츠 카테고리를 차단함으로써 조직 정책을 시행할 수 있습니다. 이는 인터넷 사용 정책 준수를 촉진하고 내부 사용자들의 보안 및 생산성을 향상시킵니다.
+* 익명성: Egress proxy를 통해 외부 서버와의 통신을 중개할 수 있으므로 내부 클라이언트의 실제 IP 주소를 숨길 수 있습니다. 이를 통해 내부 네트워크의 보안을 더욱 강화하고 외부 공격자로부터의 탐지 및 추적을 어렵게 만듭니다.
+
+[Controlling outbound traffic from Kubernetes](https://monzo.com/blog/controlling-outbound-traffic-from-kubernetes) 에서는 Egress gateways 를 설정한 과정에 대한 내용을 담고 있다.
+
+## Network Policy
+
+[NetworkPolicy](https://kubernetes.io/ko/docs/concepts/services-networking/network-policies/) 를 통해 Pod로 부터 들어오거나 나가는 트래픽을 통제할 수 있다. <br />
+일종의 Pod용 방화벽정도의 개념으로 이해하면 된다. 특정 IP나 포트로 부터만 트래픽이 들어오게 하거나 반대로, 특정 IP나 포트로만 트래픽을 내보내게할 수 있는 등의 설정이 가능하다.
+
+#### Ingress 트래픽 컨트롤 정의
+어디서 들어오는 트래픽을 허용할것인지를 정의하는 방법은 여러가지가 있다.
+
+* ipBlock
+  * CIDR IP 대역으로, 특정 IP 대역에서만 트래픽이 들어오도록 지정할 수 있다.
+* podSelector
+  * label을 이용하여, 특정 label을 가지고 있는 Pod들에서 들어오는 트래픽만 받을 수 있다. 예를 들어 DB Pod의 경우에는 apiserver 로 부터 들어오는 트래픽만 받는것과 같은 정책 정의가 가능하다.
+* namespaceSelector
+  * 특정 namespace로 부터 들어오는 트래픽만을 받을 수 있다. 운영 로깅 서버의 경우에는 운영 환경 namespace에서만 들어오는 트래픽을 받거나, 특정 서비스 컴포넌트의 namespace에서의 트래픽만 들어오게 컨트롤이 가능하다. 내부적으로 새로운 서비스 컴포넌트를 오픈했을때, 베타 서비스를 위해서 특정 서비스나 팀에게만 서비스를 오픈하고자 할때 유용하게 사용할 수 있다.
+* Protocol & Port
+  * 받을 수 있는 프로토콜과 허용되는 포트를 정의할 수 있다.
+
+#### Egress 트래픽 컨트롤 정의
+Egress 트래픽 컨트롤은 ipBlock과 Protocol & Port 두가지만을 지원한다.
+
+* ipBlock
+  * 트래픽이 나갈 수 있는 IP 대역을 정의한다. 지정된 IP 대역으로만 outbound 호출을할 수 있다.
+* Protocol & Port
+  * 트래픽을 내보낼 수 있는 프로토콜과, 포트를 정의한다.
+
+#### 예제
+
+아래 네트워크 정책은 app:apiserver 라는 라벨을 가지고 있는 Pod들의 ingress 네트워크 정책을 정의하는 설정파일로, 5000번 포트만을 통해서 트래픽을 받을 수 있으며, role:monitoring이라는 라벨을 가지고 있는 Pod에서 들어오는 트래픽만 허용한다.
+
+```
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: api-allow-5000
+spec:
+  podSelector:
+    matchLabels:
+      app: apiserver
+  ingress:
+  - ports:
+    - port: 5000
+    from:
+    - podSelector:
+        matchLabels:
+          role: monitoring
+```
+
+이외에도 다양한 정책으로, 트래픽을 컨트롤할 수 있는데, 이에 대한 레시피는 https://github.com/ahmetb/kubernetes-network-policy-recipes 문서를 참고하면 좋다.
 
 ---
 
