@@ -24,6 +24,7 @@ Turborepo 참고 링크 정리
 * Filtering Workspaces : https://turbo.build/repo/docs/core-concepts/monorepos/filtering
 
 `turbo-ignore` 를 통해 변경이 발생한 project만 빌드를 수행할 수 있는 것으로 보인다.
+ * https://github.com/vercel/turbo/blob/main/packages/turbo-ignore/README.md
  * https://vercel.com/changelog/intelligent-ignored-builds-using-turborepo
  * https://turbo.build/repo/docs/core-concepts/monorepos/skipping-tasks
  * https://vercel.com/docs/concepts/projects/overview#ignored-build-step
