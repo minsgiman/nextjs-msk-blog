@@ -1,7 +1,7 @@
 ---
 title: IOS 12, 13 에서 Keyboard가 사라질 때 viewport가 다시 내려오지 않는 문제 대응하기
 date: '2021-05-14'
-tags: ['frontend', 'webview']
+tags: ['frontend', 'mobile']
 draft: false
 summary: 'IOS 12에서 Input focus시 Keyboard가 나오면서 viewport를 위로 올린후에, input blur되면 Keyboard가 사라지면서 viewport가 원래 위치로 내려와야 하는데, 내려오지 않는 문제가 있다.'
 ---

@@ -1,7 +1,7 @@
 ---
 title: dom-to-image 이미지 해상도 이슈 해결하기
 date: '2022-09-03'
-tags: ['frontend']
+tags: ['frontend', 'mobile']
 draft: false
 summary: 'dom-to-image는 html 스크린 캡쳐가 가능한 라이브러리이다. 이를 사용하면서 IOS에서만 이미지 화질이 떨어지는 이슈를 겪었는데, 이에 대한 원인과 수정방법을 정리하였다.'
 ---

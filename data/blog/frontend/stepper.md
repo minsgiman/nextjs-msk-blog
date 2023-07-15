@@ -1,7 +1,7 @@
 ---
 title: Stepper 구현
 date: '2023-06-20'
-tags: ['frontend', 'react']
+tags: ['frontend', 'react', 'mobile']
 draft: false
 summary: 'frontend에서 여러 step 들을 통해 상태를 수집하고, 결과 페이지를 보여주는 다음과 같은 "설문조사" 패턴이 있다.'
 ---
