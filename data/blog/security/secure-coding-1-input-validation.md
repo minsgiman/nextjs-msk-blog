@@ -103,6 +103,10 @@ if (!allowList.contains(userInput)){
 
 정규 표현 설계 시 [ReDoS(RegEx 서비스 거부 공격)](https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS)에 주의하십시오. 잘못 설계된 정규 표현을 사용할 경우 프로그램 동작이 느려지거나 CPU 리소스가 오랜 시간 사용됩니다.
 
+catastrophic-backtracking 참고 : https://ko.javascript.info/regexp-catastrophic-backtracking
+
+Regex 성능에 문제가 없는지 https://regex101.com/ 에서 테스트해볼 수 있다. 
+
 <br />
 
 ### Client Side vs Server Side Validation
