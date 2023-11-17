@@ -1,6 +1,6 @@
 ---
 title: k8s 강의 연습문제 풀기
-date: '2023-11-11'
+date: '2023-2-3'
 tags: ['k8s', 'ci']
 draft: false
 summary: ''

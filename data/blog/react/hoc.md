@@ -1,6 +1,6 @@
 ---
 title: React Higher-Order Components (HOC)
-date: '2017-02-14'
+date: '2020-11-18'
 tags: ['react']
 draft: false
 summary: 'HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패턴이다.'
@@ -8,69 +8,84 @@ summary: 'HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패�
 
 HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패턴이다.
 
-React 컴포넌트를 인자로 받아서 새로운 리액트 컴포넌트를 리턴하는 함수로써, HOC를 pseudo code로 다음과 같이 표현할 수 있다.
+React 컴포넌트를 인자로 받아서 새로운 리액트 컴포넌트를 리턴하는 함수로써, 여러 컴포넌트에서 공통된 기능은 hook 으로도 구현할수 있지만, 기능과 함께 공통된 JSX까지도 필요할때 사용하면 유용하다.
 
-```js
-const HOC = (ReactComponent) => EnhancedReactComponent;
-```
+예를 들어 기존의 페이지에 공통된 기능 구현과 Layer를 붙이고자 할 때 기존 페이지 컴포넌트는 큰 변경없이 적용할 수 있다.
 
 ### HOC 구현
 
-- axios를 통해 받은 data를 Parameter로 받은 컴포넌트에 전달하는 HOC를 구현하였다.
+```tsx
+interface WithTransactionProcessInjectProps {
+  flowType: string;
+}
 
-```js
-import React, { Component } from 'react';
-import axios from 'axios';
+export interface WithTransactionProcessProps {
+  isOverAmount: boolean;
+  onCheckTransaction: () => void;
+  onPreCheckProcess: () => void;
+}
 
-const withRequest = (url) => (WrappedComponent) => {
-  return class extends Component {
-    state = {
-      data: null,
-    };
+export function withTransactionProcess(
+  InnerComponent: React.ComponentType<WithTransactionProcessProps>,
+  { flowType }: WithTransactionProcessInjectProps
+) {
+  const TransactionProcessLayoutComponent = () => {
+    const [isOverAmount, setIsOverAmount] = useState(false);
 
-    async initialize() {
-      try {
-        const response = await axios.get(url);
-        this.setState({
-          data: response.data,
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    }
+    const { show, onOpen, onClose } = useShow();
 
-    componentDidMount() {
-      this.initialize();
-    }
+    const handleCheckTransaction = useCallback(
+      () => {
+        // ...
+      },
+      []
+    );
 
-    render() {
-      const { data } = this.state;
-      return <WrappedComponent {...this.props} data={data} />;
-    }
+    const handlePreCheckProcess = useCallback(
+      () => {
+        // ...
+      },
+      []
+    );
+
+    const handleAuthComplete = useCallback(() => {
+      // ...
+    }, []);
+
+    return (
+      <>
+        <InnerComponent
+          isOverAmount={isOverAmount}
+          onCheckTransaction={handleCheckTransaction}
+          onPreCheckProcess={handlePreCheckProcess}
+        />
+
+        <Layer show={show} isFlexFullPage={true}>
+          <Uplift flowType={flowType} onCancel={onClose} onCompleted={handleAuthComplete} />
+        </Layer>
+      </>
+    );
   };
-};
 
-export default withRequest;
+  return TransactionProcessLayoutComponent;
+}
+
 ```
 
 ### HOC 사용
 
-- 앞에서 만든 withRequest를 통해 전달받은 data를 표시해주는 Component를 구현하였다.
+```tsx
+function EditSchedulePage({ isOverAmount, onCheckTransaction, onPreCheckProcess }: WithTransactionProcessProps) {
+  // ...
 
-```js
-import React, { Component } from 'react';
-import withRequest from './withRequest';
-
-class Post extends Component {
-  render() {
-    const { data } = this.props;
-
-    if (!data) return null;
-
-    return <div>{JSON.stringify(this.props.data)}</div>;
-  }
+  return (
+    <EditSchedule
+      // ...
+    />
+  );
 }
 
-const PostWithData = withRequest('https://request/post/aaa')(Post);
-export default PostWithData;
+export default withTransactionProcess(EditSchedulePage, {
+  flowType: 'SCHEDULE_EDIT'
+});
 ```
