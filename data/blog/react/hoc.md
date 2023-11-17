@@ -1,6 +1,6 @@
 ---
-title: React Higher-Order Components (HOC)
-date: '2020-11-18'
+title: React Higher-Order Components (HOC) 유용하게 사용하기
+date: '2023-11-18'
 tags: ['react']
 draft: false
 summary: 'HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패턴이다.'
@@ -8,9 +8,11 @@ summary: 'HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패�
 
 HOC는 React에서 컴포넌트 로직을 재사용하기 위한 패턴이다.
 
-React 컴포넌트를 인자로 받아서 새로운 리액트 컴포넌트를 리턴하는 함수로써, 여러 컴포넌트에서 공통된 기능은 hook 으로도 구현할수 있지만, 기능과 함께 공통된 JSX까지도 필요할때 사용하면 유용하다.
+React 컴포넌트를 인자로 받아서 새로운 리액트 컴포넌트를 리턴하는 함수로써, 여러 컴포넌트에서 공통된 기능은 hook 으로도 구현할수 있지만, 기능과 함께 공통된 JSX 로직 까지도 필요할때 사용하면 유용하다.
 
-예를 들어 기존의 페이지에 공통된 기능 구현과 Layer를 붙이고자 할 때 기존 페이지 컴포넌트는 큰 변경없이 적용할 수 있다.
+다음 [Higher-Order Components는 여전히 유용하다](https://blog.hwahae.co.kr/all/tech/11631) 글의 케이스에서도 유용하게 사용하였다.
+
+아래 예제에서는 기존의 페이지에 공통된 기능 구현과 함께 Layer를 붙이고자 할 때 기존 페이지 컴포넌트는 큰 변경없이 적용할 수 있었다.
 
 ### HOC 구현
 
