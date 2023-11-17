@@ -180,6 +180,39 @@ spec:
 [Readiness Prove 설정시]
 <img src="/static/images/readiness-probe.png" width="400" />
 
+## Deployment
+
+[Deployment](https://kubernetes.io/ko/docs/concepts/workloads/controllers/deployment/)는
+
+- Pod의 scale in / out 되는 기준을 정의한다.
+- Pod의 배포되고 update 되는 모든 버전을 추적할 수 있다.
+- 배포된 Pod에 대한 rollback을 수행할 수 있다.
+
+즉, 개념적으로 Deployment = ReplicaSet + Pod + history이며 ReplicaSet 을 만드는 것보다 더 윗 단계의 선언(추상표현)이다.
+
+#### 롤링 업데이트 전략 
+
+롤링 업데이트는 old 버전의 Pod를 하나씩 제거하는 동시에 new 버전 Pod를 추가하는 배포전략이다. <br />
+업데이트 중 old 버전과 new 버전이 동시에 서비스되기 때문에, App이 반드시 old버전, new버전 간에 하위호환성이 보장되어야 한다.
+
+* maxSurge
+  * 기본값 25%, 개수로도 설정가능
+  * 최대로 추가 배포를 허용할 개수 설정
+  * 4개인 경우 25%이면 1개가 설정. (new version 1개 + old version 4개 = 총 5개까지 동시 포트 운영됨)
+* maxUnavailable
+  * 기본값 25%, 개수로도 설정가능
+  * 동작하지 않는 포드의 개수 설정
+  * 4개인 경우 25%이면 1개가 설정. (롤링 업데이트 중 최소 4 - 1 = 3개의 포드는 운영되고 있도록 보장)
+
+```
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+```
+
 ## Namespace
 
 쿠버네티스에서는 pod, deployment, statefulset, secret 등의 오브젝트들을 클러스터내에서 논리적으로 분리할 수 있는 [namespace](https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/namespaces/)를 제공하고 있다. 오브젝트들을 묶은 하나의 가상 공간 또는 그룹이라고 이해할 수 있다. <br />

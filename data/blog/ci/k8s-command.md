@@ -32,22 +32,22 @@ export KUBECONFIG=$HOME/kubeconfig_mskang.yaml
 | hubot-hey-cookie pod 상세 정보                  | kubectl describe pod/hubot-hey-cookie    |
 | List all pods with labels                       | kubectl get pods --show-labels           |
 
-## Deployment
-
-Deployment는
-
-- Pod의 scale in / out 되는 기준을 정의한다.
-- Pod의 배포되고 update 되는 모든 버전을 추적할 수 있다.
-- 배포된 Pod에 대한 rollback을 수행할 수 있다.
-
-즉, 개념적으로 Deployment = ReplicaSet + Pod + history이며 ReplicaSet 을 만드는 것보다 더 윗 단계의 선언(추상표현)이다.
-
-참고 : https://kubernetes.io/ko/docs/concepts/workloads/controllers/deployment/
+## Deployment 커맨드
 
 deployment 리스트 조회
 
 ```$
 kubectl get deployments
+```
+
+deployment 스케일링
+
+```$
+// yaml 파일을 직접 수정하여 replicas 수를 조정
+kubectl edit deploy ${deployment_name} 
+
+// 명령을 사용해 replicas 수 조정
+kubectl scale deploy ${deployment_name} --replicas=${number}
 ```
 
 deployment 이력조회
@@ -68,7 +68,7 @@ $ kubectl rollout history deployment/${deployment_name} --revision=2
 $ kubectl rollout undo deployment/${deployment_name} --to-revision=2
 ```
 
-## Pod 재시작
+## Deployment의 Pod 재시작
 
 #### 1. Scale
 
@@ -149,6 +149,50 @@ type: Opaque
 stringData:
   SLACK_BOT_TOKEN: <your-hubot-api-token>
 EOF
+```
+
+그러면 아래와 같이 env에 `SLACK_BOT_TOKEN_NAME` 를 설정할 때 위에서 생성한 `slack-bot-token` secret의 `SLACK_BOT_TOKEN` key로부터 value를 가져올 수 있다. <br />
+그리고 node 앱에서 `process.env.SLACK_BOT_TOKEN_NAME` 로 해당 secret value를 사용한다.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hubot-hey-cookie
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: hubot-hey-cookie
+    spec:
+      containers:
+        - name: hubot-hey-cookie
+          image: hubot-hey-cookie
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SLACK_BOT_TOKEN_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: slack-bot-token
+                  key: SLACK_BOT_TOKEN
+            - name: MONGODB_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-id
+                  key: MONGODB_ID
+            - name: MONGODB_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-pwd
+                  key: MONGODB_PWD
+          resources:
+            limits:
+              cpu: 2
+              memory: 2Gi
+            requests:
+              cpu: 1
+              memory: 1Gi
+      restartPolicy: Always
 ```
 
 secret과 create에 대한 자세한 설명은 다음을 참고한다. <br />

@@ -437,6 +437,14 @@ export class Crypto {
 }
 ```
 
+#### AES 테스트 및 주의할 점
+
+[AES 암복호화 테스트](https://gchq.github.io/CyberChef/#recipe=AES_Encrypt(%7B'option':'Base64','string':'NFCfF4ibp%2BLrr6rFDvgeH1lu66Uy95OlkvxsEL8VMEs%3D'%7D,%7B'option':'Base64','string':'chSrft0caX55A7vK'%7D,'GCM','Hex','Hex',%7B'option':'undefined','string':''%7D/breakpoint)AES_Decrypt(%7B'option':'Base64','string':'NFCfF4ibp%2BLrr6rFDvgeH1lu66Uy95OlkvxsEL8VMEs%3D'%7D,%7B'option':'Base64','string':'chSrft0caX55A7vK'%7D,'GCM','Hex','Hex',%7B'option':'Hex','string':'a89cf750e19264041436270ec4684656'%7D,%7B'option':'undefined','string':''%7D)&ienc=65001&oenc=65001) 는 여기서 해볼 수 있다.
+
+AES-GCM 알고리즘 사용시 파라미터 는 [여기서](https://developer.mozilla.org/en-US/docs/Web/API/AesGcmParams) 확인 할 수 있는데, 그 중 [tagLength](https://developer.mozilla.org/en-US/docs/Web/API/AesGcmParams#taglength)는 암호문에서 끝에 몇 bit를 tag로 사용할지 정한다.
+
+web API에서는 tagLength가 default 128로 설정되어 있는데, 작업하면서 Native에서 암호화된 데이터를 전달해줄 때 암호화된 데이터 끝에 tag를 안 붙여서 전달하여 복호화가 계속 실패했던 문제를 겪은 적이 있다.
+
 ---
 
 ### 참고
