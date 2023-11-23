@@ -60,3 +60,38 @@ k port-forward service/nginx 8000:80
 ```
 
 http://localhost:8000 으로 접속하면 nginx로 접속됨을 확인할 수 있다.
+
+<br />
+
+### [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) 연습문제
+
+* /welcome/test path로 접근시 ingress를 통해 특정 service로 요청 보내기
+
+1) ingress-nginx 설치
+```
+git clone https://github.com/kubernetes/ingress-nginx
+k apply -k `pwd`/ingress-nginx/deploy/static/provider/baremetal/
+k delete validatingwebhookconfigurations.admissionregistration.k8s.io ingress-nginx-admission
+```
+
+2) namespace를 조회한다. 그럼 ingress-nginx라는 ns가 새로 생긴 걸 볼 수 있다. <br />
+ingress-nginx 네임스페이스에 대한 전체 오브젝트를 조회해보고, ingress-nginx-controller 의 포트를 확인한다.
+```
+k get ns
+k get all -n ingress-nginx
+```
+
+3) /welcome/test path로 접근시 특정 service로 요청을 보내는 [ingress.yaml](https://github.com/minsgiman/k8s-test/blob/main/ingress.yaml) 생성하고 생성된 내용 조회
+```
+k apply -f ingress.yaml
+k get ing
+k get ing -o yaml
+```
+
+4) ingress 잘 동작 하는지 테스트
+```
+curl 127.0.0.1:31818 (ingress-nginx-controller 포트)
+-> 404
+curl 127.0.0.1:31818/welcome/test/
+-> service 응답
+```
