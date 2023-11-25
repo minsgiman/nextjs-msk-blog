@@ -78,7 +78,7 @@ Pod 하나가 너무 많은 리소스를 사용하게 되면 노드안의 다른
 
 cpu, memory 리소스 제한 설정은 아래의 `resources` 부분을 참고한다.
 
-```
+```yaml
   spec:
       containers:
         - name: hubot-hey-cookie
@@ -108,7 +108,7 @@ cpu, memory 리소스 제한 설정은 아래의 `resources` 부분을 참고한
 아래에서 Pod를 key는 disktype이고 value는 ssd인 노드에만 배포해달라고 설정할 수 있다. <br />
 이를 통해 Heavy한 Batch작업 Pod와 서비스를 해야하는 Pod를 나누어서 다른 노드에 배포할 수 있다.
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -135,7 +135,7 @@ spec:
 
 아래에서 podAntiAffinity 설정을 통해 **"key는 app이고 value는 store인 Pod를 피해서 배치해줘"** 라고 요청할 수 있다. 그러면 label이 `app: store` 인 Pod들은 같은 노드에 배치되지 않고 모두 다른 노드에 분산되어 배치된다.
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -204,7 +204,7 @@ spec:
   * 동작하지 않는 포드의 개수 설정
   * 4개인 경우 25%이면 1개가 설정. (롤링 업데이트 중 최소 4 - 1 = 3개의 포드는 운영되고 있도록 보장)
 
-```
+```yaml
 spec:
   strategy:
     rollingUpdate:
@@ -263,7 +263,7 @@ Service에는 다음과 같은 타입이 있다.
 
 다음의 Service & Ingress를 설정한 yaml 파일을 참고한다.
 
-```
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -421,7 +421,7 @@ Egress 트래픽 컨트롤은 ipBlock과 Protocol & Port 두가지만을 지원�
 
 아래 네트워크 정책은 app:apiserver 라는 라벨을 가지고 있는 Pod들의 ingress 네트워크 정책을 정의하는 설정파일로, 5000번 포트만을 통해서 트래픽을 받을 수 있으며, role:monitoring이라는 라벨을 가지고 있는 Pod에서 들어오는 트래픽만 허용한다.
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:

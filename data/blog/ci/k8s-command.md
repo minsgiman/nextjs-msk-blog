@@ -16,8 +16,8 @@ kubeconfig 파일의 위치는 `~/.kube/config` 에 둔다.
 
 다른 경로의 파일을 사용하려면 다음 명령어로 KUBECONFIG 환경변수를 설정한다.
 
-```
-export KUBECONFIG=$HOME/kubeconfig_mskang.yaml
+```shell
+$ export KUBECONFIG=$HOME/kubeconfig_mskang.yaml
 ```
 
 ## Pod, namespace 조회
@@ -36,35 +36,35 @@ export KUBECONFIG=$HOME/kubeconfig_mskang.yaml
 
 deployment 리스트 조회
 
-```$
-kubectl get deployments
+```shell
+$ kubectl get deployments
 ```
 
 deployment 스케일링
 
-```$
+```shell
 // yaml 파일을 직접 수정하여 replicas 수를 조정
-kubectl edit deploy ${deployment_name} 
+$ kubectl edit deploy ${deployment_name} 
 
 // 명령을 사용해 replicas 수 조정
-kubectl scale deploy ${deployment_name} --replicas=${number}
+$ kubectl scale deploy ${deployment_name} --replicas=${number}
 ```
 
 deployment 이력조회
 
-```$
+```shell
 $ kubectl rollout history deployment/${deployment_name}
 ```
 
 deployment 버전 세부정보 조회
 
-```
+```shell
 $ kubectl rollout history deployment/${deployment_name} --revision=2
 ```
 
 이전 버전으로 롤백
 
-```
+```shell
 $ kubectl rollout undo deployment/${deployment_name} --to-revision=2
 ```
 
@@ -72,19 +72,19 @@ $ kubectl rollout undo deployment/${deployment_name} --to-revision=2
 
 #### 1. Scale
 
-```
+```shell
 $ kubectl scale deployment ${deployment_name} --replicas=0
 ```
 
 이렇게 해서 pod를 끈다. 그리고 다시 아래와 같이 하면 재시작된다.
 
-```
+```shell
 $ kubectl scale deployment ${deployment_name} --replicas=1
 ```
 
 #### 2. Rolling Restart
 
-```
+```shell
 $ kubectl rollout restart deployment ${deployment_name}
 ```
 
@@ -94,7 +94,7 @@ $ kubectl rollout restart deployment ${deployment_name}
 
 deployment -> pods 생성했다면, pod 먼저 삭제하면 다시 실행되기 때문에.. deployment를 먼저 지우고, pod를 지운다.
 
-```
+```shell
 $ kubectl delete deployment hubot-server
 deployment.extensions "hubot-server" deleted
 
@@ -106,7 +106,7 @@ pod "hubot-hey-cookie" deleted
 
 참고 : https://kubernetes.io/ko/docs/tasks/debug/debug-application/get-shell-running-container/
 
-```
+```shell
 $ kubectl exec --stdin --tty ${pod_name} -- /bin/bash
 ```
 
@@ -116,7 +116,7 @@ $ kubectl exec --stdin --tty ${pod_name} -- /bin/bash
 
 참고 : https://kubernetes.io/ko/docs/concepts/overview/working-with-objects/namespaces/
 
-```
+```shell
 $ kubectl config set-context --current --namespace=<insert-namespace-name-here>
 ```
 
@@ -124,22 +124,22 @@ $ kubectl config set-context --current --namespace=<insert-namespace-name-here>
 
 에러시에 다음의 커맨드로 pod 상세정보와 로그를 확인한다.
 
-```
+```shell
 $ kubectl describe pods
 $ kubectl logs -f ${pod_name}
 ```
 
 다음과 같이 특정 시간 이내의 로그를 확인할 수도 있다.
 
-```
-$ $ kubectl logs -f ${pod_name} --since=10h
+```shell
+$ kubectl logs -f ${pod_name} --since=10h
 ```
 
 ## Secret 생성
 
 다음 명령을 사용하여 `slack-bot-token` 이라는 name의 `SLACK_BOT_TOKEN: <your-hubot-api-token>` 데이터를 가지는 secret을 namespace에 생성할 수 있다.
 
-```
+```shell
 cat << EOF | kubectl create -n <your-namespace> -f -
 apiVersion: v1
 kind: Secret
@@ -154,7 +154,7 @@ EOF
 그러면 아래와 같이 env에 `SLACK_BOT_TOKEN_NAME` 를 설정할 때 위에서 생성한 `slack-bot-token` secret의 `SLACK_BOT_TOKEN` key로부터 value를 가져올 수 있다. <br />
 그리고 node 앱에서 `process.env.SLACK_BOT_TOKEN_NAME` 로 해당 secret value를 사용한다.
 
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
