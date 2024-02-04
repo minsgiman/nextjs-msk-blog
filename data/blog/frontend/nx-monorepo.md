@@ -94,7 +94,7 @@ npx nx g component first-lib --project=ui --export
 라이브러리를 import하는 구문은 다음과 같다.
 
 ```js
-import <UI_MODULE_NAME> from @<WORKSPACE_NAME>/<LIBRARY_NAME>  // @my-app/ui/first-lib  import ui component
+import UI_MODULE_NAME from '@WORKSPACE_NAME/LIBRARY_NAME'  // @my-app/ui/first-lib  import ui component
 ```
 
 Nx는 라이브러리가 추가될 때마다 tsconfig.base.json 파일에 TS 경로를 매핑하기 때문에 위와 같이 참조할 수 있다.
