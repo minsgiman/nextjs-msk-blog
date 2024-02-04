@@ -163,3 +163,4 @@ IDE (vscode, intellij) 에서 Nx Console Plugin 설치하여 쉽게 Nx Command �
 ### 참조
 
 - [모던 프론트엔드 프로젝트 구성 기법 - 모노레포 도구 편](https://d2.naver.com/helloworld/7553804)
+- [How To Build A Monorepo With The Nx Tool? A Full Nx Monorepo Tutorial](https://elitex.systems/blog/how-to-build-monorepo-with-nx-tool/)
