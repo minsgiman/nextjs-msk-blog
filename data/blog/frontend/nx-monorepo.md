@@ -1,7 +1,7 @@
 ---
 title: monorepo nx 사용
 date: '2023-01-27'
-tags: ['monorepo', 'frontend']
+tags: ['monorepo', 'nx', 'frontend']
 draft: false
 summary: 'Nx는 모노레포 구성을 위한 다양한 개발 도구를 제공하고 Angular, React와 같은 프런트엔드 프레임워크 기반의 개발 환경 구성뿐 아니라 Express, Nest.js와 같은 백엔드 기술 기반의 개발까지 폭넓게 지원하고 있다. 이뿐만 아니라 workspace 생성 시 Cypress, Jest 등을 기반으로 한 테스트 환경까지 설정해주기 때문에, 초기 모노레포 개발 환경 구축 비용을 크게 줄여준다.'
 ---
