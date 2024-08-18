@@ -51,7 +51,7 @@ ArgoCD 를 사용하기 위해서는 먼저 k8s 클러스터([Cluster Architectu
   * https://argo-cd.readthedocs.io/en/stable/getting_started/#3-access-the-argo-cd-api-server
   * https://developnote-blog.tistory.com/171
 
-Ingress Controller 에 대한 설명은 <a href="/blog/ci/ingress-controller">여기</a>에 정리해두었다.
+Ingress Controller 에 대한 설명은 <a href="/blog/ci/ingress-controller" target="_blank">여기</a>에 정리해두었다.
 
 ArgoCD 에서 Ingress Nginx 의 Application 을 배포하기 위해서는 다음과 같은 설정이 필요하다.
 
