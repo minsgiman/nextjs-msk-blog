@@ -1,9 +1,9 @@
 ---
 title: React Fiber 알아보기
 date: '2024-09-17'
-tags: ['react']
+tags: ['react', 'frontend']
 draft: false
-summary: ''
+summary: 'Fiber reconciler 는 위의 Stack reconciler 가지고 있던 취약점을 보완하기 위해 만들어졌다.'
 ---
 
 ## 기존 Stack reconciler의 문제점
