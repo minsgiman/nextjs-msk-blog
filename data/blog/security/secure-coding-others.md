@@ -1,5 +1,5 @@
 ---
-title: Secure Coding 7 - Others
+title: Secure Coding - Others
 date: '2023-08-19'
 tags: ['security', 'frontend', 'backend']
 draft: false

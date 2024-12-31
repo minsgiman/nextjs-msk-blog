@@ -1,5 +1,5 @@
 ---
-title: Secure Coding 1 - Input Validation
+title: Secure Coding - Input Validation
 date: '2023-08-11'
 tags: ['security', 'frontend', 'backend']
 draft: false

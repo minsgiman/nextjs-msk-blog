@@ -1,5 +1,5 @@
 ---
-title: Secure Coding 2 - Output Encoding
+title: Secure Coding - Output Encoding
 date: '2023-08-12'
 tags: ['security', 'frontend', 'backend']
 draft: false
