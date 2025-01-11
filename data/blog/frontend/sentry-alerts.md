@@ -51,6 +51,32 @@ When조건이 만족한 이슈중에 한번 더 filter를 걸기 위해 설정�
 
 #### Issue Alert 설정 예제
 
+먼저 에러의 Severity를 다음과 같이 정의한다.
+
+* Severity classification
+  * fatal
+    * 핵심 기능이 오동작 하거나 동작하지 않아서, 사용자에게 큰 불편을 초래하거나 금전적 손실이 발생하는 경우
+    * 화면이 렌더링 되지 않는 경우
+  * error
+    * 핵심 기능에는 영향이 없지만, 특정 동작이 오동작하여 사용자에게 불편을 유발시키는 경우
+    * 화면에 일부 정보가 누락되거나 잘 못 나오는 경우
+  * warning
+    * system 이나 코드 에러로 보기 어려운 경우 (ex - network 이슈로 인한 chunk loading error)
+    * API 500 error (별도로 BE 쪽에서 모니터링 하고 있어, FE 에서는 알림을 받지 않아도 되는 경우)
+
+위에서 정의한 Severity에 따라 Error 이벤트에 Level(fatal, error, warning) 을 설정하고, 이에 따른 Issue Alert 룰을 다음과 같이 정의한다. 
+
+* fatal Level Issue Alert
+  * 한 이슈의 발생한 에러의 갯수가 5분 동안 30회 이상인 경우
+  * 한 이슈에 대해 영향받은 사용자 수가 5분 동안 10명 이상인 경우
+* error Level Issue Alert 
+  * 한 이슈의 발생한 에러의 갯수가 15분 동안 200회 이상인 경우
+  * 한 이슈에 대해 영향받은 사용자 수가 15분 동안 80명 이상인 경우
+* warning Level Issue Alert
+  * No Alert
+
+위에서 정의한 룰을 가지고 sentry dashboard 에서 다음과 같이 Issue Alert 을 설정한다.
+
 <img src="/static/images/issue-alert.png" />
 
 
@@ -95,6 +121,15 @@ Time Interval은 1분에서 1일 사이로 설정한다.
 자세한 설정은 공식문서를 참고한다.
 
 #### Metric Alert 설정 예제
+
+위에서 정의한 fatal level 에 대하여 다음과 같이 룰을 정의한다.
+
+* Number of Errors
+  * 모든 fatal 에러 카운트가 15분 동안 200회 이상인 경우
+* User Experiencing Erros
+  * 모든 fatal 에러 사용자 수가 15분 동안 100명 이상인 경우
+
+sentry dashboard 에서는 다음과 같이 Metric Alert 을 설정한다.
 
 <img src="/static/images/metric-alert.png" />
 
