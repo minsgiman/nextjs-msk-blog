@@ -183,6 +183,47 @@ spec:
 [Readiness Prove 설정시]
 <img src="/static/images/readiness-probe.png" width="400" />
 
+#### Horizontal Pod Autoscaling
+
+K8S Control Plane 내에서 실행되는 HPA 컨트롤러는 평균 CPU 사용률, 평균 메모리 사용률등의 관측된 메트릭을 목표에 맞추기 위해 Deployment 의 Pod 수를 주기적으로 조정한다. 
+
+https://kubernetes.io/ko/docs/tasks/run-application/horizontal-pod-autoscale/
+
+```yaml
+hpa:
+  minReplicas: 4
+  maxReplicas: 8
+  cpuAverage: 70
+  memoryAverage: 80
+```
+
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.application.name }}-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Values.application.name }}-deployment
+  minReplicas: {{ .Values.hpa.minReplicas }}
+  maxReplicas: {{ .Values.hpa.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.memoryAverage }}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.cpuAverage }}
+```
+
 ## Deployment
 
 [Deployment](https://kubernetes.io/ko/docs/concepts/workloads/controllers/deployment/)는
