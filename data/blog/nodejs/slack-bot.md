@@ -17,7 +17,7 @@ Slack채널에서 발생하는 이벤트를 listen하기 위해서는 Slack채�
 
 Hubot을 만드는 방법은 다음과 같다.
 
-1. https://line-enterprise.slack.com/apps/A0F7XDU93-hubot 에서 Add to Slack을 누르고, Hubot 이름을 설정한다.
+1. Add to Slack을 누르고, Hubot 이름을 설정한다.
 
 <img src="/static/images/hubot-create.png" width="400" />
 

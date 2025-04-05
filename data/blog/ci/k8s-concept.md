@@ -169,6 +169,9 @@ spec:
 
 <img src="/static/images/podAntiAffinity.png" width="600" />
 
+추가로 affinity 외에 토폴로지 분산 제약을 이용한 Pod 분산 처리 방법도 있다. 아래 링크를 참고한다. <br />
+[쿠버네티스에서 파드를 분산 처리하기 위한 토폴로지 분배 제약 조건 활용 사례 소개](https://techblog.lycorp.co.jp/ko/using-topology-spread-constraints-to-spread-out-pods)
+
 #### Liveness, Readiness Prove
 
 참고 : https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
