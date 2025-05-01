@@ -12,6 +12,33 @@ summary: '쿠버네티스(Kubernetes)는 컨테이너화 된 애플리케이션�
 
 <br />
 
+# 목차
+
+- [Kubernetes Cluster](#kubernetes-cluster)
+  + [Master 노드](#master-노드)
+  + [Worker 노드](#worker-노드)
+- [Kubernetes Object](#kubernetes-object)
+  + [Pod](#pod)
+    + [Pod에 리소스 제한 (cpu, memory) 설정을 해야 하는 이유](#pod에-리소스-제한-cpu-memory-설정을-해야-하는-이유)
+    + [특정 Worker 노드에만 Pod 배포하기](#특정-worker-노드에만-pod-배포하기)
+    + [여러 노드에 분산해서 Pod 배포하기](#여러-노드에-분산해서-pod-배포하기)
+    + [Liveness, Readiness Prove](#liveness-readiness-prove)
+    + [Horizontal Pod Autoscaling](#horizontal-pod-autoscaling)
+    + [Vertical Pod Autoscaling](#vertical-pod-autoscaling)
+  + [Deployment](#deployment)
+    + [롤링 업데이트 전략](#롤링-업데이트-전략) 
+  + [Namespace](#namespace)
+    + [네임스페이스 를 왜 구성하는가](#네임스페이스-를-왜-구성하는가) 
+    + [어떻게 Namespace를 구성하면 좋을까?](#어떻게-namespace를-구성하면-좋을까)
+  + [Volume](#volume) 
+  + [Service](#service)
+  + [Ingress](#ingress)
+  + [Egress](#egress)
+  + [Network Policy](#network-policy)
+  + [Secret](#secret)
+
+<br />
+
 # Kubernetes Cluster
 
 쿠버네티스를 이루는 구성은 다음과 같다.
@@ -75,6 +102,8 @@ Pod 하나가 너무 많은 리소스를 사용하게 되면 노드안의 다른
 리소스 제한을 설정하면 아래 그림 처럼 Pod가 리소스제한까지 사용했을 때 쿠버네티스에서 해당 Pod만 재시작해준다.
 
 <img src="/static/images/pod-restart.png" width="400" />
+
+참고로 https://techblog.lycorp.co.jp/ko/efficiently-using-cpu-in-kubernetes 에서 cpu request, limits 설정에 대한 테스트 결과를 공유하고 있다.
 
 cpu, memory 리소스 제한 설정은 아래의 `resources` 부분을 참고한다.
 
@@ -224,6 +253,51 @@ spec:
           averageUtilization: {{ .Values.hpa.cpuAverage }}
 ```
 
+#### Vertical Pod Autoscaling
+
+https://github.com/kubernetes/autoscaler
+
+* Kubernetes 클러스터에서 실행되는 Pod에 필요한 리소스 요청을 계산해줍니다.
+* 권장사항에 따라 pod의 CPU 및 메모리 양을 자동으로 조정해줍니다.
+
+<img src="/static/images/vpa.png" width="600" />
+
+```yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: my-app-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       my-app
+  updatePolicy:
+    updateMode: "Auto"
+```
+
+* updateMode의 종류
+  * Auto
+    * pod 생성 시점에 리소스를 할당하고, 이후에는 리소스를 자동으로 갱신하는 모드
+    * 하지만 현재는 Recreate 모드와 다를바가 없습니다. 이후에 pod 를 재시작하지 않고도 리소스를 갱신할 수 있는 in-place 업데이트가 가능해지면 효율적인 리소스 관리가 가능
+  * Recreate
+    * pod 생성 시점에 리소스를 할당하고, 이후 기존 파드의 리소스 요청이 크게 변경되면 pod를 재시작합니다.
+  * Initial
+    * pod가 생성될 때만 리소스 요청을 할당하며 이후에는 리소스를 변경하지 않습니다.
+    * 즉 초기 리소스를 설정할때만 VPA의 도움을 받습니다.
+  * Off
+    * VPA가 pod의 리소스를 자동으로 변경하지 않는 모드입니다.
+    * VPA의 권장 사항을 참고하여 수동으로 리소스를 조정하고자 할때 사용합니다.
+
+* 주의 사항
+  * VPA는 파드가 재시작될 때만 리소스를 조정하므로, VPA가 활성화된 상태에는 파드가 재시작될 수 있음을 염두에 두어야 합니다.
+  * VPA와 HPA를 동시에 사용하는 경우 두 오토스케일러가 충돌하지 않도록 주의해야합니다.
+
+* 결론
+  * VPA는 현재로서는 pod의 리소스를 높이려면 pod를 재시동해야하는 한계가 있습니다. 또한 HPA와 동시에 사용하는 경우 충돌의 위험이 있으니 필요에 따라 하나만 선택해서 사용하는 것을 권장합니다.
+  * HPA의 min/max replica 세팅의 경우 특별히 권장하는 사항은 없습니다. 단, 하나의 클러스터에 여러 네임스페이스를 운영하는 경우 노드 리소스를 여러 서비스가 공유하기 때문에 min / max 값의 차이를 두고 리소스 여유분을 남기고 운영하는 것을 추천합니다.
+
+
 ## Deployment
 
 [Deployment](https://kubernetes.io/ko/docs/concepts/workloads/controllers/deployment/)는
@@ -271,6 +345,195 @@ dev 목적의 사용자는 dev namespace에 접근하여 오브젝트를 배치 
 <img src="/static/images/k8s-namespace.png" width="600" />
 
 위 그림에서 보듯이 namespace별로 리소스 할당량을 지정할 수 있다. 또한 사용자별로 namespace 접근 권한을 관리할 수 있다.
+
+### 네임스페이스 를 왜 구성하는가
+
+* 자원격리 : 네임스페이스를 사용하면 서로 다른 팀이나 프로젝트가 동일한 클러스터를 공유하면서도 자원을 격리하여 사용할 수 있습니다. 이는 서로 다른 팀의 애플리케이션이 서로 간섭하지 않도록 합니다.
+  * 각 네임스페이스에 대해 설정된 리소스 쿼터는 해당 네임스페이스가 사용할 수 있는 최대 CPU와 메모리 양을 제한합니다.
+  * 각 네임스페이스에 배포된 애플리케이션은 설정된 리소스 쿼터 내에서만 실행되며, 다른 네임스페이스의 리소스와 격리됩니다.
+
+    namespace project-a
+    ```yaml
+    apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: quota-project-a
+      namespace: project-a
+    spec:
+      hard:
+        requests.cpu: "2"
+        requests.memory: "2Gi"
+        limits.cpu: "4"
+        limits.memory: "4Gi"
+    
+    ---
+     
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nginx-a
+      namespace: project-a
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          app: nginx
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:latest
+            resources:
+              requests:
+                memory: "512Mi"
+                cpu: "500m"
+              limits:
+                memory: "1Gi"
+                cpu: "1"
+    ```
+    
+    namespace project-b
+    
+    ```yaml
+    apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: quota-project-b
+      namespace: project-b
+    spec:
+      hard:
+        requests.cpu: "1"
+        requests.memory: "1Gi"
+        limits.cpu: "2"
+        limits.memory: "2Gi"
+     
+    ---
+     
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nginx-b
+      namespace: project-b
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: nginx
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:latest
+            resources:
+              requests:
+                memory: "256Mi"
+                cpu: "250m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+    ```
+
+* 이름 충돌 방지 : 네임스페이스는 동일한 이름의 리소스(예: Pod, Service 등)가 클러스터 내에서 존재할 수 있도록 합니다. 각 네임스페이스 내에서 이름이 고유하면 됩니다
+* 액세스 제어: RBAC(Role-Based Access Control)와 결합하여 네임스페이스 단위로 접근 권한을 설정할 수 있습니다. 이를 통해 특정 사용자나 그룹이 특정 네임스페이스에만 접근하도록 제한할 수 있습니다.
+  * [RBAC (Role-Base Access Control)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+    * ServiceAccount, Role, ClusterRole 등의 resource 를 활용 하여 Cluster Resource 에 대한 접근 권한을 정의. 정의 하지 않을 시 모든 권한 열려 있음
+    * [Role](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole) : namespace 내에 부여 되는 권한 set
+
+      * 'pod-reader' 라는 Role을 생성하여 'get', 'list' 권한을 'pods' 리소스에 부여
+      ```yaml
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        namespace: my-namespace
+        name: pod-reader
+      rules:
+      - apiGroups: [""]
+        resources: ["pods"]
+        verbs: ["get", "list"]
+      ```
+
+    * [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) : Role / ClusterRole 을 특정 namespace 에 binding 할 때 사용. 역할이 특정 네임스페이스에 한정된 정책을 따르도록 적용
+
+      * 'read-pods' 라는 RoleBinding 을 생성하여 'my-service-account' 에 'pod-reader' Role 을 바인딩
+      * 'my-service-account' 는 'my-namespace' 내의 Pod에 대해 조회 및 나열 권한을 가지게 됨
+        ```yaml
+        apiVersion: rbac.authorization.k8s.io/v1
+        kind: RoleBinding
+        metadata:
+          name: read-pods
+          namespace: my-namespace
+        subjects:
+        - kind: ServiceAccount
+          name: my-service-account
+          namespace: my-namespace
+        roleRef:
+          kind: Role
+          name: pod-reader
+          apiGroup: rbac.authorization.k8s.io
+        ```
+
+    * ClusterRole : namespace 를 넘어 cluster 범위에 유효한 권한 set. role 은 지역변수 개념이라면 clusterRole 은 전역변수 개념
+    * ClusterRoleBinding : ClusterRole 을 Cluster 의 모든 namespace 에 binding 할 때 사용. Role이 클러스터 전체에 한정된 정책을 따르도록 적용할 때
+
+* 리소스 할당(Resource Quota) : 네임스페이스별로 리소스 쿼터를 설정할 수 있습니다. 이를 통해 각 네임스페이스가 사용할 수 있는 CPU, 메모리 등의 리소스를 제한하여 클러스터 전체 자원을 효율적으로 관리할 수 있습니다.
+  * https://kubernetes.io/ko/docs/concepts/policy/resource-quotas/
+  * 리소스 쿼터는 네임스페이스 내의 모든 Pod와 컨테이너에 걸쳐 적용되며, 설정된 한도를 초과하면 새로운 리소스를 생성할 수 없습니다. 이를 통해 클러스터 자원의 과도한 사용을 방지하고, 여러 팀이나 프로젝트가 동일한 클러스터를 사용할 때 자원을 공정하게 분배할 수 있습니다.
+  * 예시
+    * requests.cpu와 requests.memory: 네임스페이스 내에서 요청할 수 있는 총 CPU와 메모리 양을 제한합니다. 이는 Pod가 시작될 때 요청하는 최소 리소스 양을 의미합니다.
+    * limits.cpu와 limits.memory: 네임스페이스 내에서 사용할 수 있는 최대 CPU와 메모리 양을 제한합니다. 이는 Pod가 사용할 수 있는 최대 리소스 양을 의미합니다.
+    ```yaml
+    apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: my-quota
+      namespace: my-namespace
+    spec:
+      hard:
+        requests.cpu: "1"        # 네임스페이스 내의 총 CPU 요청을 1 코어로 제한
+        requests.memory: "1Gi"   # 네임스페이스 내의 총 메모리 요청을 1Gi로 제한
+        limits.cpu: "2"          # 네임스페이스 내의 총 CPU 사용을 2 코어로 제한
+        limits.memory: "2Gi"     # 네임스페이스 내의 총 메모리 사용을 2Gi로 제한
+    ```
+
+* 환경 분리: 개발, 테스트, 프로덕션과 같은 다양한 환경을 네임스페이스로 구분하여 관리할 수 있습니다. 이를 통해 환경별로 설정을 분리하고, 배포를 독립적으로 관리할 수 있습니다.
+
+### 어떻게 Namespace를 구성하면 좋을까?
+
+* 각 프로젝트가 환경별로 클러스터/네임스페이스 구성
+  ```
+  [Dev Cluster]  ← (A Project 전용)
+  ├── Namespace: dev
+  ├── Namespace: alpha
+  └── Namespace: beta
+
+  [Prod Cluster] ← (A Project 전용)
+  ├── Namespace: prod
+  └── Namespace: hotfix
+  ```
+
+  * 장점 : 비교적 구성이 단순해지며, 프로젝트 간의 리소스 영향도가 적다.
+  * 단점 : 각 프로젝트별로 클러스터를 관리하게 되므로 관리해야하는 클러스터의 수가 늘어나게 된다. 자원의 소모가 많을 수 있다.
+* 여러 프로젝트가 개발용, 제품용 2개의 클러스터에 환경별로 네임스페이스 로 구성
+  ```
+  [Shared Dev Cluster]
+    ├── Namespace: projectA-alpha
+    ├── Namespace: projectB-beta
+    └── Namespace: projectC-alpha
+  
+  [Shared Prod Cluster]
+    ├── Namespace: projectA-prod
+    ├── Namespace: projectB-prod
+    └── Namespace: projectC-prod
+  ```
+
+  * 장점 : 신규 프로젝트가 기존 클러스터에 네임스페이스만으로 배포되므로 확장성이 용이하다. 여유분 리소스를 확보하여 확보한 리소스를 여러 프로젝트에서 적절하게 공유하여 사용이 가능하다.
+  * 단점 : 프로젝트 별 리소스 관리가 어렵다. 예상치 못한 리소스 증가에 대응하기 어려울 수 있다. nodepool 을 이용하여 프로젝트 별로 node 관리 구성을 할 필요가 있을 수 있다.
 
 ## Volume
 
@@ -484,6 +747,11 @@ spec:
 ```
 
 이외에도 다양한 정책으로, 트래픽을 컨트롤할 수 있는데, 이에 대한 레시피는 https://github.com/ahmetb/kubernetes-network-policy-recipes 문서를 참고하면 좋다.
+
+## Secret
+
+TODO:
+[sealed-secret](https://github.com/bitnami-labs/sealed-secrets)
 
 ---
 
