@@ -109,9 +109,31 @@ function getIsMetrics(url: string) {
 ## Grafana 대시보드
 
 grafana에서 아래 nodejs-exporter 대시보드 ID로 import 하여 대시보드를 구성한다. <br />
+해당 대시보드는 prom-client 를 사용하여 노출된 메트릭을 기반으로 구성되어 있다. <br />
 https://grafana.com/oss/prometheus/exporters/nodejs-exporter/?tab=dashboards
 
-해당 대시보드는 prom-client 를 사용하여 노출된 메트릭을 기반으로 구성되어 있다.
+그 외 설정에 대해서는 아래 문서를 참고한다.
+
+* [grafana document](https://grafana.com/docs/grafana/latest/)
+* [grafana sample page](https://play.grafana.org/d/000000012/grafana-play-home?orgId=1&from=now-1h&to=now&timezone=browser)
+* [grafana 커뮤니티](https://community.grafana.com/)
+* [Grafana를 활용한 데이터 가시화](https://vntgcorp.github.io/grafana_df_op/)
+
+## Alert
+
+Prometheus Alert 을 활용하는 방법과 Grafana Alert 을 활용하는 방법이 있다.
+
+Prometheus의 Alert은 다음 2가지 컴포넌트로 구성되어있다.
+
+* [Alert Rule](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) : PromQL을 기반으로 정의하는 알람이 발생할 규칙
+* [AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/) : 수신받은 Alert를 다양한 서비스에 notify를 수행
+
+Prometheus Alert 은 고성능이며 Prometheus 중심 모니터링 시스템에서 사용하기에 적합하다.
+
+Grafana Alert 은 Grafana 대시보드 또는 Alert UI 에서 직접 알람을 설정할 수 있고, 시각화된 데이터와 통합 할 수 있으며 다양한 데이터 소스와도 통합하여 Alert 을 설정할 수 있다. <br />
+다만 자체적으로 메트릭 데이터를 저장하지 않기 때문에, 성능적으로는 Prometheus Alert 보다 떨어진다. 
+
+https://grafana.com/tutorials/alerting-get-started/ 을 참고하여 Grafana Alert 을 설정할 수 있다.
 
 ---
 
