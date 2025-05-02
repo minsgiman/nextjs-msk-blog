@@ -36,6 +36,9 @@ summary: '쿠버네티스(Kubernetes)는 컨테이너화 된 애플리케이션�
   + [Egress](#egress)
   + [Network Policy](#network-policy)
   + [Secret](#secret)
+    + [Ingress TLS](#ingress-tls) 
+    + [Sealed Secrets](#sealed-secrets)
+    + [Default SSL Certificate](#default-ssl-certificate)
 
 <br />
 
@@ -750,8 +753,106 @@ spec:
 
 ## Secret
 
-TODO:
-[sealed-secret](https://github.com/bitnami-labs/sealed-secrets)
+[Secret](https://kubernetes.io/ko/docs/concepts/configuration/secret/)은 Password, API key, SSH key 등 보안이 중요한 정보를 컨테이너에 주입해야할 때 사용되는 리소스 이다.
+* [ConfigMap](https://kubernetes.io/ko/docs/concepts/configuration/configmap/)과 사용법은 비슷하다. 다만 ConfigMap이 민감하지 않은 설정 정보를 컨테이너에 주입하는 게 목적이라면, Secret은 반대로 민감한 정보를 안전하게 컨테이너에 주입하는 게 목적이다.
+* Kubentes는 기본적으로 Secret 값을 etcd에 저장하는데, Base64 인코딩을 한다. 즉, etcd에 접근권한이 있다면 Secret을 읽는 게 어려운 일이 아니다.
+  * 따라서 클라우드 서비스 같은 경우엔 암호화를 거칠 수 있도록 추가적인 방법을 제공한다. (가령 EKS를 사용하면 KMS로 encrypt 할 수 있다.)
+  * 그럼에도 가장 중요한 건 읽기 권한(사용자 접근 제어 관리)이다. RBAC(Role Based Access Control)을 활용해 Secret 오브젝트에 대한 읽기권한을 누가 가질 수 있게 할지에 대해 설정을 잘 해야 한다.
+    * 가령 ConfigMap과 Secret을 구분해서 보관하여 사용자별로 권한을 나눠서 주는 방식이 예시가 될 수 있다.
+
+Secret 에 여러 type 이 있는데, https://kubernetes.io/ko/docs/concepts/configuration/secret/#secret-types 문서를 참고한다.
+
+#### Ingress TLS
+
+Ingress는 클러스터 내 여러 서비스에 대한 트래픽을 관리합니다. 
+TLS를 Ingress 레벨에서 설정함으로써 각 서비스마다 개별적으로 설정할 필요 없이 중앙에서 관리할 수 있습니다.
+
+다음은 TLS를 설정한 Ingress 예시입니다. <br />
+참고 : https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: testsecret-tls
+  namespace: default
+data:
+  tls.crt: base64 encoded cert
+  tls.key: base64 encoded key
+type: kubernetes.io/tls
+```
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tls-example-ingress
+spec:
+  tls:
+  - hosts:
+      - https-example.foo.com
+    secretName: testsecret-tls
+  rules:
+  - host: https-example.foo.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+```
+
+#### Sealed Secrets
+
+[SealedSecret 오브젝트](https://github.com/bitnami-labs/sealed-secrets)를 생성하면 쿠버네티스 컨트롤러가 복호화하여 Secret 오브젝트를 생성하는 방식이다.
+* SealedSecret를 사용하게 되면 kubeseal CLI라고 하는 또다른 커맨드 툴을 사용해야 하는데, 이 툴이 컨트롤러와 통신하며 데이터를 암호화하게 되는 것이다.
+* SealedSecret은 클러스터 상에서만 복호화된 Secret 오브젝트가 사용될 수 있게 관리해 준다.
+* 즉, git과 같은 pulbic 공간에는 데이터가 암호된 상태로 올라가기 때문에 보안을 보장받을 수 있다.
+
+SealedSecret 은 다음과 같은 두 가지 구성요소로 이루어져 있다.
+* A cluster-side controller / operator
+* A client-side utility: `kubeseal`
+
+`kubeseal` utility 는 비대칭키를 통해 secret 을 암호화하고 이는 클러스터에서만 복호화할 수 있다. <br />
+다음의 SealedSecret 리소스는 kubeseal CLI를 통해 암호화된 secret을 포함하고 있다.
+
+```yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: mysecret
+  namespace: mynamespace
+spec:
+  encryptedData:
+    foo: AgBy3i4OJSWK+PiTySYZZA9rO43cGDEq.....
+```
+
+클러스터에서 복호화하여 다음의 Secret 리소스를 생성한다.
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+  namespace: mynamespace
+data:
+  foo: YmFy  # <- base64 encoded "bar"
+```
+
+#### Default SSL Certificate
+
+팀에서는 TLS 인증서 관리를 SealedSecret 을 사용해서 암호화하고, 이를 git에 저장해서 사용한다.
+
+도메인이 다른 경우 프로젝트 별로 ingress 에 TLS secret 을 따로 지정하여 사용하기도 하지만,
+공통된 도메인인 경우는 ingress nginx의 [Default SSL Certificate](https://kubernetes.github.io/ingress-nginx/user-guide/tls/#default-ssl-certificate) 를 사용하여 인증서를 하나로 관리할 수도 있다.
+
+* Ingress nginx controller는 모든 요청을 핸들링 하며, --default-ssl-certificate flag로 기본 certificate를 설정 할 수 있다.
+  * 예를 들어, foo-tls 라는 이름을 가진 TLS secret이 default namespace에 있다면 --default-ssl-certificate=default/foo-tls 로 설정하면 된다.
+* 각 서비스의 ingress에 tls가 설정이 되어 있고, secretName이 없다면 HTTPS redirect를 강제로 진행한다.
+* ingress nginx도 일반적인 리소스와 같이 TLS secret 을 업데이트 하려면 reload가 필요하다. ( [참고](https://kubernetes.github.io/ingress-nginx/how-it-works/#when-a-reload-is-required) )
 
 ---
 
